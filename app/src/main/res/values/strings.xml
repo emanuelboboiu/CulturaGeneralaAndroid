@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <string name="app_name">Cultură generală</string>
+    <string name="title_activity_quiz">Cultură generală</string>
+    <string name="banner_ad_unit_id_test">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="banner_ad_unit_id">ca-app-pub-9705662823127450~3812324606</string>
+    <string name="ellipsis">…</string>
+
+    <!-- About dialog: -->
+    <string name="about_title">Despre joc</string>
+    <string name="app_version">Cultură generală, Fii deștept!, versiunea 5.7.1</string>
+    <string name="app_release_date">Versiunea 1.0 a fost finalizată vineri, 22 decembrie 2017</string>
+    <string name="app_last_update">Ultima actualizare pe acest dispozitiv:\n - versiunea 5.7.1, finalizată vineri, 7 octombrie 2022</string>
+    <string name="app_creator">Programat de Emanuel Boboiu (Manu)</string>
+    <string name="phone_number">Telefon: +40740203043</string>
+    <string name="email_address">E-mail: android@pontes.ro</string>
+    <string name="web_address">Web: www.android.pontes.ro</string>
+    <string name="app_credits1">Design creat de Iulian Duma</string>
+    <string name="app_credits2">Testare beta: Iulian Duma, Mircea Doduț</string>
+
+    <!-- Other strings: -->
+    <string name="ib_fifty">Jumi juma</string>
+    <string name="ib_call">Cer părerea cuiva</string>
+    <string name="ib_ask">Întreb mulțimea</string>
+    <string name="ib_change">Sar peste întrebare</string>
+    <string name="ib_abandon">Renunț! Mă opresc aici</string>
+
+    <string-array name="use_options_question_array">
+        <item>Sigur faci jumi juma?</item>
+        <item>Sigur ceri părerea cuiva?</item>
+        <item>Sigur întrebi mulțimea?</item>
+        <item>Sigur sari peste întrebare?</item>
+        <item>Renunți? Sigur vrei să te oprești aici?</item>
+    </string-array>
+
+    <string name="bt_start_quiz">Start joc</string>
+    <string name="bt_continue_quiz">Continuare joc</string>
+    <string name="bt_settings">Setări…</string>
+    <string name="bt_about">Despre joc…</string>
+    <string name="bt_help">Ajutor…</string>
+    <string name="bt_game_mode">Alegere seturi…</string>
+    <string name="bt_statistics">Statistici…</string>
+    <string name="bt_web_statistics">Statistici și clasamente (on-line)</string>
+    <string name="tv_letter_a">a</string>
+    <string name="tv_letter_b">b</string>
+    <string name="tv_letter_c">c</string>
+    <string name="tv_letter_d">d</string>
+
+    <!-- A plurals resource for number of points: -->
+    <plurals name="msg_number_of_points">
+        <item quantity="one">un punct</item>
+        <item quantity="other">%d puncte</item>
+    </plurals>
+
+    <string name="tv_status">&lt;b>%1$s&lt;/b>&lt;br>Întrebarea &lt;b>%2$s&lt;/b> pentru &lt;b>%3$s&lt;/b></string>
+    <string name="level_statuses">x|Ești la primul nivel|Ești la al doilea nivel|Ești la al treilea nivel|Răspunde la următoarea întrebare și câștigi jocul!</string>
+    <string name="are_you_sure">Răspuns final?</string>
+    <string name="yes">Da</string>
+    <string name="no">Nu</string>
+    <string name="ok">OK</string>
+    <string name="close">Închide</string>
+    <string name="close_settings">Închide setările</string>
+    <string name="close_statistics">Închide statisticile</string>
+    <string name="close_help">Închide informațiile</string>
+    <string name="cancel">Anulează</string>
+    <string name="warning">Avertisment</string>
+    <string name="error">Eroare</string>
+    <string name="tv_final_status_message">%1$s&lt;br>%2$s</string>
+    <string name="tv_status_actual_points">Total &lt;b>%1$s&lt;/b> în testul curent.</string>
+    <string name="tv_points_status">%1$s (total %2$s)</string>
+    <string name="tv_points_status_negative">Penalizare %1$s (total %2$s)</string>
+    <string name="tv_correct_answer">Răspuns corect!&lt;br>%1$s</string>
+    <string name="tv_wrong_answer">Răspuns greșit!&lt;br>%1$s</string>
+    <string name="tv_status_wrong_finished">Joc terminat!</string>
+
+    <string-array name="chances_array">
+        <item>Nimic</item>
+        <item>Ai consumat ultima șansă!</item>
+        <item>Mai ai doar o șansă!</item>
+        <item>Mai ai două șanse!</item>
+    </string-array>
+
+    <string name="tv_status_penalised">Penalizare: %1$s…</string>
+    <string name="tv_time_has_expired">Timpul a expirat!&lt;br>%1$s</string>
+    <string name="tv_status_time_expired">Joc terminat!</string>
+    <string name="tv_status_abandoned">De ce n-ai mai încercat?…</string>
+    <string name="tv_winner_reached">Felicitări! Ai câștigat jocul!&lt;br>%1$s</string>
+    <string name="tv_status_winner">Ai ajuns cu succes la final!</string>
+    <string name="tv_status_test_position">Poziție rezultat: &lt;b>%1$s&lt;/b></string>
+    <string name="tv_status_record">Felicitări! Ți-ai bătut recordul!</string>
+    <string name="stats_error_get_test_position">A apărut o eroare la calcularea poziției testului…</string>
+    <string name="initial_chronometer_value">100</string>
+    <string name="dismiss_results_after_use_help_options">Ascunde rezultatul și arată iar butoanele cu variante ajutătoare</string>
+    <string name="used_fifty">Au rămas doar două variante posibile…</string>
+    <string name="used_call">Sunt %1$s%% sigur că %2$s este răspunsul corect…</string>
+    <string name="used_ask">Mulțimea a votat:\n%1$s</string>
+    <string name="used_change">Ai sărit peste o întrebare…</string>
+    <string name="x_for_dismiss">X</string>
+    <string name="used_abandon">Ai abandonat jocul…&lt;br>%1$s</string>
+
+    <!-- Sets management strings -->
+    <string name="warning_choose_not_available">Există un test neterminat dintr-o sesiune anterioară, aflat în prezent la întrebarea %1$s.\nSeturile nu pot fi alese până nu este finalizat testul început.</string>
+    <string name="set_management_alert_title">Alegere seturi de întrebări</string>
+    <string name="tv_set_item_all">&lt;b>Selectare toate&lt;/b></string>
+    <string name="tv_set_item_none">&lt;b>Deselectare toate&lt;/b></string>
+    <string name="tv_set_item">&lt;i>%1$s&lt;/i> &lt;b>(%2$s)&lt;/b></string>
+    <string name="save_sets">Salvează!</string>
+
+    <!-- Settings activity: -->
+    <string name="title_activity_settings">Setări generale</string>
+    <string name="enable_sounds">Activare sunete pentru diverse evenimente</string>
+    <string name="enable_music">Activare muzică de fundal</string>
+    <string name="enable_screen_awake">Menținere ecran activ</string>
+    <string name="enable_speech">Activare vorbire automată a unor mesaje (util pentru utilizatorii de cititoare de ecran)</string>
+    <string name="bt_reset_to_defaults">Resetare joc la valorile implicite…</string>
+    <string name="title_default_settings">Resetare joc</string>
+    <string name="body_default_settings">Ești sigur că vrei să resetezi jocul?\nAcesta va fi adus la setările inițiale.</string>
+
+    <!-- Messages for TextToSpeech: -->
+    <string name="tts_correct_answer">Corect era %1$s: %2$s.</string>
+
+    <!-- Statistics strings: -->
+    <string name="statistics_title">Statistici personale</string>
+    <string name="stats_introduction">&lt;i>Aceste statistici iau în calcul testele finalizate de la prima încercare din intervalul ultimei instalări a jocului&lt;/i> – &lt;br> &lt;b>%1$s&lt;/b>&lt;br>După statistici sunt și acțiuni, derulează mai mult în jos…</string>
+    <string name="stats_finished_tests"> - teste finalizate: &lt;b>%1$s&lt;/b>;</string>
+    <string name="stats_total_points"> - total puncte acumulate: &lt;b>%1$s&lt;/b>;</string>
+    <string name="stats_won_tests"> - jocuri câștigate: &lt;b>%1$s&lt;/b>;</string>
+    <string name="stats_average_nrq"> - medie răspunsuri corecte per test: &lt;b>%1$s&lt;/b>;</string>
+    <string name="stats_average_points"> - medie puncte per test: &lt;b>%1$s&lt;/b>;</string>
+    <string name="stats_main_menu_launches"> - afișări ale meniului principal: &lt;b>%1$s&lt;/b>;</string>
+    <string name="stats_no_records_found">Încă nu a fost rezolvat niciun test</string>
+    <string name="stats_duration_as_string">%1$s zile, %2$s ore, %3$s minute și %4$s secunde</string>
+    <string name="stats_total_duration"> - timp total petrecut jucând acest joc:&lt;br>&lt;b>%1$s&lt;/b>;</string>
+    <string name="stats_average_duration"> - durată medie per test: &lt;b>%1$s&lt;/b> secunde;</string>
+    <string name="stats_best_tests_title">&lt;b>Cele mai bune rezultate:&lt;/b></string>
+    <string name="stats_last_tests_title">&lt;b>Ultimele teste rezolvate:&lt;/b></string>
+    <string name="stats_test_info"> - Test &lt;b>%1$s&lt;/b>:&lt;br>răspunsuri corecte: &lt;b>%2$s&lt;/b>;&lt;br>puncte: &lt;b>%3$s&lt;/b>;&lt;br>durata: &lt;b>%4$s&lt;/b> secunde.</string>
+    <string name="bt_send_best_test">Trimite cel mai bun rezultat!!!</string>
+    <string name="bt_get_best_test_position">Poziția actuală a celui mai bun test trimis…</string>
+    <string name="stats_please_wait_sending">În curs de trimitere rezultat…</string>
+    <string name="stats_please_wait_getting">În curs de obținere poziție actuală…</string>
+    <string name="stats_test_was_already_sent">Cel mai bun rezultat înregistrat a fost trimis deja.\nPoți încerca din nou când îți bați recordul…</string>
+    <string name="stats_result_sent_title">Top rezultate</string>
+    <string name="stats_result_sent_body">Ai trimis rezultatul cu succes.\nPoziția actuală a acestui rezultat în topul on-line este %1$s.\nTopul rezultatelor trimise de utilizatori poate fi consultat în pagina web a statisticilor și clasamentelor on-line.\nAdresa paginii este www.android.pontes.ro (secțiunea General Knowledge; de asemenea, se poate ajunge direct, apăsând butonul Statistici și clasamente (on-line) din fereastra Statistici personale a jocului.</string>
+    <string name="stats_current_top_position_title">Poziție actuală</string>
+    <string name="stats_current_top_position_body">Poziție actuală: &lt;b>%1$s&lt;/b>.&lt;br>Poziția menționată mai sus este a celui mai bun rezultat trimis de tine pentru topul on-line de pe acest dispozitiv de la ultima instalare a jocului:&lt;br>%2$s</string>
+    <string name="stats_test_info_best_result"> - rezultat trimis &lt;b>%1$s&lt;/b>:&lt;br> - răspunsuri corecte: &lt;b>%2$s&lt;/b>;&lt;br> - puncte: &lt;b>%3$s&lt;/b>;&lt;br> - durata: &lt;b>%4$s&lt;/b> secunde&lt;br> - nume / poreclă: &lt;b>%5$s&lt;/b></string>
+    <string name="error_occurred">A apărut o eroare necunoscută…</string>
+    <string name="stats_no_results_found_in_top">Nu a fost găsit niciun rezultat trimis pentru topul on-line.\nSunt luate în calcul doar testele trimise de pe acest dispozitiv de la ultima instalare a jocului.</string>
+    <string name="stats_error_get_sent_result_position">A apărut o eroare necunoscută pe server.\nTe rugăm încearcă din nou puțin mai târziu…</string>
+
+    <!-- Strings for date: -->
+    <string name="today">azi</string>
+    <string name="yesterday">ieri</string>
+    <string name="date_format">%1$s, %2$s %3$s %4$s, %5$s:%6$s</string>
+
+    <!-- Strings for rating: -->
+    <string name="mnu_rate">Evaluează jocul</string>
+    <string name="title_rate_app">Evaluare</string>
+    <string name="body_rate_app">Dacă îți place acest joc de cultură generală, te rugăm să îl evaluezi în Magazin Google Play.\nAcordând o notă bună, cât mai multe steluțe, ne ajuți să fim cât mai vizibili și ne încurajezi să lucrăm în continuare la dezvoltarea acestui joc.\nDesigur că ne prind bine și eventualele comentarii, sugestii, observații critice.\nMulțumim pentru interesul acordat.</string>
+    <string name="bt_rate">Evaluează!</string>
+    <string name="bt_not_now">Nu acum!</string>
+
+    <!-- Other strings: -->
+    <string name="no_internet_is_available">Nu am detectat o conexiune activă la Internet.\nTe rugăm să încerci mai târziu, după ce te conectezi la o rețea activă.</string>
+    <string name="help_alert_title">Ajutor / Informații</string>
+    <string name="html_new_line">&lt;br></string>
+    <string name="nickname_title">Nume sau poreclă</string>
+    <string name="nickname_body">Scrie un nume sau o poreclă care să apară în topul on-line pentru rezultatul trimis:</string>
+    <string name="nickname_hint">Scrie aici numele sau porecla…</string>
+    <string name="bt_send">Trimite!</string>
+    <string name="nickname_wrong_message">Numele trebuie să conțină între 4 și 20 de caractere.\nTe rugăm încearcă din nou!</string>
+
+    <!-- New in version 2.1: -->
+    <string-array name="stars_chances_array">
+        <item></item>
+        <item>*  </item>
+        <item>** </item>
+        <item>***</item>
+    </string-array>
+
+    <!-- Strings for feedback for a question: -->
+    <string name="title_feedback_dialog">Semnalare problemă</string>
+    <string name="message_feedback_dialog">Scrie pe scurt ceva despre problema identificată și trimite…\nCronometrul este oprit până te ocupi de semnalarea erorii.</string>
+    <string name="hint_feedback">Scrie aici…</string>
+    <string name="rb_feedback_0">Eroare conținut întrebare</string>
+    <string name="rb_feedback_1">Eroare conținut variante de răspuns</string>
+    <string name="rb_feedback_2">Eroare lexico-gramaticală</string>
+    <string name="rb_feedback_3">Alt tip de eroare</string>
+    <string name="no_connection_for_feedback">Nu poți trimite o notificare despre întrebarea curentă deoarece nu ai o conexiune validă la Internet.\nPoți ieși din joc, mergi în setările dispozitivului și activează o conexiune la Internet.\nCând vei reveni, vei putea încerca din nou, va apărea tot această întrebare.\nMulțumim că vrei să contribui la îmbunătățirea acestui joc de cultură generală!</string>
+    <string name="no_texts_for_description">Trebuie să scrii ceva în câmpul de editare despre problema identificată de tine la întrebarea curentă, astfel ne ajuți să găsim mai ușor  unde să operăm corecturi.</string>
+    <string name="please_wait_sending_feedback">Notificare în curs de expediere…</string>
+    <string name="feedback_sent_successfully">Notificarea ta în legătură cu întrebarea curentă a fost trimisă cu succes.\nMulțumim pentru contribuțiile aduse!</string>
+    <string name="feedback_sent_unsuccessfully">Notificarea ta nu a putut fi trimisă.\nTe rugăm să încerci din nou.\nMulțumim pentru interesul acordat!</string>
+
+    <!-- Strings for what's new alert: -->
+    <string name="whatsnew_title">Ceva nou în 5.7.1</string>
+    <string name="whatsnew_in_570_a">A apărut un nou set creat de Virgil Zanfir, numit România postdecembristă, cu întrebări din istorie, politică, legislație.</string>
+    <string name="whatsnew_in_570_b">Au fost operate corecturi în urma semnalării erorilor de către utilizatori, cu această ocazie le mulțumim tuturor celor care contribuie la îmbunătățirea bazei de date cu întrebări.</string>
+    <string name="whatsnew_in_570_c">Nu uita că ne poți semnala oricând eventualele erori de conținut sau gramaticale identificate la afișarea întrebărilor; dai click pe cronometru, acesta se oprește, lăsându-te să ne scrii în caseta care apare.</string>
+    <string name="chk_got_it">Am văzut, nu mai arăta!</string>
+
+</resources>

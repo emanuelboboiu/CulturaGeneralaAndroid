@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/llIbsLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_vertical"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:gravity="center_vertical"
+    android:orientation="horizontal" >
+
+    <ImageButton
+        android:id="@+id/ibOption1"
+        style="@style/style_for_image_buttons"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:contentDescription="@string/ib_fifty"
+        android:onClick="fifty"
+        android:src="@drawable/ib_option1" />
+
+    <ImageButton
+        android:id="@+id/ibOption2"
+        style="@style/style_for_image_buttons"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:contentDescription="@string/ib_call"
+        android:onClick="call"
+        android:src="@drawable/ib_option2" />
+
+    <ImageButton
+        android:id="@+id/ibOption3"
+        style="@style/style_for_image_buttons"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:contentDescription="@string/ib_ask"
+        android:onClick="ask"
+        android:src="@drawable/ib_option3" />
+
+    <ImageButton
+        android:id="@+id/ibOption4"
+        style="@style/style_for_image_buttons"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:contentDescription="@string/ib_change"
+        android:onClick="change"
+        android:src="@drawable/ib_option4" />
+
+    <ImageButton
+        android:id="@+id/ibOption5"
+        style="@style/style_for_image_buttons"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:contentDescription="@string/ib_abandon"
+        android:onClick="abandon"
+        android:src="@drawable/ib_option5" />
+
+</LinearLayout>

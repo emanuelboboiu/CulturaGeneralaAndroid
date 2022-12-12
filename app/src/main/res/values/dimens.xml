@@ -1,0 +1,21 @@
+<resources>
+
+    <dimen name="text_size_main">20sp</dimen>
+    <dimen name="text_size_main_selected">22sp</dimen>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="padding_for_menu_item">5dp</dimen>
+    <dimen name="margin_below_menu_item">8dp</dimen>
+    <dimen name="vars_margin_left">16dp</dimen>
+    <dimen name="vars_margin_right">5dp</dimen>
+    <dimen name="between_image_buttons">2dp</dimen>
+    <dimen name="margin_below_controls">4dp</dimen>
+    <dimen name="margin_between_controls">2dp</dimen>
+    <dimen name="margin_between_simple_buttons">3dp</dimen>
+    <dimen name="padding_for_status">5dp</dimen>
+    <dimen name="padding_for_question">10dp</dimen>
+    <dimen name="padding_for_chronometer">2dp</dimen>
+    <dimen name="padding_for_text_variant">10dp</dimen>
+    <dimen name="padding_for_bottom_text">5dp</dimen>
+
+</resources>

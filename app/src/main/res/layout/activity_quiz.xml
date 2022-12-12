@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layoutMain"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background" >
+
+    <LinearLayout
+        android:id="@+id/llBottomInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="center_horizontal"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:id="@+id/llForIbsLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_below_controls"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <include layout="@layout/ll_ibs_layout" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llBottomAd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical" >
+
+<!-- Here the admob zone. -->
+<com.google.android.gms.ads.AdView
+      xmlns:ads="http://schemas.android.com/apk/res-auto"
+      android:id="@+id/adView"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_centerHorizontal="true"
+      android:layout_alignParentBottom="true"
+      ads:adSize="BANNER"
+      ads:adUnitId="ca-app-pub-9705662823127450~3812324606">
+  </com.google.android.gms.ads.AdView>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llMain"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/llBottomInfo"
+        android:gravity="center_horizontal"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/tvStatus"
+            style="@style/status_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nextFocusDown="@+id/tvQuestion" />
+
+        <LinearLayout
+            android:id="@+id/llQuestion"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/tvQuestion"
+                style="@style/question_style"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.2"
+                android:nextFocusDown="@+id/tvVariant1"
+                android:nextFocusUp="@+id/tvStatus" />
+
+            <LinearLayout
+                android:id="@+id/llUnderQuestion"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.8"
+                android:baselineAligned="false"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal" >
+
+                <ScrollView
+                    android:id="@+id/svVariants"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.95"
+                    android:isScrollContainer="false"
+                    android:orientation="vertical"
+                    tools:ignore="NestedWeights" >
+
+                    <LinearLayout
+                        android:id="@+id/llVariants"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/vars_margin_left"
+                        android:layout_marginRight="@dimen/vars_margin_right"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:id="@+id/tvGameTimer"
+                            style="@style/chronometer_style"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:nextFocusDown="@+id/tvVariant1"
+                            android:nextFocusUp="@+id/tvQuestion"
+                            android:onClick="chronPressed"
+                            android:text="@string/initial_chronometer_value" />
+
+                        <LinearLayout
+                            android:id="@+id/llFirstVariant"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal" >
+
+                            <TextView
+                                android:id="@+id/tvLetter1"
+                                style="@style/letters_style"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:contentDescription="@string/tv_letter_a"
+                                android:nextFocusUp="@+id/tvGameTimer"
+                                android:onClick="variant1" />
+
+                            <TextView
+                                android:id="@+id/tvVariant1"
+                                style="@style/variants_style"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:nextFocusUp="@+id/tvGameTimer"
+                                android:onClick="variant1" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_below_controls"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal" >
+
+                            <TextView
+                                android:id="@+id/tvLetter2"
+                                style="@style/letters_style"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:contentDescription="@string/tv_letter_b"
+                                android:onClick="variant2" />
+
+                            <TextView
+                                android:id="@+id/tvVariant2"
+                                style="@style/variants_style"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:onClick="variant2" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_below_controls"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal" >
+
+                            <TextView
+                                android:id="@+id/tvLetter3"
+                                style="@style/letters_style"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:contentDescription="@string/tv_letter_c"
+                                android:onClick="variant3" />
+
+                            <TextView
+                                android:id="@+id/tvVariant3"
+                                style="@style/variants_style"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:onClick="variant3" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_below_controls"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal" >
+
+                            <TextView
+                                android:id="@+id/tvLetter4"
+                                style="@style/letters_style"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:contentDescription="@string/tv_letter_d"
+                                android:onClick="variant4" />
+
+                            <TextView
+                                android:id="@+id/tvVariant4"
+                                style="@style/variants_style"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:onClick="variant4" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </ScrollView>
+
+                <LinearLayout
+                    android:id="@+id/llProgressBar"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="0.05"
+                    android:orientation="vertical" >
+
+                    <!-- Here it will be a included custom progress bar: -->
+
+                    <include layout="@layout/ll_progress_bar_layout" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

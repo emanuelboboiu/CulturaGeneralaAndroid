@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- For different controls in the game -->
+    <color name="tvTextWhite">#ffffff</color>
+    <color name="tvTextBlack">#000000</color>
+    <color name="tvChronRed">#ff3333</color>
+    <color name="transparent">#00000000</color>
+    <color name="background_selected">#99ff5555</color>
+    <color name="background_bt_selected">#6a52bf</color>
+    <color name="background_bt_unselected">#483696</color>
+    <color name="text_white_selected">#ff9999</color>
+    <color name="text_black_selected">#aa3333</color>
+    <color name="background_for_progress_bar">#3333cc</color>
+    <color name="background_progress_bar_unfilled">#0e0e47</color>
+    <color name="background_progress_bar_filled">#e5ff60</color>
+
+</resources>

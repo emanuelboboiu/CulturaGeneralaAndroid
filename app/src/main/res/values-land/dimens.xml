@@ -1,0 +1,9 @@
+<resources>
+
+    <dimen name="vars_margin_left">20dp</dimen>
+    <dimen name="vars_margin_right">7dp</dimen>
+    <dimen name="padding_for_menu_item">10dp</dimen>
+    <dimen name="between_image_buttons">32dp</dimen>
+    <dimen name="padding_for_status">1dp</dimen>
+
+</resources>

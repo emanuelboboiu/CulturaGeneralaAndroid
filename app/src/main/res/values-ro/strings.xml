@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- A plurals resource for number of points: -->
+    <plurals name="msg_number_of_points">
+        <item quantity="one">un punct</item>
+        <item quantity="few">%d puncte</item>
+        <item quantity="other">%d de puncte</item>
+    </plurals>
+
+</resources>

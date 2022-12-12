@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="information_array">
+        <item>&lt;b>Generalități&lt;/b></item>
+        <item>Jocul de față vine cu o bază de date locală care conține mii de întrebări din diverse domenii.</item>
+        <item>Sunt seturi de întrebări din diverse domenii precum: cultură generală, istorie, geografie, literatură, mitologie, filosofie, muzică, biologie, lingvistică şi gramatică, Antichitatea romană, film, artă plastică, anatomie, sport, tehnologia informației, Biblie, zoologie, Harry Potter și altele.</item>
+        <item>Se pot adăuga oricând noi seturi de întrebări, fiind acceptate și cele trimise de utilizatori, cu condiția să existe minimum 150 de întrebări cu 4 variante de răspuns (60 pentru primul nivel, 50 pentru al doilea, respectiv 40 pentru al treilea nivel).</item>
+        <item>Pentru a propune un set de întrebări, ia legătura cu noi prin mijloacele de contact puse la dispoziţie în secţiunea &lt;i>Despre&lt;/i> aflată în &lt;i>Meniul principal&lt;/i>.</item>
+        <item>Jocul este creat să fie compatibil și cu televizoarele cu Android TV, este disponibil în Magazin Play pentru aceste dispozitive.</item>
+        <item>&lt;b>Atenție!&lt;/b> Dacă întrebarea este mai lungă și nu încape în chenarul rezervat, se poate face scroll pe verticală. De asemenea, dacă o variantă de răspuns este mai lungă decât spațiul alocat, se poate face scroll pe orizontală.</item>
+        <item>La un click scurt pe bara / zona de status din partea de sus a ferestrei jocului este afișat punctajul din acel moment.</item>
+        <item>La un click lung pe bara / zona de status aflată în partea de sus a ferestrei jocului este afișat numele autorului și setul din care face parte întrebarea din acel moment.</item>
+        <item></item>
+        <item>&lt;b>Alegere seturi de întrebări&lt;/b></item>
+        <item>A doua opțiune din meniul principal este &lt;i>Alegere seturi&lt;/i>.</item>
+        <item>Într-o fereastră alert apare lista de seturi disponibile și autorii acestora.</item>
+        <item>Seturile pot fi combinate oricum, se pot alege toate, câte unul sau câteva grupate. De exemplu, se poate juca un test în care să fie întrebări doar din &lt;i>Literatură&lt;/i> și &lt;i>Sport&lt;/i>.</item>
+        <item>Seturile apar cu fundal albastru atunci când nu sunt bifate, și cu fundal verde atunci când sunt bifate.</item>
+        <item>În urma selectării testelor dorite, se apasă butonul Salvează din partea de jos a ferestrei.</item>
+        <item>Pe parcursul unui test, jocul alege câte o întrebare aleatoriu din seturile alese.</item>
+        <item>Implicit este ales un set de cultură generală.</item>
+        <item>Pentru a ști din ce set anume este aleasă o întrebare pe parcursul unui test, se poate da click lung pe bara de status și va apărea pentru câteva secunde numele setului și numele autorului acestuia. De menționat că la click scurt pe aceeași bară apare numărul de puncte acumulat până în acel moment.</item>
+        <item></item>
+        <item>&lt;b>Instrucțiuni de joc&lt;/b></item>
+        <item>Un test are maxim 21 de întrebări, grupate pe 3 niveluri de dificultate cu câte 7 întrebări fiecare.&lt;br>Stadiul de avansare în joc este indicat și grafic printr-o bară laterală care se umple pe măsură ce au fost date răspunsuri corecte.</item>
+        <item>Așadar, pe măsură ce este dat un răspuns corect, jocul avansează afișând câte o întrebare cu 4 variante de răspuns.</item>
+        <item>Dând click lung pe bara de status de sus, va fi afișat în locul acesteia, pentru 3 secunde, numele setului de întrebări din care a fost aleasă și numele autorului acestuia.</item>
+        <item>Obiectivul este de a strânge cât mai multe puncte.</item>
+        <item>Punctarea se face în funcție de nivelul la care se află întrebarea, viteza de răspuns și altele, a se vedea secțiunea următoare – &lt;i>Sistemul de punctare&lt;/i>.</item>
+        <item>Pentru fiecare test există câteva variante ajutătoare aflate pe bara de jos a ferestrei jocului: &lt;i>Jumi juma&lt;/i> – anulează două răspunsuri greșite, &lt;i>Cer părerea cuiva&lt;/i> – încearcă să aproximeze răspunsul corect, &lt;i>Întreb mulțimea&lt;/i> – se votează pentru varianta corectă, &lt;i>Sar peste întrebare&lt;/i> – trece de întrebarea curentă fără penalizări (valabil începând cu nivelul 2).</item>
+        <item>Toate variantele ajutătoare pot fi folosite o singură dată pe parcursul unui test.</item>
+        <item>Mai există și trei Șanse. Răspunzând de 3 ori greșit, jocul nu se termină, ci se penalizează din puncte în funcție de nivelul de dificultate prezent.&lt;br>Numărul de șanse rămase la un moment dat este indicat prin steluțele care apar în locul cronometrului atunci când este dat un răspuns greșit.</item>
+        <item>Ultima opțiune de pe bara de jos este &lt;i>Renunț&lt;/i> – se poate renunța la joc fără penalizări, astfel încât utilizatorul rămâne la punctele din acel moment.</item>
+        <item></item>
+        <item>&lt;b>Sistem de punctare&lt;/b></item>
+        <item>În partea de sus, pe bara de status, apare de obicei numărul întrebări în cadrul testului și valoarea unui răspuns corect.</item>
+        <item>Pentru a vedea punctajul total pe parcursul jocului, se poate da click pe bara de status de sus, și va apărea această informație pentru câteva secunde. De menționat că la un click lung pe bara de status apare numele setului din care este întrebarea curentă și autorul acesteia.</item>
+        <item>Pentru fiecare răspuns corect sunt acordate câte 10, 20, respectiv 30 de puncte, în funcție de nivel.</item>
+        <item>Valoarea întrebări scade cu 10% la fiecare 10 secunde. Așadar, la nivelul 1, dacă au trecut 15 secunde, un răspuns corect în acel moment valorează doar 9 puncte.</item>
+        <item>La trecerea cu succes de nivelul 1 și nivelul 2, se mai acordă puncte bonus, câte 10, respectiv 20 înmulțit cu numărul de seturi alese. Dacă se joacă cu întrebări din 3 teste și s-a trecut cu succes de nivelul 2, se acordă 60 de puncte bonus (rezultatul înmulțirii lui 20 cu 3).</item>
+        <item>La câștigarea jocului, răspuns corect la întrebarea 21, se acordă ca bonus un total de puncte egal cu 50 înmulțit cu numărul de seturi alese.</item>
+        <item>Există multe situații când jucătorul este penalizat.</item>
+        <item>La un răspuns greșit, penalizarea este egală cu 10, 20, respectiv 30 de puncte, depinde de nivelul curent, practic penalizarea este egală cu valoarea de start a unui răspuns corect.</item>
+        <item>În cazul expirării timpului, penalizarea este egală cu 30, 20, respectiv 10 puncte, tot în funcție de nivel, iar jocul se termină fără a se mai acorda vreo șansă.</item>
+        <item>Utilizarea variantelor ajutătoare nu costă nici un punct.</item>
+        <item>În cazul utilizării opțiunii &lt;i>Renunț&lt;/i>, ultima de pe banda de jos, jocul este finalizat cu totalul de puncte din acel moment.</item>
+        <item></item>
+        <item>&lt;b>Statistici&lt;/b></item>
+        <item>Accesând &lt;i>Statistici&lt;/i> din &lt;i>Meniul principal&lt;/i>, apar diverse informații precum: total teste finalizate, total punctaj făcut, medie punctaj per întrebare, durata medie per test, număr de jocuri câștigate și altele.</item>
+        <item>Tot aici apar ultimele teste finalizate și cele mai bune rezultate obținute cu detaliile aferente (data și ora finalizării testelor respective, durata, număr puncte etc.).</item>
+        <item>Cel mai bun rezultat poate fi trimis pentru a participa la un top on-line al celor mai bune reușite. Rezultatul este trimis cu orice nume, astfel putându-se păstra anonimatul.</item>
+        <item></item>
+        <item>&lt;b>Top rezultate on-line&lt;/b></item>
+        <item>Cel mai bun test de la un moment dat poate fi trimis oricând pentru a participa într-un top al celor mai bune rezultate ale utilizatorilor.</item>
+        <item>Oricând un utilizator își bate recordul, din &lt;i>Statistici&lt;/i>, după secțiunea &lt;i>Cele mai bune rezultate&lt;/i>, se poate da click pe butonul &lt;i>Trimite cel mai bun rezultat&lt;/i>.</item>
+        <item>Trebuie completat un nume sau o poreclă care să apară în tabelul on-line.</item>
+        <item>Dacă rezultatul este trimis cu succes, va apărea un mesaj de confirmare în care scrie și poziția pe care se situează rezultatul în clasamentul din acel moment.</item>
+        <item>Atenție! Sunt luate în calcul doar testele trimise în mod special pentru acest clasament.</item>
+        <item>Clasamentul poate fi vizualizat la www.android.pontes.ro, secțiunea General Knowledge (Cultură generală).</item>
+        <item>Butonul &lt;i>Statistici și clasamente on-line&lt;/i> de la finalul ferestrei Statistici deschide pagina de la care se poate ajunge ușor și la clasament. Butonul nu apare în cazul televizoarelor cu Android TV.</item>
+        <item></item>
+        <item>&lt;b>Setări&lt;/b></item>
+        <item>În &lt;i>Setări&lt;/i> există diferite opțiuni care pot fi activate sau dezactivate, după preferință.</item>
+        <item>&lt;i>Activare sunete&lt;/i> – activează / dezactivează diverse sunete care marchează anumite evenimente pe parcursul testului.</item>
+        <item>&lt;i>Activare muzică de fundal&lt;/i> – activează / dezactivează fundalul sonor al jocului, sunt melodii clasice celebre în format Midi.</item>
+        <item>&lt;i>Menținere ecran activ&lt;/i> – face ca ecranul să nu se blocheze pe parcursul unui test.</item>
+        <item>&lt;i>Resetare joc la valorile implicite&lt;/i> – face ca jocul să fie adus în starea lui inițială, din momentul instalării. Această opțiune nu șterge statisticile.</item>
+        <item></item>
+        <item>&lt;b>Semnalare erori&lt;/b></item>
+        <item>Poți oricând contribui la corectarea întrebărilor și variantelor de răspuns prin semnalarea oricărui tip de greșeală.</item>
+        <item>În timp ce vrei să răspunzi la o întrebare și ai identificat o eroare de conținut sau lexico-gramaticală, apasă pe cronometrul aflat sub întrebarea propriu-zisă.</item>
+        <item>Timpul va fi oprit și va apărea o casetă de dialog în care se poate alege tipul de eroare și scrie câte ceva despre aceasta.&lt;br>Nu trebuie să ne spui despre care întrebare este vorba, se trimite automat ID-ul de identificare al acesteia în baza de date.</item>
+        <item>Descrierea erorii identificate ar trebui să fie cât mai concisă, de exemplu: &lt;i>\"apare scris Caragiale cu c mic\"&lt;/i>.</item>
+        <item>Mulțumim de pe acum pentru implicare și pentru eventualul ajutor pe care ni-l vei da pentru a ajunge la întrebări cât mai corecte din toate punctele de vedere.</item>
+        <item></item>
+        <item>&lt;b>Contact&lt;/b></item>
+        <item>Pentru a întreba alte detalii sau pentru a trimite sugestii, scrie la emanuelboboiu@gmail.com.</item>
+        <item>Poți de asemenea suna la +40740203043.</item>
+        <item></item>
+    </string-array>
+
+</resources>

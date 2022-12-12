@@ -1,0 +1,110 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="AppBaseTheme" parent="android:Theme.Light"></style>
+
+    <!-- Application theme. -->
+    <style name="AppTheme" parent="AppBaseTheme">
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <style name="mainMenuStyle" parent="android:Widget.Holo.Light.TextView">
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:gravity">center_vertical|center_horizontal</item>
+        <item name="android:textColor">@color/selector_text_white</item>
+        <item name="android:textSize">@dimen/text_size_main</item>
+        <item name="android:paddingLeft">@dimen/padding_for_menu_item</item>
+        <item name="android:paddingRight">@dimen/padding_for_menu_item</item>
+    </style>
+
+    <style name="style_check_boxes_in_settings">
+        <item name="android:textSize">@dimen/text_size_main</item>
+    </style>
+
+    <style name="status_style" parent="android:Widget.Holo.Light.TextView">
+        <item name="android:accessibilityLiveRegion" tools:ignore="NewApi">polite</item>
+        <item name="android:padding">@dimen/padding_for_status</item>
+        <item name="android:gravity">center_vertical|center_horizontal</item>
+        <item name="android:textColor">@color/tvTextWhite</item>
+        <item name="android:textSize">@dimen/text_size_main</item>
+    </style>
+
+    <style name="question_style" parent="android:Widget.Holo.Light.TextView">
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:accessibilityLiveRegion" tools:ignore="NewApi">polite</item>
+        <item name="android:scrollbars">vertical</item>
+        <item name="android:gravity">center_vertical|center_horizontal</item>
+        <item name="android:background">@drawable/background_question</item>
+        <item name="android:textColor">@color/selector_text_white</item>
+        <item name="android:textSize">@dimen/text_size_main</item>
+        <item name="android:paddingLeft">@dimen/padding_for_question</item>
+        <item name="android:paddingRight">@dimen/padding_for_question</item>
+    </style>
+
+    <style name="chronometer_style" parent="android:Widget.Holo.Light.TextView">
+        <item name="android:focusable">true</item>
+        <item name="android:clickable">true</item>
+        <item name="android:gravity">center_vertical|center_horizontal</item>
+        <item name="android:textColor">@color/tvTextWhite</item>
+        <item name="android:padding">@dimen/padding_for_chronometer</item>
+        <item name="android:textSize">@dimen/text_size_main</item>
+    </style>
+
+    <style name="letters_style" parent="android:Widget.Holo.Light.TextView">
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">false</item>
+    </style>
+
+    <style name="variants_style" parent="android:Widget.Holo.Light.TextView">
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:layout_marginLeft">@dimen/margin_between_controls</item>
+        <item name="android:gravity">left|center_vertical</item>
+        <item name="android:textColor">@color/selector_text_white</item>
+        <item name="android:textSize">@dimen/text_size_main</item>
+        <item name="android:paddingLeft">@dimen/padding_for_text_variant</item>
+        <item name="android:paddingRight">@dimen/padding_for_text_variant</item>
+    </style>
+
+    <style name="style_for_image_buttons" parent="android:Widget.Holo.Light.ImageButton">
+        <item name="android:background">@drawable/selector_background_selected</item>
+        <item name="android:adjustViewBounds">true</item>
+        <item name="android:layout_marginLeft">@dimen/between_image_buttons</item>
+        <item name="android:layout_marginRight">@dimen/between_image_buttons</item>
+        <item name="android:scaleType">fitCenter</item>
+    </style>
+
+    <style name="bottom_button_style" parent="android:Widget.Holo.Light.TextView">
+        <item name="android:background">@drawable/selector_simple_bt_background</item>
+        <item name="android:gravity">center_vertical|center_horizontal</item>
+        <item name="android:textColor">@color/tvTextWhite</item>
+        <item name="android:textSize">@dimen/text_size_main</item>
+        <item name="android:layout_marginLeft">@dimen/margin_between_simple_buttons</item>
+        <item name="android:layout_marginRight">@dimen/margin_between_simple_buttons</item>
+    </style>
+
+    <style name="bottom_info_style" parent="android:Widget.Holo.Light.TextView">
+        <item name="android:background">@color/transparent</item>
+        <item name="android:gravity">center_vertical|center_horizontal</item>
+        <item name="android:textColor">@color/tvTextWhite</item>
+        <item name="android:textSize">@dimen/text_size_main</item>
+        <item name="android:paddingRight">@dimen/padding_for_bottom_text</item>
+    </style>
+
+    <style name="about_dialog_style" parent="android:Widget.Holo.Light.TextView">
+        <item name="android:textSize">@dimen/text_size_main</item>
+    </style>
+
+    <style name="pb_style" parent="android:Widget.Holo.Light.TextView">
+        <item name="android:background">@color/background_progress_bar_unfilled</item>
+    </style>
+
+    <style name="ll_for_each_level_style">
+        <item name="android:paddingBottom">1dp</item>
+        <item name="android:paddingTop">1dp</item>
+    </style>
+
+</resources>
