@@ -1,0 +1,20 @@
+{
+  "version": 3,
+  "artifactType": {
+    "type": "APK",
+    "kind": "Directory"
+  },
+  "applicationId": "ro.pontes.culturagenerala",
+  "variantName": "release",
+  "elements": [
+    {
+      "type": "SINGLE",
+      "filters": [],
+      "attributes": [],
+      "versionCode": 80,
+      "versionName": "5.9.1",
+      "outputFile": "app-release.apk"
+    }
+  ],
+  "elementType": "File"
+}

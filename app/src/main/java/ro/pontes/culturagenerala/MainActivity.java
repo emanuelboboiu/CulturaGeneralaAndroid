@@ -116,14 +116,14 @@ public class MainActivity extends Activity {
         for (int i = 0; i < tvMenuItems.length; i++) {
             int resID = mContext.getResources().getIdentifier(
                     "tvMenuItem" + (i + 1), "id", getPackageName());
-            tvMenuItems[i] = (TextView) findViewById(resID);
+            tvMenuItems[i] = findViewById(resID);
         } // end for.
     } // end getTextViews() method.
 
     // A method to set some initial things, the backgrounds:
     private void setFirstThings() {
         // Get the linear layout with the menu items:
-        llMainMenu = (LinearLayout) findViewById(R.id.llMainMenu);
+        llMainMenu = findViewById(R.id.llMainMenu);
 
         // Resize the item menu background:
         llMainMenu.getViewTreeObserver().addOnGlobalLayoutListener(

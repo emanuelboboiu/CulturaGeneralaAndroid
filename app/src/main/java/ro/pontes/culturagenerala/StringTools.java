@@ -5,21 +5,19 @@ import android.content.res.Resources;
 
 public class StringTools {
 
-	private final Context mContext;
-	private Resources res = null;
+    private final Resources res;
 
-	// A constructor for context and number of points:
-	public StringTools(Context context) {
-		mContext = context;
-		res = mContext.getResources();
-	} // end constructor.
+    // A constructor for context and number of points:
+    public StringTools(Context context) {
+        res = context.getResources();
+    } // end constructor.
 
-	public String getNumberOfPointsAsString(int nrOfPoints) {
+    public String getNumberOfPointsAsString(int nrOfPoints) {
 
-		// First take the corresponding plural resource:
-		String numberOfPointsMessage = res.getQuantityString(
-				R.plurals.msg_number_of_points, nrOfPoints, nrOfPoints);
-		return numberOfPointsMessage;
-	} // end getNumberOfPointsAsString() method.
+        // First take the corresponding plural resource:
+        String numberOfPointsMessage = res.getQuantityString(
+                R.plurals.msg_number_of_points, nrOfPoints, nrOfPoints);
+        return numberOfPointsMessage;
+    } // end getNumberOfPointsAsString() method.
 
 } // end StringTools class.

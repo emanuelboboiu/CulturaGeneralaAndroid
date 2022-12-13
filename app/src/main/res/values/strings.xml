@@ -10,9 +10,9 @@
 
     <!-- About dialog: -->
     <string name="about_title">Despre joc</string>
-    <string name="app_version">Cultură generală, Fii deștept!, versiunea 5.7.1</string>
+    <string name="app_version">Cultură generală, Fii deștept!, versiunea 5.9.1</string>
     <string name="app_release_date">Versiunea 1.0 a fost finalizată vineri, 22 decembrie 2017</string>
-    <string name="app_last_update">Ultima actualizare pe acest dispozitiv:\n - versiunea 5.7.1, finalizată vineri, 7 octombrie 2022</string>
+    <string name="app_last_update">Ultima actualizare pe acest dispozitiv:\n - versiunea 5.9.1, finalizată marți, 13 decembrie 2022</string>
     <string name="app_creator">Programat de Emanuel Boboiu (Manu)</string>
     <string name="phone_number">Telefon: +40740203043</string>
     <string name="email_address">E-mail: android@pontes.ro</string>

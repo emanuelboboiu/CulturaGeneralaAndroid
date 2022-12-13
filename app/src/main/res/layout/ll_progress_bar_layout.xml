@@ -6,17 +6,17 @@
     android:layout_marginRight="5dp"
     android:background="@color/background_for_progress_bar"
     android:orientation="vertical"
-    android:paddingBottom="3dp"
     android:paddingLeft="4dp"
+    android:paddingTop="3dp"
     android:paddingRight="4dp"
-    android:paddingTop="3dp" >
+    android:paddingBottom="3dp">
 
     <LinearLayout
         style="@style/ll_for_each_level_style"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:orientation="vertical" >
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/pb21"
@@ -74,7 +74,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:orientation="vertical" >
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/pb14"
@@ -132,7 +132,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:orientation="vertical" >
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/pb7"

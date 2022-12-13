@@ -45,7 +45,7 @@
         </activity>
         <activity
             android:name=".QuizActivity"
-            android:label="@string/title_activity_quiz"></activity>
+            android:label="@string/title_activity_quiz" />
     </application>
 
 </manifest>

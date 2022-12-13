@@ -7,20 +7,20 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DbOpenAndReadMain extends SQLiteOpenHelper {
 
-	public DbOpenAndReadMain(Context context, String name,
-			CursorFactory factory, int version) {
-		super(context, name, factory, version);
+    public DbOpenAndReadMain(Context context, String name,
+                             CursorFactory factory, int version) {
+        super(context, name, factory, version);
 
-	} // end constructor.
+    } // end constructor.
 
-	@Override
-	public void onCreate(SQLiteDatabase db) {
-		// Nothing yet.
-	}
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+        // Nothing yet.
+    }
 
-	@Override
-	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-		// Nothing yet.
-	}
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        // Nothing yet.
+    }
 
 } // end DbOpenAndReadMain class.
