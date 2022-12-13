@@ -4,7 +4,8 @@
     <string name="app_name">Cultură generală</string>
     <string name="title_activity_quiz">Cultură generală</string>
     <string name="banner_ad_unit_id_test">ca-app-pub-3940256099942544/6300978111</string>
-    <string name="banner_ad_unit_id">ca-app-pub-9705662823127450~3812324606</string>
+    <string name="banner_ad_unit_id">ca-app-pub-9705662823127450/1266176025</string>
+    <string name="banner_ad_application_id">ca-app-pub-9705662823127450~3812324606</string>
     <string name="ellipsis">…</string>
 
     <!-- About dialog: -->

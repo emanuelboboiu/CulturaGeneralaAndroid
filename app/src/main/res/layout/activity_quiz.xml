@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:ads="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layoutMain"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background" >
+    android:background="@drawable/background">
 
     <LinearLayout
         android:id="@+id/llBottomInfo"
@@ -13,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:gravity="center_horizontal"
-        android:orientation="vertical" >
+        android:orientation="vertical">
 
         <LinearLayout
             android:id="@+id/llForIbsLayout"
@@ -21,7 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_below_controls"
             android:gravity="center_vertical"
-            android:orientation="horizontal" >
+            android:orientation="horizontal">
 
             <include layout="@layout/ll_ibs_layout" />
         </LinearLayout>
@@ -31,19 +30,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
-<!-- Here the admob zone. -->
-<com.google.android.gms.ads.AdView
-      xmlns:ads="http://schemas.android.com/apk/res-auto"
-      android:id="@+id/adView"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_centerHorizontal="true"
-      android:layout_alignParentBottom="true"
-      ads:adSize="BANNER"
-      ads:adUnitId="ca-app-pub-9705662823127450~3812324606">
-  </com.google.android.gms.ads.AdView>
+            <!-- Here the admob zone. -->
+            <!-- Banner AdView -->
+            <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/bannerAdView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                ads:adSize="BANNER"
+                ads:adUnitId="@string/banner_ad_unit_id_test">
+
+            </com.google.android.gms.ads.AdView>
+
 
         </LinearLayout>
     </LinearLayout>
@@ -54,7 +53,7 @@
         android:layout_height="match_parent"
         android:layout_above="@id/llBottomInfo"
         android:gravity="center_horizontal"
-        android:orientation="vertical" >
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/tvStatus"
@@ -68,7 +67,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_horizontal"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/tvQuestion"
@@ -76,8 +75,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="0.2"
-                android:nextFocusDown="@+id/tvVariant1"
-                android:nextFocusUp="@+id/tvStatus" />
+                android:nextFocusUp="@+id/tvStatus"
+                android:nextFocusDown="@+id/tvVariant1" />
 
             <LinearLayout
                 android:id="@+id/llUnderQuestion"
@@ -86,7 +85,7 @@
                 android:layout_weight="0.8"
                 android:baselineAligned="false"
                 android:gravity="center_horizontal"
-                android:orientation="horizontal" >
+                android:orientation="horizontal">
 
                 <ScrollView
                     android:id="@+id/svVariants"
@@ -95,7 +94,7 @@
                     android:layout_weight="0.95"
                     android:isScrollContainer="false"
                     android:orientation="vertical"
-                    tools:ignore="NestedWeights" >
+                    tools:ignore="NestedWeights">
 
                     <LinearLayout
                         android:id="@+id/llVariants"
@@ -104,15 +103,15 @@
                         android:layout_marginLeft="@dimen/vars_margin_left"
                         android:layout_marginRight="@dimen/vars_margin_right"
                         android:gravity="center_horizontal"
-                        android:orientation="vertical" >
+                        android:orientation="vertical">
 
                         <TextView
                             android:id="@+id/tvGameTimer"
                             style="@style/chronometer_style"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:nextFocusDown="@+id/tvVariant1"
                             android:nextFocusUp="@+id/tvQuestion"
+                            android:nextFocusDown="@+id/tvVariant1"
                             android:onClick="chronPressed"
                             android:text="@string/initial_chronometer_value" />
 
@@ -121,7 +120,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center_vertical"
-                            android:orientation="horizontal" >
+                            android:orientation="horizontal">
 
                             <TextView
                                 android:id="@+id/tvLetter1"
@@ -146,7 +145,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/margin_below_controls"
                             android:gravity="center_vertical"
-                            android:orientation="horizontal" >
+                            android:orientation="horizontal">
 
                             <TextView
                                 android:id="@+id/tvLetter2"
@@ -169,7 +168,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/margin_below_controls"
                             android:gravity="center_vertical"
-                            android:orientation="horizontal" >
+                            android:orientation="horizontal">
 
                             <TextView
                                 android:id="@+id/tvLetter3"
@@ -192,7 +191,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/margin_below_controls"
                             android:gravity="center_vertical"
-                            android:orientation="horizontal" >
+                            android:orientation="horizontal">
 
                             <TextView
                                 android:id="@+id/tvLetter4"
@@ -216,10 +215,10 @@
                     android:id="@+id/llProgressBar"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_marginBottom="5dp"
                     android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
                     android:layout_weight="0.05"
-                    android:orientation="vertical" >
+                    android:orientation="vertical">
 
                     <!-- Here it will be a included custom progress bar: -->
 
