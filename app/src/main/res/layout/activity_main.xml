@@ -35,7 +35,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/margin_below_menu_item"
-                android:nextFocusUp="@+id/tvMenuItem6"
+                android:nextFocusUp="@+id/tvMenuItem7"
                 android:onClick="startQuiz"
                 android:text="@string/bt_start_quiz" />
 
@@ -72,11 +72,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/margin_below_menu_item"
+                android:onClick="showPremium"
+                android:text="@string/bt_premium" />
+
+            <TextView
+                android:id="@+id/tvMenuItem6"
+                style="@style/mainMenuStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_below_menu_item"
                 android:onClick="showHelp"
                 android:text="@string/bt_help" />
 
             <TextView
-                android:id="@+id/tvMenuItem6"
+                android:id="@+id/tvMenuItem7"
                 style="@style/mainMenuStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

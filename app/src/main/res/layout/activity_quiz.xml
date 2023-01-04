@@ -99,8 +99,8 @@
                         android:id="@+id/llVariants"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/vars_margin_left"
-                        android:layout_marginRight="@dimen/vars_margin_right"
+                        android:layout_marginStart="@dimen/vars_margin_left"
+                        android:layout_marginEnd="@dimen/vars_margin_right"
                         android:gravity="center_horizontal"
                         android:orientation="vertical">
 

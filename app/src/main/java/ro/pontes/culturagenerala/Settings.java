@@ -23,8 +23,7 @@ public class Settings {
     // A method to detect if a preference exist or not:
     public boolean preferenceExists(String key) {
         // Restore preferences
-        SharedPreferences settings = context
-                .getSharedPreferences(PREFS_NAME, 0);
+        SharedPreferences settings = context.getSharedPreferences(PREFS_NAME, 0);
         return settings.contains(key);
     } // end detect if a preference exists or not.
 
@@ -33,8 +32,7 @@ public class Settings {
     public void saveBooleanSettings(String key, boolean value) {
         // We need an Editor object to make preference changes.
         // All objects are from android.context.Context
-        SharedPreferences settings = context
-                .getSharedPreferences(PREFS_NAME, 0);
+        SharedPreferences settings = context.getSharedPreferences(PREFS_NAME, 0);
         SharedPreferences.Editor editor = settings.edit();
         editor.putBoolean(key, value);
         // Commit the edits!
@@ -44,11 +42,9 @@ public class Settings {
     // Read boolean preference:
     public boolean getBooleanSettings(String key) {
         boolean value;
-        // Restore preferences
-        SharedPreferences settings = context
-                .getSharedPreferences(PREFS_NAME, 0);
+        // Restore preferences:
+        SharedPreferences settings = context.getSharedPreferences(PREFS_NAME, 0);
         value = settings.getBoolean(key, false);
-
         return value;
     } // end get boolean preference from SharedPreference.
 
@@ -56,8 +52,7 @@ public class Settings {
     public void saveIntSettings(String key, int value) {
         // We need an Editor object to make preference changes.
         // All objects are from android.context.Context
-        SharedPreferences settings = context
-                .getSharedPreferences(PREFS_NAME, 0);
+        SharedPreferences settings = context.getSharedPreferences(PREFS_NAME, 0);
         SharedPreferences.Editor editor = settings.edit();
         editor.putInt(key, value);
         // Commit the edits!
@@ -68,10 +63,8 @@ public class Settings {
     public int getIntSettings(String key) {
         int value;
         // Restore preferences
-        SharedPreferences settings = context
-                .getSharedPreferences(PREFS_NAME, 0);
+        SharedPreferences settings = context.getSharedPreferences(PREFS_NAME, 0);
         value = settings.getInt(key, 0);
-
         return value;
     } // end get integer preference from SharedPreference.
 
@@ -79,8 +72,7 @@ public class Settings {
     public void saveStringSettings(String key, String value) {
         // We need an Editor object to make preference changes.
         // All objects are from android.context.Context
-        SharedPreferences settings = context
-                .getSharedPreferences(PREFS_NAME, 0);
+        SharedPreferences settings = context.getSharedPreferences(PREFS_NAME, 0);
         SharedPreferences.Editor editor = settings.edit();
         editor.putString(key, value);
         // Commit the edits!
@@ -91,17 +83,14 @@ public class Settings {
     public String getStringSettings(String key) {
         String value;
         // Restore preferences
-        SharedPreferences settings = context
-                .getSharedPreferences(PREFS_NAME, 0);
+        SharedPreferences settings = context.getSharedPreferences(PREFS_NAME, 0);
         value = settings.getString(key, null);
-
         return value;
     } // end get String preference from SharedPreference.
     // End read and write settings in SharedPreferences.
 
     // Charge Settings function:
     public void chargeSettings() {
-
         // Determine if is first launch of the program:
         boolean isNotFirstRunning = getBooleanSettings("isFirstRunning");
 
@@ -112,6 +101,8 @@ public class Settings {
         }
 
         // Now charge settings:
+
+        MainActivity.isPremium = getBooleanSettings("isPremium");
 
         MainActivity.isStarted = getBooleanSettings("isStarted");
 
@@ -137,15 +128,18 @@ public class Settings {
             MainActivity.randomId = GUITools.random(1, 2147000000);
             saveIntSettings("randomId", MainActivity.randomId);
         } // end if randomId doesn't exist.
-
     } // end charge settings.
 
     public void setDefaultSettings() {
+
+        saveBooleanSettings("isPremium", false);
+        MainActivity.isPremium = false;
+
         saveBooleanSettings("isStarted", false);
         MainActivity.isStarted = false;
 
         saveBooleanSettings("isSound", true);
-        saveBooleanSettings("isMusic", true);
+        saveBooleanSettings("isMusic", false);
 
         // For keeping screen awake:
         saveBooleanSettings("isWakeLock", true);

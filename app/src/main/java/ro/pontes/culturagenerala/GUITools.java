@@ -1,6 +1,5 @@
 package ro.pontes.culturagenerala;
 
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.UiModeManager;
@@ -50,12 +49,9 @@ public class GUITools {
 
     // A method to show an alert with title and message, just an OK button:
     public static void alert(Context mContext, String title, String message) {
-
         AlertDialog.Builder alert = new AlertDialog.Builder(mContext);
-
         // The title:
         alert.setTitle(title);
-
         // The body creation:
         // Create a LinearLayout with ScrollView with all contents as TextViews:
         ScrollView sv = new ScrollView(mContext);
@@ -81,10 +77,9 @@ public class GUITools {
 
         alert.setView(sv);
 
-        alert.setPositiveButton(mContext.getString(R.string.ok),
-                (dialog, whichButton) -> {
-                    // Do nothing yet...
-                });
+        alert.setPositiveButton(mContext.getString(R.string.ok), (dialog, whichButton) -> {
+            // Do nothing yet...
+        });
         alert.show();
     } // end alert static method.
 
@@ -119,8 +114,7 @@ public class GUITools {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(mContext);
         alertDialog.setTitle(mContext.getString(R.string.help_alert_title));
         alertDialog.setView(sv);
-        alertDialog.setPositiveButton(mContext.getString(R.string.close_help),
-                null);
+        alertDialog.setPositiveButton(mContext.getString(R.string.close_help), null);
         AlertDialog alert = alertDialog.create();
         alert.show();
     } // end showHelp() method.
@@ -128,8 +122,7 @@ public class GUITools {
     // A method for about dialog for this package:
     public static void aboutDialog(Context context) {
         // Inflate the about message contents
-        LayoutInflater inflater = (LayoutInflater) context
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View messageView = inflater.inflate(R.layout.about_dialog, null);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
@@ -165,9 +158,7 @@ public class GUITools {
 
     // A method to rate this application:
     public static void showRateDialog(final Context context) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(context).setIcon(
-                R.drawable.ic_launcher).setTitle(
-                context.getString(R.string.title_rate_app));
+        AlertDialog.Builder builder = new AlertDialog.Builder(context).setIcon(R.drawable.ic_launcher).setTitle(context.getString(R.string.title_rate_app));
 
         ScrollView sv = new ScrollView(context);
         LinearLayout ll = new LinearLayout(context);
@@ -187,27 +178,22 @@ public class GUITools {
         sv.addView(ll);
 
         builder.setView(sv);
-        builder.setPositiveButton(context.getString(R.string.bt_rate),
-                (dialog, which) -> {
-                    Settings set = new Settings(context);
-                    set.saveBooleanSettings("wasRated", true);
-                    String link = "market://details?id=";
-                    try {
-                        // play market available
-                        context.getPackageManager().getPackageInfo(
-                                "com.android.vending", 0);
-                        // not available
-                    } catch (PackageManager.NameNotFoundException e) {
-                        e.printStackTrace();
-                        // Should use browser
-                        link = "https://play.google.com/store/apps/details?id=";
-                    }
-                    // Starts external action
-                    context.startActivity(new Intent(
-                            Intent.ACTION_VIEW, Uri.parse(link
-                            + context.getPackageName())));
-                }).setNegativeButton(context.getString(R.string.bt_not_now),
-                null);
+        builder.setPositiveButton(context.getString(R.string.bt_rate), (dialog, which) -> {
+            Settings set = new Settings(context);
+            set.saveBooleanSettings("wasRated", true);
+            String link = "market://details?id=";
+            try {
+                // play market available
+                context.getPackageManager().getPackageInfo("com.android.vending", 0);
+                // not available
+            } catch (PackageManager.NameNotFoundException e) {
+                e.printStackTrace();
+                // Should use browser
+                link = "https://play.google.com/store/apps/details?id=";
+            }
+            // Starts external action
+            context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(link + context.getPackageName())));
+        }).setNegativeButton(context.getString(R.string.bt_not_now), null);
         builder.show();
     } // end showRateDialog() method.
 
@@ -217,8 +203,7 @@ public class GUITools {
         boolean wasRated = set.getBooleanSettings("wasRated");
         if (!wasRated) {
 
-            if (MainActivity.numberOfLaunches % 6 == 0
-                    && MainActivity.numberOfLaunches > 0) {
+            if (MainActivity.numberOfLaunches % 6 == 0 && MainActivity.numberOfLaunches > 0) {
                 GUITools.showRateDialog(context);
             } // end if was x launches.
         } // end if it was not rated.
@@ -226,17 +211,14 @@ public class GUITools {
 
     // A method to detect if Internet connection is available:
     public static boolean isNetworkAvailable(Context context) {
-        ConnectivityManager connectivityManager = (ConnectivityManager) context
-                .getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetworkInfo = connectivityManager
-                .getActiveNetworkInfo();
+        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     } // end isNetworkAvailable() method.
 
     // A method which detects if accessibility is enabled:
     public static boolean isAccessibilityEnabled(Context context) {
-        AccessibilityManager am = (AccessibilityManager) context
-                .getSystemService(Context.ACCESSIBILITY_SERVICE);
+        AccessibilityManager am = (AccessibilityManager) context.getSystemService(Context.ACCESSIBILITY_SERVICE);
         // boolean isAccessibilityEnabled = am.isEnabled();
         return am.isTouchExplorationEnabled();
     } // end isAccessibilityEnabled() method.
@@ -253,33 +235,25 @@ public class GUITools {
     } // end random method.
 
     // A method to resize image:
-    public static Bitmap resizeImage(final Context context, String imageName,
-                                     int mWidth, int mHeight) {
+    public static Bitmap resizeImage(final Context context, String imageName, int mWidth, int mHeight) {
 
-        int resId = context.getResources().getIdentifier(imageName, "drawable",
-                context.getPackageName());
+        int resId = context.getResources().getIdentifier(imageName, "drawable", context.getPackageName());
 
         // Get the resized image:
-        Bitmap bmp = BitmapFactory
-                .decodeResource(context.getResources(), resId);
-        return Bitmap.createScaledBitmap(bmp, mWidth, mHeight,
-                true);
+        Bitmap bmp = BitmapFactory.decodeResource(context.getResources(), resId);
+        return Bitmap.createScaledBitmap(bmp, mWidth, mHeight, true);
     } // end resizeImage() method.
 
     // Convert DP to pixels:
     public static int dpToPx(Context mContext, int dp) {
-        DisplayMetrics displayMetrics = mContext.getResources()
-                .getDisplayMetrics();
-        return Math.round(dp
-                * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
+        DisplayMetrics displayMetrics = mContext.getResources().getDisplayMetrics();
+        return Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
     } // end dpToPx() method.
 
     // Convert pixel to DP:
     public static int pxToDp(Context mContext, int px) {
-        DisplayMetrics displayMetrics = mContext.getResources()
-                .getDisplayMetrics();
-        return Math.round(px
-                / (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
+        DisplayMetrics displayMetrics = mContext.getResources().getDisplayMetrics();
+        return Math.round(px / (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
     } // end pxToDp() method.
 
     // A method which returns true if is portrait, false otherwise:
@@ -295,8 +269,7 @@ public class GUITools {
 
     // A method to determine if it is AndroidTV:
     public static boolean isAndroidTV(final Context context) {
-        UiModeManager uiModeManager = (UiModeManager) context
-                .getSystemService(Context.UI_MODE_SERVICE);
+        UiModeManager uiModeManager = (UiModeManager) context.getSystemService(Context.UI_MODE_SERVICE);
         return uiModeManager.getCurrentModeType() == Configuration.UI_MODE_TYPE_TELEVISION;
     } // end determine if isAndroidTV() method.
 
@@ -346,8 +319,7 @@ public class GUITools {
         } else if (today == 2) {
             dayOfWeek = context.getString(R.string.yesterday);
         } else {
-            dayOfWeek = cal.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG,
-                    Locale.getDefault());
+            dayOfWeek = cal.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault());
         }
 
         // Make the hour and minute with 0 in front if they are less
@@ -367,34 +339,24 @@ public class GUITools {
             curMinute = "" + iMinute;
         }
 
-        return String.format(
-                context.getString(R.string.date_format),
-                dayOfWeek,
-                "" + cal.get(Calendar.DAY_OF_MONTH),
-                ""
-                        + cal.getDisplayName(Calendar.MONTH, Calendar.LONG,
-                        Locale.getDefault()),
-                "" + cal.get(Calendar.YEAR), curHour, curMinute);
+        return String.format(context.getString(R.string.date_format), dayOfWeek, "" + cal.get(Calendar.DAY_OF_MONTH), "" + cal.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault()), "" + cal.get(Calendar.YEAR), curHour, curMinute);
     } // end timeStampToString() method.
 
     /*
      * This method returns 1 if a date in milliseconds at parameter is today, 2
      * if it was yesterday or 0 on another date.
      */
-    public static int getIsToday(long smsTimeInMilis) {
+    public static int getIsToday(long smsTimeInMillis) {
         Calendar smsTime = Calendar.getInstance();
-        smsTime.setTimeInMillis(smsTimeInMilis);
+        smsTime.setTimeInMillis(smsTimeInMillis);
 
         Calendar now = Calendar.getInstance();
         if (now.get(Calendar.YEAR) == smsTime.get(Calendar.YEAR)) {
-            if (now.get(Calendar.DAY_OF_YEAR) == smsTime
-                    .get(Calendar.DAY_OF_YEAR)) {
+            if (now.get(Calendar.DAY_OF_YEAR) == smsTime.get(Calendar.DAY_OF_YEAR)) {
                 return 1; // today.
-            } else if (now.get(Calendar.DAY_OF_YEAR)
-                    - smsTime.get(Calendar.DAY_OF_YEAR) == 1) {
+            } else if (now.get(Calendar.DAY_OF_YEAR) - smsTime.get(Calendar.DAY_OF_YEAR) == 1) {
                 return 2; // yesterday.
-            } else if (smsTime.get(Calendar.DAY_OF_YEAR)
-                    - now.get(Calendar.DAY_OF_YEAR) == 1) {
+            } else if (smsTime.get(Calendar.DAY_OF_YEAR) - now.get(Calendar.DAY_OF_YEAR) == 1) {
                 return 3; // tomorrow.
             } else {
                 return 0; // another date.
@@ -421,24 +383,17 @@ public class GUITools {
 
     // This method sets the locale independent of the OS language, 2 means
     // Romanian:
-    @TargetApi(24)
     public static void setLocale(Activity activity, int numLang) {
         // If it is not the device language, normal change:
         if (numLang > 0) {
             // An array with language codes:
-            String[] langs = {"", "en", "ro"};
-            String lang = langs[numLang];
+            String[] languages = {"", "en", "ro"};
+            String lang = languages[numLang];
             Locale locale = new Locale(lang);
             Locale.setDefault(locale);
-            Configuration config = activity.getBaseContext().getResources()
-                    .getConfiguration();
+            Configuration config = activity.getBaseContext().getResources().getConfiguration();
             config.locale = locale;
-            activity.getBaseContext()
-                    .getResources()
-                    .updateConfiguration(
-                            config,
-                            activity.getBaseContext().getResources()
-                                    .getDisplayMetrics());
+            activity.getBaseContext().getResources().updateConfiguration(config, activity.getBaseContext().getResources().getDisplayMetrics());
         } // end if langNumber is not 0, no device language.
     } // end setLocale() method.
 
