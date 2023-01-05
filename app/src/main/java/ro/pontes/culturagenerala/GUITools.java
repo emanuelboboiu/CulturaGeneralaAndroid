@@ -11,6 +11,8 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Point;
+import android.media.AudioManager;
+import android.media.ToneGenerator;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -197,13 +199,13 @@ public class GUITools {
         builder.show();
     } // end showRateDialog() method.
 
-    // A method which checks if was rated:
+    // A method which checks if the app was rated:
     public static void checkIfRated(Context context) {
         Settings set = new Settings(context);
         boolean wasRated = set.getBooleanSettings("wasRated");
         if (!wasRated) {
 
-            if (MainActivity.numberOfLaunches % 6 == 0 && MainActivity.numberOfLaunches > 0) {
+            if (MainActivity.numberOfLaunches % 11 == 0 && MainActivity.numberOfLaunches > 0) {
                 GUITools.showRateDialog(context);
             } // end if was x launches.
         } // end if it was not rated.
@@ -396,5 +398,11 @@ public class GUITools {
             activity.getBaseContext().getResources().updateConfiguration(config, activity.getBaseContext().getResources().getDisplayMetrics());
         } // end if langNumber is not 0, no device language.
     } // end setLocale() method.
+
+    // A method to play a tone, just to make tests:
+    public static void beep() {
+        ToneGenerator toneG = new ToneGenerator(AudioManager.STREAM_ALARM, 100);
+        toneG.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD, 200);
+    } // end beep() method.
 
 } // end GUITools class.

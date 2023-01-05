@@ -4,12 +4,11 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.LinearLayout;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.initialization.InitializationStatus;
-import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -18,8 +17,6 @@ public class QuizActivity extends Activity {
 
     // Creating object of AdView:
     private AdView bannerAdView;
-
-    // Simple boolean for checking if ad is loaded or not:
 
     // Class fields:
     private Quiz quiz = null;
@@ -45,19 +42,22 @@ public class QuizActivity extends Activity {
 
         // To keep screen awake:
         if (MainActivity.isWakeLock) {
-            getWindow()
-                    .addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         } // end wake lock.
 
         quiz = new Quiz(this, this);
         startOrContinueQuiz();
 
-        // Start the AdMob only if it is not TV:
-        if (!MainActivity.isTV) {
+        // Start the AdMob only if it is not TV and not premium:
+        if (!MainActivity.isTV && !MainActivity.isPremium) {
             // Initializing the AdView object
             bannerAdView = findViewById(R.id.bannerAdView);
             adMobSequence();
-        } // end if it is not TV, not admob sequence.
+        } // end if it is not TV and not Premium.
+        // If it is premium and not TV, we hide the ad zone to have more space, for TV we have another XML layout:
+        if (MainActivity.isPremium && !MainActivity.isTV) {
+            hideAds();
+        } // end if it is premium and not TV, hide the ads zone for more space.
     }// end onCreate() method.
 
     @Override
@@ -105,15 +105,9 @@ public class QuizActivity extends Activity {
     // The method to generate the AdMob sequence:
     private void adMobSequence() {
         //initializing the Google Admob SDK
-        MobileAds.initialize(this, new OnInitializationCompleteListener() {
-            @Override
-            public void onInitializationComplete(InitializationStatus initializationStatus) {
-
-                //Showing a simple Toast Message to the user when The Google AdMob Sdk Initialization is Completed
-                // Toast.makeText(QuizActivity.this, "AdMob Sdk Initialize " + initializationStatus.toString(), Toast.LENGTH_LONG).show();
-                // Now, because it is initialized, we load the ad:
-                loadBannerAd();
-            }
+        MobileAds.initialize(this, initializationStatus -> {
+            // Now, because it is initialized, we load the ad:
+            loadBannerAd();
         });
     } // end adMobSequence().
 
@@ -124,6 +118,12 @@ public class QuizActivity extends Activity {
         // load Ad with the Request
         bannerAdView.loadAd(adRequest);
     } // end loadBannerAd() method.
+
+    // A method to hide the linear layout that includes Google Ads:
+    private void hideAds() {
+        LinearLayout llBottomAd = findViewById(R.id.llBottomAd);
+        llBottomAd.setVisibility(View.GONE);
+    } // end hideAds() method.
 
     // Methods for all four variants:
     public void variant1(View view) {
@@ -218,11 +218,9 @@ public class QuizActivity extends Activity {
 
             @Override
             public void run() {
-                runOnUiThread(new Runnable() {
-                    public void run() {
-                        // Here what happens.
-                        quiz.timerEvent();
-                    }
+                runOnUiThread(() -> {
+                    // Here what happens.
+                    quiz.timerEvent();
                 });
             }
         }, 1000, 1000);

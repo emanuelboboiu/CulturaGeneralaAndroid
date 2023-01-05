@@ -39,30 +39,23 @@ public class Feedback {
     public void feedbackStart() {
         if (GUITools.isNetworkAvailable(context)) {
             // create an alert inflating an XML:
-            LayoutInflater inflater = (LayoutInflater) context
-                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            View feedbackView = inflater
-                    .inflate(R.layout.feedback_dialog, null);
+            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            View feedbackView = inflater.inflate(R.layout.feedback_dialog, null);
 
             // Get the strings to make an alert:
-            String tempTitle = context
-                    .getString(R.string.title_feedback_dialog);
+            String tempTitle = context.getString(R.string.title_feedback_dialog);
 
             // Get the linear layout to add controls there:
-            LinearLayout ll = feedbackView
-                    .findViewById(R.id.llFeedback);
+            LinearLayout ll = feedbackView.findViewById(R.id.llFeedback);
 
             // A LayoutParams to add the controls:
-            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-                    LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
 
             // Add the editText for description:
             final EditText etDescription = new EditText(context);
-            etDescription.setTextSize(TypedValue.COMPLEX_UNIT_SP,
-                    MainActivity.textSize);
+            etDescription.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.textSize);
             etDescription.setHint(context.getString(R.string.hint_feedback));
-            etDescription
-                    .setInputType(InputType.TYPE_TEXT_VARIATION_SHORT_MESSAGE);
+            etDescription.setInputType(InputType.TYPE_TEXT_VARIATION_SHORT_MESSAGE);
             InputFilter[] filterArray = new InputFilter[1];
             filterArray[0] = new InputFilter.LengthFilter(350);
             etDescription.setFilters(filterArray);
@@ -102,21 +95,15 @@ public class Feedback {
             ll.addView(radioGroup, lp);
 
             // end if send button was pressed.
-            AlertDialog.Builder alert = new AlertDialog.Builder(context)
-                    .setTitle(tempTitle)
-                    .setView(feedbackView)
-                    .setPositiveButton(R.string.bt_send,
-                            (dialog, whichButton) -> {
-                                String newDescription = etDescription
-                                        .getText().toString();
-                                sendAdd(errorType, newDescription);
-                            }).setNegativeButton(android.R.string.cancel, null);
+            AlertDialog.Builder alert = new AlertDialog.Builder(context).setTitle(tempTitle).setView(feedbackView).setPositiveButton(R.string.bt_send, (dialog, whichButton) -> {
+                String newDescription = etDescription.getText().toString();
+                sendAdd(errorType, newDescription);
+            }).setNegativeButton(android.R.string.cancel, null);
 
             alert.create();
             alert.show();
         } else {
-            GUITools.alert(context, context.getString(R.string.warning),
-                    context.getString(R.string.no_connection_for_feedback));
+            GUITools.alert(context, context.getString(R.string.warning), context.getString(R.string.no_connection_for_feedback));
         }
     } // end send feedback method.
 
@@ -125,21 +112,14 @@ public class Feedback {
     private void sendAdd(int type, String description) {
         // Save now the new record:
         // First of all, check if the edit text has text:
-        String newDescription = (MyHtml.fromHtml(description).toString())
-                .trim();
+        String newDescription = (MyHtml.fromHtml(description).toString()).trim();
         if (newDescription.length() >= 2) {
             // Add here into online database:
-            String url = "http://www.android.pontes.ro/cg/insert_feedback.php?id_intrebare="
-                    + questionId
-                    + "&tip_eroare="
-                    + type
-                    + "&random_id="
-                    + MainActivity.randomId + "&descriere=" + newDescription;
+            String url = "http://www.android.pontes.ro/cg/insert_feedback.php?id_intrebare=" + questionId + "&tip_eroare=" + type + "&random_id=" + MainActivity.randomId + "&descriere=" + newDescription;
             new SendFeedback().execute(url);
         } // end if the length are OK.
         else {
-            GUITools.alert(context, context.getString(R.string.warning),
-                    context.getString(R.string.no_texts_for_description));
+            GUITools.alert(context, context.getString(R.string.warning), context.getString(R.string.no_texts_for_description));
         } // end if edit text haven't text.
     } // end send new add Edit() method.
 
@@ -151,8 +131,7 @@ public class Feedback {
         protected void onPreExecute() {
             super.onPreExecute();
             pd = new ProgressDialog(context);
-            pd.setMessage(context
-                    .getString(R.string.please_wait_sending_feedback));
+            pd.setMessage(context.getString(R.string.please_wait_sending_feedback));
             pd.setIndeterminate(false);
             pd.setCancelable(true);
             pd.show();
@@ -168,8 +147,7 @@ public class Feedback {
                 // Create a URLConnection object:
                 URLConnection urlConnection = url.openConnection();
                 // Wrap the URLConnection in a BufferedReader:
-                BufferedReader bufferedReader = new BufferedReader(
-                        new InputStreamReader(urlConnection.getInputStream()));
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
                 String line;
                 // Read from the URLConnection via the BufferedReader:
                 while ((line = bufferedReader.readLine()) != null) {
@@ -189,13 +167,9 @@ public class Feedback {
 
             if (result.contains("succes")) {
                 SoundPlayer.playSimple(context, "send_something");
-                GUITools.toast(
-                        context.getString(R.string.feedback_sent_successfully),
-                        2000, context);
+                GUITools.toast(context.getString(R.string.feedback_sent_successfully), 2000, context);
             } else {
-                GUITools.toast(context
-                                .getString(R.string.feedback_sent_unsuccessfully),
-                        2000, context);
+                GUITools.toast(context.getString(R.string.feedback_sent_unsuccessfully), 2000, context);
             }
         } // end postExecute() method.
 

@@ -7,8 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DbOpenAndReadMain extends SQLiteOpenHelper {
 
-    public DbOpenAndReadMain(Context context, String name,
-                             CursorFactory factory, int version) {
+    public DbOpenAndReadMain(Context context, String name, CursorFactory factory, int version) {
         super(context, name, factory, version);
 
     } // end constructor.

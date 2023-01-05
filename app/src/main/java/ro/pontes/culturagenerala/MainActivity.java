@@ -2,7 +2,6 @@ package ro.pontes.culturagenerala;
 
 import static com.google.android.gms.common.util.CollectionUtils.listOf;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -18,6 +17,8 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
 import com.android.billingclient.api.AcknowledgePurchaseParams;
 import com.android.billingclient.api.AcknowledgePurchaseResponseListener;
 import com.android.billingclient.api.BillingClient;
@@ -25,19 +26,27 @@ import com.android.billingclient.api.BillingClientStateListener;
 import com.android.billingclient.api.BillingFlowParams;
 import com.android.billingclient.api.BillingResult;
 import com.android.billingclient.api.ProductDetails;
-import com.android.billingclient.api.ProductDetailsResponseListener;
 import com.android.billingclient.api.Purchase;
-import com.android.billingclient.api.PurchasesResponseListener;
 import com.android.billingclient.api.PurchasesUpdatedListener;
 import com.android.billingclient.api.QueryProductDetailsParams;
 import com.android.billingclient.api.QueryPurchasesParams;
 
 import java.util.List;
 
+import com.google.android.gms.ads.AdError;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.FullScreenContentCallback;
+import com.google.android.gms.ads.LoadAdError;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+import com.google.android.gms.ads.interstitial.InterstitialAd;
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
+
 public class MainActivity extends Activity {
 
     public static boolean isPremium = false;
-    private final String mProduct = "erd.premium";
+    private final String mProduct = "cg_premium";
     public static String mUpgradePrice = "�";
 
     private final Context mFinalContext = this;
@@ -46,6 +55,7 @@ public class MainActivity extends Activity {
     public static int randomId = 0;
     public static boolean isPortrait = true;
     public static boolean isTV = false;
+    public static boolean isAccessibility = false;
     public static boolean isSound = true;
     public static boolean isMusic = true;
     public static int soundBackgroundPercentage = 75;
@@ -76,6 +86,9 @@ public class MainActivity extends Activity {
 
     public static int mPaddingDP = 3;
 
+    // For google interstitial ads:
+    private InterstitialAd mInterstitialAd;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,9 +99,9 @@ public class MainActivity extends Activity {
         GUITools.setLocale(this, 2);
 
         // Determine if it's a TV or not:
-        if (GUITools.isAndroidTV(this)) {
-            MainActivity.isTV = true;
-        } // end determine if it is TV.
+        isTV = GUITools.isAndroidTV(this);
+// Determine if it is accessibility enabled:
+        // xxx isAccessibility = GUITools.isAccessibilityEnabled(this);
 
         // Determine the orientation:
         MainActivity.isPortrait = GUITools.isPortraitOrientation(this);
@@ -98,7 +111,7 @@ public class MainActivity extends Activity {
         getTextViews();
         setFirstThings();
 
-        if (!isTV) {
+        if (!isTV && !isFirstLaunchInSession) {
             GUITools.checkIfRated(this);
         } // end if is TV.
 
@@ -124,10 +137,24 @@ public class MainActivity extends Activity {
         mDbHelper.createDatabase();
         mDbHelper.open();
 
+        // Sometimes we set as it is not registered as premium, let's say at each 25 launches:
+        if (isPremium) {
+            int howOften = 25;
+            if (numberOfLaunches % howOften == 0) {
+                set.saveBooleanSettings("isPremium", false);
+                isPremium = false;
+            } // end if numberOfLaunches is divisible with howOften.
+        } // end if it is premium.
+// Below it will be made premium again if it is really bought:
         if (!isPremium) {
             // For billing:
             startBillingDependencies();
-        }
+
+            // We also show interstitial ads if it is not premium and not first launch also if not accessibility enabled and also if not tv:
+            if (!isFirstLaunchInSession && !isAccessibility && !isTV && numberOfLaunches % 3 == 0) {
+                interstitialAdSequence();
+            } // end if is time to show the interstitial ad.
+        } // end if it is not premium.
     } // end onCreate method.
 
     @Override
@@ -145,6 +172,80 @@ public class MainActivity extends Activity {
             sndBackground.stopLooped();
         }
     } // end onPause method.
+
+    // Method for interstitial ads:
+    public void interstitialAdSequence() {
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+        AdRequest adRequest = new AdRequest.Builder().build();
+
+        InterstitialAd.load(this, getString(R.string.interstitial_ad_unit_id_test), adRequest, new InterstitialAdLoadCallback() {
+            @Override
+            public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
+                // The mInterstitialAd reference will be null until an ad is loaded.
+                mInterstitialAd = interstitialAd;
+                fullScreenTheInterstitialAd(); // user defined method under the current one.
+                showInterstitialAdEffectively(); // the third user defined method for interstitial ads.
+            }
+
+            @Override
+            public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+                // Handle the error
+                // Log.d(TAG, loadAdError.toString());
+                mInterstitialAd = null;
+            }
+        });
+    } // end interstitialAdSequence() method.
+
+    // Now if it is loaded successfully, set full screen:
+    public void fullScreenTheInterstitialAd() {
+        mInterstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
+            @Override
+            public void onAdClicked() {
+                // Called when a click is recorded for an ad.
+                // Log.d(TAG, "Ad was clicked.");
+            }
+
+            @Override
+            public void onAdDismissedFullScreenContent() {
+                // Called when ad is dismissed.
+                // Set the ad reference to null so you don't show the ad a second time.
+                // Log.d(TAG, "Ad dismissed fullscreen content.");
+                mInterstitialAd = null;
+            }
+
+            @Override
+            public void onAdFailedToShowFullScreenContent(AdError adError) {
+                // Called when ad fails to show.
+                // Log.e(TAG, "Ad failed to show fullscreen content.");
+                mInterstitialAd = null;
+            }
+
+            @Override
+            public void onAdImpression() {
+                // Called when an impression is recorded for an ad.
+                // Log.d(TAG, "Ad recorded an impression.");
+            }
+
+            @Override
+            public void onAdShowedFullScreenContent() {
+                // Called when ad is shown.
+                // Log.d(TAG, "Ad showed fullscreen content.");
+            }
+        });
+    }  // end fullScreenTheInterstitialAd() method.
+
+    // A method to show the interstitial ad effectively:
+    public void showInterstitialAdEffectively() {
+        if (mInterstitialAd != null) {
+            mInterstitialAd.show(MainActivity.this);
+        } else {
+            // Log.d("TAG", "The interstitial ad wasn't ready yet.");
+        }
+    } // end showInterstitialAdEffectively() method.
 
     // A method to take the menu item TVs into an array:
     private void getTextViews() {
@@ -340,7 +441,6 @@ public class MainActivity extends Activity {
     } // end showHelp() method.
 
     // A method to show alert for what's new:
-    @SuppressLint("InflateParams")
     private void showWhatsNew() {
         Settings set = new Settings(this);
         boolean wasAnnounced = set.getBooleanSettings("wasAnnounced" + curVer);
@@ -421,63 +521,59 @@ public class MainActivity extends Activity {
     } // end upgradeToPremiumActions() method.
 
     private void startBillingDependencies() {
-        purchasesUpdatedListener = new PurchasesUpdatedListener() {
-            @Override
-            public void onPurchasesUpdated(BillingResult billingResult, List<Purchase> purchases) {
-                // If item newly purchased
-                if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK && purchases != null) {
-                    for (Purchase purchase : purchases) {
-                        handlePurchase(purchase);
-                    } // end for.
-                }
-                // If item already purchased then check and reflect changes
-                else if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.ITEM_ALREADY_OWNED) {
-                    registerTheGameEffectively();
-                }
-                //if purchase cancelled
-                else if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.USER_CANCELED) {
-                    GUITools.alert(mFinalContext, getString(R.string.warning), getString(R.string.purchase_canceled));
-                }
-                // Handle any other error messages
-                else {
-                    GUITools.alert(mFinalContext, getString(R.string.warning), getString(R.string.billing_unknown_error));
-                }
-            } // end onPurchasesUpdated() method.
+        // end onPurchasesUpdated() method.
+        purchasesUpdatedListener = (billingResult, purchases) -> {
+            // If item newly purchased
+            if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK && purchases != null) {
+                for (Purchase purchase : purchases) {
+                    handlePurchase(purchase);
+                } // end for.
+            }
+            // If item already purchased then check and reflect changes
+            else if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.ITEM_ALREADY_OWNED) {
+                registerTheGameEffectively();
+            }
+            //if purchase cancelled
+            else if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.USER_CANCELED) {
+                GUITools.alert(mFinalContext, getString(R.string.warning), getString(R.string.purchase_canceled));
+            }
+            // Handle any other error messages
+            else {
+                GUITools.alert(mFinalContext, getString(R.string.warning), getString(R.string.billing_unknown_error));
+            }
         };
 
         billingClient = BillingClient.newBuilder(this).setListener(purchasesUpdatedListener).enablePendingPurchases().build();
 
         billingClient.startConnection(new BillingClientStateListener() {
             @Override
-            public void onBillingSetupFinished(BillingResult billingResult) {
+            public void onBillingSetupFinished(@NonNull BillingResult billingResult) {
                 if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
                     // The BillingClient is ready. You can query purchases here,
                     QueryProductDetailsParams queryProductDetailsParams = QueryProductDetailsParams.newBuilder().setProductList(listOf(QueryProductDetailsParams.Product.newBuilder().setProductId(mProduct).setProductType(BillingClient.ProductType.INAPP).build())).build();
 
                     // Now check if it is already purchased:
-                    billingClient.queryPurchasesAsync(QueryPurchasesParams.newBuilder().setProductType(BillingClient.ProductType.INAPP).build(), new PurchasesResponseListener() {
-                        public void onQueryPurchasesResponse(BillingResult billingResult, List<Purchase> purchases) {
-                            // check billingResult and process returned purchase list, e.g. display the products user owns
-                            if (purchases != null && purchases.size() > 0) { // it means there are items:
-                                Purchase myOldPurchase = purchases.get(0);
-                                if (myOldPurchase.getPurchaseState() == Purchase.PurchaseState.PURCHASED) {
-                                    registerTheGameEffectively();
-                                }
-                            } // end process the purchases list.
-                        }
+                    billingClient.queryPurchasesAsync(QueryPurchasesParams.newBuilder().setProductType(BillingClient.ProductType.INAPP).build(), (billingResult12, purchases) -> {
+                        // check billingResult and process returned purchase list, e.g. display the products user owns
+                        if (purchases.size() > 0) { // it means there are items:
+                            Purchase myOldPurchase = purchases.get(0);
+                            if (myOldPurchase.getPurchaseState() == Purchase.PurchaseState.PURCHASED) {
+                                registerTheGameEffectively();
+                            }
+                        } // end process the purchases list.
                     });
                     // end check if it is already purchased.
 
                     // Now let's query for our product:
-                    billingClient.queryProductDetailsAsync(queryProductDetailsParams, new ProductDetailsResponseListener() {
-                        public void onProductDetailsResponse(BillingResult billingResult, List<ProductDetails> productDetailsList) {
-                            // check billingResult
-                            // process returned productDetailsList
-                            myProducts = productDetailsList;
-                            // Get the price of the 0 item if there is at least one product:
-                            if (myProducts != null && myProducts.size() > 0) {
-                                ProductDetails productDetail = myProducts.get(0);
-                                ProductDetails.OneTimePurchaseOfferDetails offer = productDetail.getOneTimePurchaseOfferDetails();
+                    billingClient.queryProductDetailsAsync(queryProductDetailsParams, (billingResult1, productDetailsList) -> {
+                        // check billingResult
+                        // process returned productDetailsList
+                        myProducts = productDetailsList;
+                        // Get the price of the 0 item if there is at least one product:
+                        if (myProducts.size() > 0) {
+                            ProductDetails productDetail = myProducts.get(0);
+                            ProductDetails.OneTimePurchaseOfferDetails offer = productDetail.getOneTimePurchaseOfferDetails();
+                            if (offer != null) {
                                 mUpgradePrice = offer.getFormattedPrice();
                             }
                         }
@@ -494,14 +590,11 @@ public class MainActivity extends Activity {
         }); // end startConnection.
 
         // Create also the acknowledge purchase listener:
-        acknowledgePurchaseResponseListener = new AcknowledgePurchaseResponseListener() {
-            @Override
-            public void onAcknowledgePurchaseResponse(BillingResult billingResult) {
-                if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
-                    // if purchase is acknowledged
-                    // Grant entitlement to the user. and restart activity
-                    registerTheGameEffectively(); // here is also saved everything in shared preferences.
-                }
+        acknowledgePurchaseResponseListener = billingResult -> {
+            if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
+                // if purchase is acknowledged
+                // Grant entitlement to the user. and restart activity
+                registerTheGameEffectively(); // here is also saved everything in shared preferences.
             }
         };
 // End acknowledge listener creation..
@@ -515,7 +608,7 @@ public class MainActivity extends Activity {
 // An activity reference from which the billing flow will be launched.
             Activity activity = this;
 
-            List productDetailsParamsList = listOf(BillingFlowParams.ProductDetailsParams.newBuilder()
+            List<BillingFlowParams.ProductDetailsParams> productDetailsParamsList = listOf(BillingFlowParams.ProductDetailsParams.newBuilder()
                     // retrieve a value for "productDetails" by calling queryProductDetailsAsync()
                     .setProductDetails(productDetails).build());
 
@@ -539,13 +632,13 @@ public class MainActivity extends Activity {
     } // end handlePurchase() method.
 
     // A method which sets the game as registered after upgrading:
-    private void registerTheGameEffectively() {
+    public void registerTheGameEffectively() {
         // We save it as a premium version:
         isPremium = true;
         Settings set = new Settings(this);
         set.saveBooleanSettings("isPremium", true);
         // Now show an alert about this purchase:
-        GUITools.alert(this, getString(R.string.title_success_premium_version), getString(R.string.premium_success_message));
+        // GUITools.alert(mFinalContext, getString(R.string.title_success_premium_version), getString(R.string.premium_success_message));
     } // end registerTheGameEffectively() method.
     // End methods for InAppBilling.
 

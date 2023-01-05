@@ -111,195 +111,175 @@ public class Quiz {
         });
         // End add listener for long click on tvStatus.
 
-        llForIbsLayout = activity
-                .findViewById(R.id.llForIbsLayout);
+        llForIbsLayout = activity.findViewById(R.id.llForIbsLayout);
 
         // Charge the chronometer:
         chron = activity.findViewById(R.id.tvGameTimer);
 
         // Resize the background to have for our screen size:
         // end onGlobalLayout.
-        layoutMain.getViewTreeObserver().addOnGlobalLayoutListener(
-                () -> {
+        layoutMain.getViewTreeObserver().addOnGlobalLayoutListener(() -> {
 
-                    int width;
-                    int height;
+            int width;
+            int height;
+
+            /*
+             * Resize the background for ibsLayout to be 150% of a
+             * ImageButton height:
+             */
+            if (ibsLayoutBackground == null) {
+                width = llForIbsLayout.getWidth();
+                height = llForIbsLayout.getHeight();
+                int newHeight = height + height / 2; // for
+                // portrait.
+                /*
+                 * If is landscape, we add only one quarter to
+                 * height:
+                 */
+                if (!MainActivity.isPortrait) {
+                    newHeight = height + height / 4;
+                } // end if is landscape.
+
+                ibsLayoutBackground = GUITools.resizeImage(mContext, "background_bottom_buttons", width, newHeight);
+                // Change now the background:
+                llForIbsLayout.setBackground(new BitmapDrawable(mContext.getResources(), ibsLayoutBackground));
+            } // end if ibsLayoutBackground isn't created.
+
+            /*
+             * Resize the background for status TextView to be
+             * enough for 2 lines of text.
+             */
+            if (statusBackground == null) {
+                width = tvStatus.getWidth();
+                height = tvStatus.getHeight();
+                // If it is TV, we add 20% to the status height:
+                if (MainActivity.isTV) {
+                    height = height * 20 / 100 + height;
+                } // end if it is Android TV.
+                statusHeight = height; // a static value for
+                // Question class.
+                statusBackground = GUITools.resizeImage(mContext, "background_status", width, height);
+                // Change now the background:
+                tvStatus.setBackground(new BitmapDrawable(mContext.getResources(), statusBackground));
+            } // end if statusBackground isn't created.
+
+            // Now create the background for chronometer resizing an
+            // image:
+            if (chronBackground == null) {
+                /*
+                 * Now we know the dimensions of the chronometer. We
+                 * can resize the background to wrap content. Only
+                 * the width is necessary, the resized background is
+                 * a square. We add also x DP instead padding:
+                 */
+                if (MainActivity.isPortrait) {
+                    /*
+                     * The size of the chronometer will be the size
+                     * of text in width and some padding (12):
+                     */
+                    width = chron.getWidth();
+                    height = chron.getHeight();
+                    int dpForChronPadding = 12; // for normal
+                    // devices.
+                    width = width + GUITools.dpToPx(mContext, dpForChronPadding);
+
+                } else { // Landscape or TV:
+                    /*
+                     * Charge also the llVariantsCentral, the place
+                     * which contains the chronometer. It is
+                     * available only in landscape mode. The width
+                     * will be a percent from this central layout
+                     * which contains the chronometer:
+                     */
+                    LinearLayout llChron = activity.findViewById(R.id.llVariantsCentral);
+
+                    int w = llChron.getWidth();
+                    width = 75 * w / 100;
+                    // For TV we also change the text size of the
+                    // chronometer:
+                    if (MainActivity.isTV) {
+                        chron.setTextSize(TypedValue.COMPLEX_UNIT_SP, MainActivity.textSize + 4);
+                    }
+                } // end if it is TV or landscape..
+
+                // Resize it effectively:
+                chronBackground = GUITools.resizeImage(mContext, "background_timer", width, width);
+                // Change now the background:
+                chron.setBackground(new BitmapDrawable(mContext.getResources(), chronBackground));
+            } // end if chronBackground isn't created.
+            // End resize Bitmaps for backgrounds.
+
+            /*
+             * Now set the top margin for first linearLayout
+             * variant, this way we can push the variants in the
+             * middle between chronometer and bottom band. This is
+             * available only for portrait and if it is more place
+             * than all 4 variants, we put the variants in the
+             * middle between chronometer and bottom band.
+             */
+            if (!areVariantsPositionedInMiddle && MainActivity.isPortrait) {
+                areVariantsPositionedInMiddle = true;
+
+                final Handler handler = new Handler();
+                // end run() method.
+                handler.postDelayed(() -> {
+                    // Do something after a while:
+
+                    LinearLayout llFirstVariant = activity.findViewById(R.id.llFirstVariant);
+                    int llHeight = llFirstVariant.getHeight();
+                    int chronHeight = chron.getHeight();
+                    /*
+                     * We need to know how much space is
+                     * available for variants zone, to see after
+                     * subtract the chronometer height and all
+                     * for linear layouts for variant with their
+                     * margins, if is more space available.
+                     */
+                    ScrollView svVariants = activity.findViewById(R.id.svVariants);
+                    int svHeight = svVariants.getHeight();
+                    /*
+                     * Finally, the space between chronometer
+                     * and bottom band:
+                     */
+                    int spaceAvailable = svHeight - chronHeight;
 
                     /*
-                     * Resize the background for ibsLayout to be 150% of a
-                     * ImageButton height:
+                     * Let's see how much space occupies all 4
+                     * variants with their margins of 2dp:
                      */
-                    if (ibsLayoutBackground == null) {
-                        width = llForIbsLayout.getWidth();
-                        height = llForIbsLayout.getHeight();
-                        int newHeight = height + height / 2; // for
-                        // portrait.
+                    int allVariantsHeight = 4 * llHeight + 4 * GUITools.dpToPx(mContext, 2);
+
+                    /*
+                     * If the space available is higher than the
+                     * all variants, we divide by 2 the remained
+                     * space after subtracting the
+                     * allVariantsHeight from spaceAvailable:
+                     */
+                    if (spaceAvailable > allVariantsHeight) {
+                        // Only in this case we need to work
+                        // with margins:
+                        int topMargin = (spaceAvailable - allVariantsHeight) / 2;
                         /*
-                         * If is landscape, we add only one quarter to
-                         * height:
+                         * // Set now the params to
+                         * llFirstVariant, including the top
+                         * margin. A last check is do not be a
+                         * negative number, a very rare case,
+                         * who knows:
                          */
-                        if (!MainActivity.isPortrait) {
-                            newHeight = height + height / 4;
-                        } // end if is landscape.
+                        if (topMargin < 0) {
+                            topMargin = 0;
+                        }
+                        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) llFirstVariant.getLayoutParams();
+                        params.setMargins(0, topMargin, 0, 0);
+                        llFirstVariant.setLayoutParams(params);
+                    } // end if is more space available.
 
-                        ibsLayoutBackground = GUITools.resizeImage(
-                                mContext, "background_bottom_buttons",
-                                width, newHeight);
-                        // Change now the background:
-                        llForIbsLayout.setBackground(new BitmapDrawable(
-                                mContext.getResources(),
-                                ibsLayoutBackground));
-                    } // end if ibsLayoutBackground isn't created.
+                }, 110); // a longer delay.
+            } // end if is portrait.
+            // end put the variants middle between chronometer
+            // and bottom.
 
-                    /*
-                     * Resize the background for status TextView to be
-                     * enough for 2 lines of text.
-                     */
-                    if (statusBackground == null) {
-                        width = tvStatus.getWidth();
-                        height = tvStatus.getHeight();
-                        // If it is TV, we add 20% to the status height:
-                        if (MainActivity.isTV) {
-                            height = height * 20 / 100 + height;
-                        } // end if it is Android TV.
-                        statusHeight = height; // a static value for
-                        // Question class.
-                        statusBackground = GUITools.resizeImage(mContext,
-                                "background_status", width, height);
-                        // Change now the background:
-                        tvStatus.setBackground(new BitmapDrawable(mContext
-                                .getResources(), statusBackground));
-                    } // end if statusBackground isn't created.
-
-                    // Now create the background for chronometer resizing an
-                    // image:
-                    if (chronBackground == null) {
-                        /*
-                         * Now we know the dimensions of the chronometer. We
-                         * can resize the background to wrap content. Only
-                         * the width is necessary, the resized background is
-                         * a square. We add also x DP instead padding:
-                         */
-                        if (MainActivity.isPortrait) {
-                            /*
-                             * The size of the chronometer will be the size
-                             * of text in width and some padding (12):
-                             */
-                            width = chron.getWidth();
-                            height = chron.getHeight();
-                            int dpForChronPadding = 12; // for normal
-                            // devices.
-                            width = width
-                                    + GUITools.dpToPx(mContext,
-                                    dpForChronPadding);
-
-                        } else { // Landscape or TV:
-                            /*
-                             * Charge also the llVariantsCentral, the place
-                             * which contains the chronometer. It is
-                             * available only in landscape mode. The width
-                             * will be a percent from this central layout
-                             * which contains the chronometer:
-                             */
-                            LinearLayout llChron = activity
-                                    .findViewById(R.id.llVariantsCentral);
-
-                            int w = llChron.getWidth();
-                            width = 75 * w / 100;
-                            // For TV we also change the text size of the
-                            // chronometer:
-                            if (MainActivity.isTV) {
-                                chron.setTextSize(
-                                        TypedValue.COMPLEX_UNIT_SP,
-                                        MainActivity.textSize + 4);
-                            }
-                        } // end if it is TV or landscape..
-
-                        // Resize it effectively:
-                        chronBackground = GUITools.resizeImage(mContext,
-                                "background_timer", width, width);
-                        // Change now the background:
-                        chron.setBackground(new BitmapDrawable(mContext
-                                .getResources(), chronBackground));
-                    } // end if chronBackground isn't created.
-                    // End resize Bitmaps for backgrounds.
-
-                    /*
-                     * Now set the top margin for first linearLayout
-                     * variant, this way we can push the variants in the
-                     * middle between chronometer and bottom band. This is
-                     * available only for portrait and if it is more place
-                     * than all 4 variants, we put the variants in the
-                     * middle between chronometer and bottom band.
-                     */
-                    if (!areVariantsPositionedInMiddle
-                            && MainActivity.isPortrait) {
-                        areVariantsPositionedInMiddle = true;
-
-                        final Handler handler = new Handler();
-                        // end run() method.
-                        handler.postDelayed(() -> {
-                            // Do something after a while:
-
-                            LinearLayout llFirstVariant = activity
-                                    .findViewById(R.id.llFirstVariant);
-                            int llHeight = llFirstVariant.getHeight();
-                            int chronHeight = chron.getHeight();
-                            /*
-                             * We need to know how much space is
-                             * available for variants zone, to see after
-                             * subtract the chronometer height and all
-                             * for linear layouts for variant with their
-                             * margins, if is more space available.
-                             */
-                            ScrollView svVariants = activity
-                                    .findViewById(R.id.svVariants);
-                            int svHeight = svVariants.getHeight();
-                            /*
-                             * Finally, the space between chronometer
-                             * and bottom band:
-                             */
-                            int spaceAvailable = svHeight - chronHeight;
-
-                            /*
-                             * Let's see how much space occupies all 4
-                             * variants with their margins of 2dp:
-                             */
-                            int allVariantsHeight = 4 * llHeight + 4
-                                    * GUITools.dpToPx(mContext, 2);
-
-                            /*
-                             * If the space available is higher than the
-                             * all variants, we divide by 2 the remained
-                             * space after subtracting the
-                             * allVariantsHeight from spaceAvailable:
-                             */
-                            if (spaceAvailable > allVariantsHeight) {
-                                // Only in this case we need to work
-                                // with margins:
-                                int topMargin = (spaceAvailable - allVariantsHeight) / 2;
-                                /*
-                                 * // Set now the params to
-                                 * llFirstVariant, including the top
-                                 * margin. A last check is do not be a
-                                 * negative number, a very rare case,
-                                 * who knows:
-                                 */
-                                if (topMargin < 0) {
-                                    topMargin = 0;
-                                }
-                                LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) llFirstVariant
-                                        .getLayoutParams();
-                                params.setMargins(0, topMargin, 0, 0);
-                                llFirstVariant.setLayoutParams(params);
-                            } // end if is more space available.
-
-                        }, 110); // a longer delay.
-                    } // end if is portrait.
-                    // end put the variants middle between chronometer
-                    // and bottom.
-
-                });
+        });
         // End resize different controls.
 
         // Reinitialise some variables at the beginnings:
@@ -319,20 +299,17 @@ public class Quiz {
         // Fill the array with 21 rectangles for progress bar:
         tvPBs = new TextView[21];
         for (int i = 0; i < 21; i++) {
-            int resID = mContext.getResources().getIdentifier("pb" + (i + 1),
-                    "id", mContext.getPackageName());
+            int resID = mContext.getResources().getIdentifier("pb" + (i + 1), "id", mContext.getPackageName());
             tvPBs[i] = activity.findViewById(resID);
         } // end for.
 
         // Determine the resIds for filled and unfilled rectangles on progress
         // bar:
         // First green colour, filled:
-        resIdColorFilled = mContext.getResources().getColor(
-                R.color.background_progress_bar_filled);
+        resIdColorFilled = mContext.getResources().getColor(R.color.background_progress_bar_filled);
 
         // Second red colour, unfilled:
-        resIdColorUnfilled = mContext.getResources().getColor(
-                R.color.background_progress_bar_unfilled);
+        resIdColorUnfilled = mContext.getResources().getColor(R.color.background_progress_bar_unfilled);
     } // end initial things method.
 
     /*
@@ -361,8 +338,7 @@ public class Quiz {
          * We need to see if the last set was suspended after a question, in the
          * handle delay time:
          */
-        isTestBetweenQuestions = set
-                .getBooleanSettings("isTestBetweenQuestions");
+        isTestBetweenQuestions = set.getBooleanSettings("isTestBetweenQuestions");
 
         if (!MainActivity.isStarted) {
             startGame();
@@ -419,17 +395,14 @@ public class Quiz {
             curStatusIndex = 4;
         } // end if statements to determine the level.
         determineQuestionPointsValue(); // determine the curPoints variable.
-        String status = String.format(tvStatusMessage,
-                levelStatuses[curStatusIndex], "" + curQuestionNumber,
-                "" + st.getNumberOfPointsAsString(curPoints));
+        String status = String.format(tvStatusMessage, levelStatuses[curStatusIndex], "" + curQuestionNumber, "" + st.getNumberOfPointsAsString(curPoints));
         Spanned msgStatus = MyHtml.fromHtml(status);
         tvStatus.setText(msgStatus);
     } // end setTVStatus() method.
 
     // A method to generate a random set from chosen ones:
     private int determineRandomSet() {
-        return Integer.parseInt(curSetIds[GUITools.random(0,
-                curSetIds.length - 1)]);
+        return Integer.parseInt(curSetIds[GUITools.random(0, curSetIds.length - 1)]);
     } // end determineRandomSet() method.
 
     // A method to go to the next question in current quiz:
@@ -442,8 +415,7 @@ public class Quiz {
         checkIfAreRemainedQuestionsInSet();
         showHelperButtons();
 
-        question = new Question(mContext, activity, mDbHelper, curSetId,
-                curLevel, lastQuestionId);
+        question = new Question(mContext, activity, mDbHelper, curSetId, curLevel, lastQuestionId);
         question.make(true);
         // Start also the chronometer:
         chronStart();
@@ -454,8 +426,7 @@ public class Quiz {
         setTVStatus();
         showHelperButtons();
 
-        question = new Question(mContext, activity, mDbHelper, curSetId,
-                curLevel, lastQuestionId);
+        question = new Question(mContext, activity, mDbHelper, curSetId, curLevel, lastQuestionId);
         question.make(false); // false means last question.
         chronStart();
     } // end lastQuestion() method.
@@ -574,8 +545,7 @@ public class Quiz {
          * Inflate the layout with confirm message and yes / no buttons from
          * XML:
          */
-        LayoutInflater inflater = (LayoutInflater) mContext
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.ll_confirm_final_answer, llForIbsLayout, true);
 
         lastChosenAnswer = answer;
@@ -585,16 +555,14 @@ public class Quiz {
     public void showHelperButtons() {
         // Delete what was previous in the llForIbsButtons:
         llForIbsLayout.removeAllViews();
-        LayoutInflater inflater = (LayoutInflater) mContext
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.ll_ibs_layout, llForIbsLayout, true);
 
         // Now charge the buttons in their array:
         // Charge all the bottom ImageButtons:
         ibOptions = new ImageButton[5];
         for (int i = 0; i < ibOptions.length; i++) {
-            int resID = mContext.getResources().getIdentifier(
-                    "ibOption" + (i + 1), "id", mContext.getPackageName());
+            int resID = mContext.getResources().getIdentifier("ibOption" + (i + 1), "id", mContext.getPackageName());
             ibOptions[i] = activity.findViewById(resID);
         } // end for.
 
@@ -610,8 +578,7 @@ public class Quiz {
              */
             if (!ibStatus[i]) {
                 String fileName = "ib_option" + (i + 1) + "b";
-                int resId = mContext.getResources().getIdentifier(fileName,
-                        "drawable", mContext.getPackageName());
+                int resId = mContext.getResources().getIdentifier(fileName, "drawable", mContext.getPackageName());
                 ibOptions[i].setImageResource(resId);
                 ibOptions[i].setEnabled(ibStatus[i]);
             } // end if IB must be changed because is disabled.
@@ -629,8 +596,7 @@ public class Quiz {
          * level finishing:
          */
         if (curQuestionNumber % 7 == 0) { // level finished:
-            SoundPlayer.playTwoSoundsInSequence("var_correct",
-                    "level_finished", mContext);
+            SoundPlayer.playTwoSoundsInSequence("var_correct", "level_finished", mContext);
             curPoints = curPoints + (curLevel * 10 * numberOfChosenTests);
         } else { // no level finished:
             SoundPlayer.playSimple(mContext, "var_correct");
@@ -670,8 +636,7 @@ public class Quiz {
         chron.setText(chanceStars[remainedChances + 1]);
         chron.setTag("yourFirstStatus");
 
-        final CountDownTimer blinkTimer = new CountDownTimer(blinkDuration,
-                blinkInterval) {
+        final CountDownTimer blinkTimer = new CountDownTimer(blinkDuration, blinkInterval) {
             @Override
             public void onTick(long millisUntilFinished) {
                 if (chron.getTag() == "yourFirstStatus") {
@@ -699,8 +664,7 @@ public class Quiz {
 
     // This method shows in the lower part if time has expired:
     private void showInformationAboutTimeExpired() {
-        SoundPlayer.playTwoSoundsInSequence("time_expired", "var_wrong",
-                mContext);
+        SoundPlayer.playTwoSoundsInSequence("time_expired", "var_wrong", mContext);
         curPoints = (40 - curLevel * 10) * -1;
         addPointsToTotal(); // a method.
         // Because is expired, we must set chances to 0:
@@ -749,8 +713,7 @@ public class Quiz {
 
     // A method which changes the tvStatus at game over:
     private void showFinalInfoOnTVStatus(int what) {
-        String statusMessage = mContext
-                .getString(R.string.tv_final_status_message);
+        String statusMessage = mContext.getString(R.string.tv_final_status_message);
         String msgFirstLine = "";
         String msgSecondLine;
 
@@ -760,8 +723,7 @@ public class Quiz {
                 break;
 
             case 2: // wrong loser:
-                msgFirstLine = mContext
-                        .getString(R.string.tv_status_wrong_finished);
+                msgFirstLine = mContext.getString(R.string.tv_status_wrong_finished);
                 break;
 
             case 3: // looser time expired:
@@ -790,13 +752,10 @@ public class Quiz {
             msgSecondLine = ""; // not text yet on second line.
         } else {
             // Determine the second line, position, record etc::
-            msgSecondLine = stats.getTestPositionInStats(totalPoints,
-                    cumulativeTime);
+            msgSecondLine = stats.getTestPositionInStats(totalPoints, cumulativeTime);
         } // end else if no more chances.
 
-        statusMessage = MyHtml.fromHtml(
-                        String.format(statusMessage, msgFirstLine, msgSecondLine))
-                .toString();
+        statusMessage = MyHtml.fromHtml(String.format(statusMessage, msgFirstLine, msgSecondLine)).toString();
         tvStatus.setText(statusMessage);
     } // end showFinalInfoOnTVStatus() method.
 
@@ -816,34 +775,27 @@ public class Quiz {
             temp = mContext.getString(R.string.tv_points_status_negative);
             tempCurPoints = curPoints * -1; // make it positive.
         }
-        temp = String.format(temp, st.getNumberOfPointsAsString(tempCurPoints),
-                st.getNumberOfPointsAsString(totalPoints));
+        temp = String.format(temp, st.getNumberOfPointsAsString(tempCurPoints), st.getNumberOfPointsAsString(totalPoints));
         return temp;
     } // end getPointsStatusAsString() method.
 
     // A method to show current points on tvStatus at short click:
     private void showCurrentPointsOnTVStatus() {
-        String msg = MyHtml.fromHtml(
-                String.format(
-                        mContext.getString(R.string.tv_status_actual_points),
-                        st.getNumberOfPointsAsString(totalPoints))).toString();
+        String msg = MyHtml.fromHtml(String.format(mContext.getString(R.string.tv_status_actual_points), st.getNumberOfPointsAsString(totalPoints))).toString();
         tvStatus.setText(msg);
     } // end showCurrentPointsOnTVStatus() method.
 
     // A method to show current set on tvQuestion at long click:
     private void showCurrentSet() {
         // Determine the set name:
-        String sql = "SELECT nume FROM seturi WHERE setId='" + lastCurSetId
-                + "';";
+        String sql = "SELECT nume FROM seturi WHERE setId='" + lastCurSetId + "';";
         Cursor tempCursor = mDbHelper.queryData(sql);
         String setName = tempCursor.getString(0);
         // Determine the author name:
         sql = "SELECT nume FROM autori WHERE autorId=" + author + ";";
         tempCursor = mDbHelper.queryData(sql);
         String authorName = tempCursor.getString(0);
-        String msg = MyHtml.fromHtml(
-                String.format(mContext.getString(R.string.tv_set_item),
-                        setName, authorName)).toString();
+        String msg = MyHtml.fromHtml(String.format(mContext.getString(R.string.tv_set_item), setName, authorName)).toString();
         tvStatus.setText(msg);
     } // end showCurrentSet() method.
 
@@ -854,13 +806,11 @@ public class Quiz {
     private void showBottomInformation(int what) {
         // Delete what was previous in the llForIbsButtons:
         llForIbsLayout.removeAllViews();
-        LayoutInflater inflater = (LayoutInflater) mContext
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.ll_bottom_information, llForIbsLayout, true);
 
         // Change the text view depending of the what variable:
-        TextView tvInfo = activity
-                .findViewById(R.id.tvBottomInformation);
+        TextView tvInfo = activity.findViewById(R.id.tvBottomInformation);
         String msgInfo = "";
 
         // We also make the string for points status:
@@ -906,16 +856,13 @@ public class Quiz {
          * Inflate the layout with confirm message and yes / no buttons from
          * XML:
          */
-        LayoutInflater inflater = (LayoutInflater) mContext
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.ll_confirm_use_help, llForIbsLayout, true);
 
         // Take the TextView for the question:
-        TextView tvConfirmation = activity
-                .findViewById(R.id.tvConfirmUseHelp);
+        TextView tvConfirmation = activity.findViewById(R.id.tvConfirmUseHelp);
         // Get the question confirmation from the string array:
-        String msgQuestion = mContext.getResources().getStringArray(
-                R.array.use_options_question_array)[option];
+        String msgQuestion = mContext.getResources().getStringArray(R.array.use_options_question_array)[option];
         tvConfirmation.setText(msgQuestion);
 
         // Save the chosen help option to use it after yes pressed:
@@ -970,14 +917,11 @@ public class Quiz {
     private void showResultsAfterUseHelpOptions(String msgResults) {
         // Delete what was previous in the llForIbsButtons:
         llForIbsLayout.removeAllViews();
-        LayoutInflater inflater = (LayoutInflater) mContext
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        inflater.inflate(R.layout.ll_show_results_after_use_help_options,
-                llForIbsLayout, true);
+        LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        inflater.inflate(R.layout.ll_show_results_after_use_help_options, llForIbsLayout, true);
 
         // Change the text view:
-        TextView tv = activity
-                .findViewById(R.id.tvResultsAfterUseHelpOptions);
+        TextView tv = activity.findViewById(R.id.tvResultsAfterUseHelpOptions);
         SoundPlayer.playSimple(mContext, "use_help");
         tv.setText(msgResults);
     } // end showResultsAfterUseHelpOptions() method.
@@ -987,11 +931,9 @@ public class Quiz {
         // If it is a chosen set or all of them:
         String sql;
         if (curSetId == 0) {
-            sql = "SELECT COUNT(*) FROM intrebari WHERE prag=" + curLevel
-                    + " AND consumat=0;";
+            sql = "SELECT COUNT(*) FROM intrebari WHERE prag=" + curLevel + " AND consumat=0;";
         } else {
-            sql = "SELECT COUNT(*) FROM intrebari WHERE setId=" + curSetId
-                    + " AND prag=" + curLevel + " AND consumat=0;";
+            sql = "SELECT COUNT(*) FROM intrebari WHERE setId=" + curSetId + " AND prag=" + curLevel + " AND consumat=0;";
         }
         Cursor cursor = mDbHelper.queryData(sql);
         int remainedQuestions = cursor.getInt(0);
@@ -999,11 +941,9 @@ public class Quiz {
         if (remainedQuestions == 0) {
             // We set the status of consumed to 0 for this set and level:
             if (curSetId == 0) { // all sets:
-                sql = "UPDATE intrebari SET consumat=0 WHERE prag=" + curLevel
-                        + ";";
+                sql = "UPDATE intrebari SET consumat=0 WHERE prag=" + curLevel + ";";
             } else {
-                sql = "UPDATE intrebari SET consumat=0 WHERE setId=" + curSetId
-                        + " AND prag=" + curLevel + ";";
+                sql = "UPDATE intrebari SET consumat=0 WHERE setId=" + curSetId + " AND prag=" + curLevel + ";";
             } // end if a chosen set.
             mDbHelper.updateData(sql);
         } // end if there are no remained questions.
@@ -1074,14 +1014,11 @@ public class Quiz {
 
         if (GUITools.isNetworkAvailable(mContext)) {
             wasOnlinePosted = 1; // We thing is will be posted.
-            stats.postFinishedTestOnline(tempSets, curQuestionNumber - 1,
-                    totalPoints, cumulativeTime, androidTV, tempUsedOptions);
+            stats.postFinishedTestOnline(tempSets, curQuestionNumber - 1, totalPoints, cumulativeTime, androidTV, tempUsedOptions);
         } // end if it is an Internet connection.
 
         // Now post also locally:
-        stats.postFinishedTestLocally(tempSets, curQuestionNumber - 1,
-                totalPoints, cumulativeTime, androidTV, tempUsedOptions,
-                wasOnlinePosted);
+        stats.postFinishedTestLocally(tempSets, curQuestionNumber - 1, totalPoints, cumulativeTime, androidTV, tempUsedOptions, wasOnlinePosted);
     } // end postStatistics() method.
 
     // Methods to charge and save current game:
@@ -1108,8 +1045,7 @@ public class Quiz {
         Settings set = new Settings(mContext);
         if (MainActivity.isStarted) {
             set.saveBooleanSettings("isStarted", MainActivity.isStarted);
-            set.saveBooleanSettings("isTestBetweenQuestions",
-                    isTestBetweenQuestions);
+            set.saveBooleanSettings("isTestBetweenQuestions", isTestBetweenQuestions);
             set.saveIntSettings("lastCurQuestionNumber", curQuestionNumber);
             set.saveIntSettings("lastQuestionId", question.lastQuestionId);
             set.saveIntSettings("remainedTime", remainedTime);

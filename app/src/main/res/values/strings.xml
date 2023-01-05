@@ -3,6 +3,7 @@
 
     <string name="app_name">Cultură generală</string>
     <string name="title_activity_quiz">Cultură generală</string>
+    <string name="interstitial_ad_unit_id_test">ca-app-pub-3940256099942544/1033173712</string>
     <string name="banner_ad_unit_id_test">ca-app-pub-3940256099942544/6300978111</string>
     <string name="banner_ad_unit_id">ca-app-pub-9705662823127450/1266176025</string>
     <string name="banner_ad_application_id">ca-app-pub-9705662823127450~3812324606</string>
@@ -197,23 +198,23 @@
 
     <!-- Strings for what's new alert: -->
     <string name="whatsnew_title">Noutăți în 6.0</string>
-    <string name="whatsnew_in_601_a">A apărut un set nou creat de Virgil Zanfir, numit România postdecembristă, cu întrebări din istorie, politică, legislație.</string>
-    <string name="whatsnew_in_601_b">Au fost operate corecturi în urma semnalării erorilor de către utilizatori, cu această ocazie le mulțumim tuturor celor care contribuie la îmbunătățirea bazei de date cu întrebări.</string>
+    <string name="whatsnew_in_601_a">De acum se poate cumpăra versiune Premium pentru a juca fără reclame. O sumă modică face viața mai ușoară.</string>
+    <string name="whatsnew_in_601_b">A apărut un set nou creat de Gheorghe Andreica, numit Romane polițiste.</string>
     <string name="whatsnew_in_601_c">Nu uita că ne poți semnala oricând eventualele erori de conținut sau gramaticale identificate la afișarea întrebărilor; dai click pe cronometru, acesta se oprește, lăsându-te să ne scrii în caseta care apare.</string>
     <string name="chk_got_it">Am văzut, nu mai arăta!</string>
 
     <!-- Strings added in 6.0, starting with ThursdayTuesday 3rd January 2023: -->
     <!-- Strings for in_app_billing, Premium version: -->
-    <string name="bt_premium">Premium!</string>
+    <string name="bt_premium">Premium…</string>
     <string name="mnu_get_premium_version">Versiune Premium…</string>
     <string name="tv_premium_version_status">Ai versiunea Premium</string>
     <string name="premium_version_alert_title">Versiune Premium</string>
-    <string name="non_premium_version_alert_message">Dacă vrei ca reclamele să nu mai apară niciodată în acest joc, poți achiziționa versiunea Premium pentru doar %1$s.\nAvând versiunea Premium va fi economisit de asemenea trafic de internet consumat în prezent pentru afișarea reclamelor.</string>
+    <string name="non_premium_version_alert_message">Dacă vrei ca reclamele să nu mai apară niciodată în acest joc, poți achiziționa versiunea Premium pentru doar %1$s.\nAvând versiunea Premium va fi economisit de asemenea trafic de internet consumat în prezent pentru afișarea reclamelor.\nNu în ultimul rând, prin această achiziție, ne încurajezi și pe noi, astfel încât să lucrăm și mai mult la acest joc.</string>
     <string name="premium_version_alert_message">Ai deja versiunea Premium.\nÎți mulțumim pentru interesul acordat acestui joc.</string>
     <string name="bt_buy_premium">Obține Premium acum!</string>
     <string name="title_success_premium_version">Versiune Premium</string>
     <string name="premium_success_message">Felicitări!\nAi achiziționat cu succes versiunea Premium a jocului Cultură generală, Fii deștept!.\nDe acum ai scăpat de reclame.\nMulțumim pentru interesul acordat acestui joc.</string>
-    <string name="purchase_canceled">Procesul de achiziție a versiunii Premium a fost anulat.</string>
+    <string name="purchase_canceled">Procesul de achiziție a versiunii Premium a fost anulat.\nPoți încerca din nou oricând să cumperi versiunea Premium a acestui joc.</string>
     <string name="no_purchases_available">Nu există articole de cumpărat.</string>
     <string name="billing_unknown_error">A apărut o eroare necunoscută în procesul de achiziție.</string>
     <string name="no_connection_available">Am detectat că nu există conexiune la Internet.\nTe rugăm să conectezi dispozitivul la rețea și să încerci din nou.</string>

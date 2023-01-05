@@ -74,10 +74,8 @@ public class SetsManagement {
 
         // A LayoutParams for text views dimensions:
         // We add to height 25%:
-        int tvHeight = MainActivity.textHeight * 25 / 100
-                + MainActivity.textHeight;
-        LinearLayout.LayoutParams tvParam = new LinearLayout.LayoutParams(
-                LayoutParams.MATCH_PARENT, tvHeight);
+        int tvHeight = MainActivity.textHeight * 25 / 100 + MainActivity.textHeight;
+        LinearLayout.LayoutParams tvParam = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, tvHeight);
 
         // Get all sets from DB:
         String sql = "SELECT * FROM seturi ORDER BY nume;";
@@ -161,41 +159,36 @@ public class SetsManagement {
 
         // The alert dialog is created and shown:
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(mContext);
-        alertDialog.setTitle(mContext
-                .getString(R.string.set_management_alert_title));
+        alertDialog.setTitle(mContext.getString(R.string.set_management_alert_title));
         alertDialog.setView(sv);
 
-        alertDialog.setPositiveButton(mContext.getString(R.string.save_sets),
-                (dialog, whichButton) -> {
-                    SoundPlayer.playSimple(mContext, "element_finished");
-                    /*
-                     * If no set where chosen, we put the set 1 like as
-                     * default. This is the CULTURA GENERALA GP sets:
-                     */
-                    if (arrSets.size() == 0) {
-                        arrSets.add("" + 1);
-                        arrSets.add("" + 24);
-                    }
+        alertDialog.setPositiveButton(mContext.getString(R.string.save_sets), (dialog, whichButton) -> {
+            SoundPlayer.playSimple(mContext, "element_finished");
+            /*
+             * If no set where chosen, we put the set 1 like as
+             * default. This is the CULTURA GENERALA GP sets:
+             */
+            if (arrSets.size() == 0) {
+                arrSets.add("" + 1);
+                arrSets.add("" + 24);
+            }
 
-                    // If all sets were chosen, add 0 the value in array:
-                    if (isAllSets) {
-                        arrSets.clear();
-                        arrSets.add("0");
-                    } // end if all sets were chosen.
+            // If all sets were chosen, add 0 the value in array:
+            if (isAllSets) {
+                arrSets.clear();
+                arrSets.add("0");
+            } // end if all sets were chosen.
 
-                    // Save as delimited string the chosen sets:
-                    // Make the ArrayList an array:
-                    String[] aTemp = arrSets.toArray(new String[arrSets
-                            .size()]);
-                    String chosenSets = GUITools
-                            .arrayToDelimitedString(aTemp);
-                    Settings set = new Settings(mContext);
-                    set.saveStringSettings("curSetIds", chosenSets);
-                });
-        alertDialog.setNegativeButton(mContext.getString(R.string.cancel),
-                (dialog, whichButton) -> {
-                    // Nothing...
-                });
+            // Save as delimited string the chosen sets:
+            // Make the ArrayList an array:
+            String[] aTemp = arrSets.toArray(new String[arrSets.size()]);
+            String chosenSets = GUITools.arrayToDelimitedString(aTemp);
+            Settings set = new Settings(mContext);
+            set.saveStringSettings("curSetIds", chosenSets);
+        });
+        alertDialog.setNegativeButton(mContext.getString(R.string.cancel), (dialog, whichButton) -> {
+            // Nothing...
+        });
 
         alertDialog.create();
         alertDialog.show();
@@ -280,16 +273,14 @@ public class SetsManagement {
         if (isSelected) {
             arrTV[arrTVIndex].setBackgroundResource(R.drawable.var_green);
             // Set the selector for black text as default:
-            arrTV[arrTVIndex].setTextColor(mContext.getResources()
-                    .getColorStateList(R.color.selector_text_black));
+            arrTV[arrTVIndex].setTextColor(mContext.getResources().getColorStateList(R.color.selector_text_black));
 
             // Change also the text for content description:
             text = "Selectat. " + text;
         } else { // not selected, white on blue:
             arrTV[arrTVIndex].setBackgroundResource(R.drawable.var_blue);
             // Set the selector for white text as default:
-            arrTV[arrTVIndex].setTextColor(mContext.getResources()
-                    .getColorStateList(R.color.selector_text_white));
+            arrTV[arrTVIndex].setTextColor(mContext.getResources().getColorStateList(R.color.selector_text_white));
 
         } // end if is not selected.
         // Set the content description for blind users:
@@ -346,8 +337,7 @@ public class SetsManagement {
     // A method to get author name for a set:
     private String getSetAuthor(int setId) {
         // Get first a question from set, there we have also the authorId:
-        String sql = "SELECT autorId FROM intrebari WHERE setId=" + setId
-                + " LIMIT 1";
+        String sql = "SELECT autorId FROM intrebari WHERE setId=" + setId + " LIMIT 1";
         Cursor cursor = mDbHelper.queryData(sql);
         cursor.moveToFirst();
         int authorId = cursor.getInt(0);
