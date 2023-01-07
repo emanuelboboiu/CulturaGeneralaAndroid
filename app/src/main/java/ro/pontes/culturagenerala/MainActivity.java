@@ -30,18 +30,15 @@ import com.android.billingclient.api.Purchase;
 import com.android.billingclient.api.PurchasesUpdatedListener;
 import com.android.billingclient.api.QueryProductDetailsParams;
 import com.android.billingclient.api.QueryPurchasesParams;
-
-import java.util.List;
-
 import com.google.android.gms.ads.AdError;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.FullScreenContentCallback;
 import com.google.android.gms.ads.LoadAdError;
 import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.initialization.InitializationStatus;
-import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.android.gms.ads.interstitial.InterstitialAd;
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
+
+import java.util.List;
 
 public class MainActivity extends Activity {
 
@@ -101,7 +98,7 @@ public class MainActivity extends Activity {
         // Determine if it's a TV or not:
         isTV = GUITools.isAndroidTV(this);
 // Determine if it is accessibility enabled:
-        // xxx isAccessibility = GUITools.isAccessibilityEnabled(this);
+        isAccessibility = GUITools.isAccessibilityEnabled(this);
 
         // Determine the orientation:
         MainActivity.isPortrait = GUITools.isPortraitOrientation(this);
@@ -111,8 +108,13 @@ public class MainActivity extends Activity {
         getTextViews();
         setFirstThings();
 
-        if (!isTV && !isFirstLaunchInSession) {
-            GUITools.checkIfRated(this);
+        // Some variables for moment of interstitial and auto unregister:
+        int howOftenAd = 3;
+        int howOftenUnregister = 24;
+
+        // We don't want to have this announcement about rating together with an interstitial, also when is TV and first launch after a while:
+        if (!isTV && !isFirstLaunchInSession && numberOfLaunches % howOftenAd != 0) {
+            GUITools.checkIfRated(this); // now it is at each 11 menu shows.
         } // end if is TV.
 
         /*
@@ -137,21 +139,20 @@ public class MainActivity extends Activity {
         mDbHelper.createDatabase();
         mDbHelper.open();
 
-        // Sometimes we set as it is not registered as premium, let's say at each 25 launches:
+        // Sometimes we set as it is not registered as premium, let's say at each howOftenUnregister launches:
         if (isPremium) {
-            int howOften = 25;
-            if (numberOfLaunches % howOften == 0) {
+            if (numberOfLaunches % howOftenUnregister == 0) {
                 set.saveBooleanSettings("isPremium", false);
                 isPremium = false;
-            } // end if numberOfLaunches is divisible with howOften.
+            } // end if numberOfLaunches is divisible with howOftenUnregister.
         } // end if it is premium.
-// Below it will be made premium again if it is really bought:
+// Below it will be made premium again if it is really bought and other actions:
         if (!isPremium) {
             // For billing:
             startBillingDependencies();
 
-            // We also show interstitial ads if it is not premium and not first launch also if not accessibility enabled and also if not tv:
-            if (!isFirstLaunchInSession && !isAccessibility && !isTV && numberOfLaunches % 3 == 0) {
+            // We also show interstitial ads if it is not premium and not first launch also if not accessibility enabled and also if not tv and also if not too early:
+            if (!isFirstLaunchInSession && !isAccessibility && !isTV && numberOfLaunches % howOftenAd == 0 && numberOfLaunches % howOftenUnregister != 0 && numberOfLaunches > howOftenAd + 1) {
                 interstitialAdSequence();
             } // end if is time to show the interstitial ad.
         } // end if it is not premium.
@@ -175,14 +176,11 @@ public class MainActivity extends Activity {
 
     // Method for interstitial ads:
     public void interstitialAdSequence() {
-        MobileAds.initialize(this, new OnInitializationCompleteListener() {
-            @Override
-            public void onInitializationComplete(InitializationStatus initializationStatus) {
-            }
+        MobileAds.initialize(this, initializationStatus -> {
         });
         AdRequest adRequest = new AdRequest.Builder().build();
 
-        InterstitialAd.load(this, getString(R.string.interstitial_ad_unit_id_test), adRequest, new InterstitialAdLoadCallback() {
+        InterstitialAd.load(this, getString(R.string.interstitial_ad_unit_id), adRequest, new InterstitialAdLoadCallback() {
             @Override
             public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
                 // The mInterstitialAd reference will be null until an ad is loaded.
@@ -242,8 +240,6 @@ public class MainActivity extends Activity {
     public void showInterstitialAdEffectively() {
         if (mInterstitialAd != null) {
             mInterstitialAd.show(MainActivity.this);
-        } else {
-            // Log.d("TAG", "The interstitial ad wasn't ready yet.");
         }
     } // end showInterstitialAdEffectively() method.
 
@@ -555,7 +551,7 @@ public class MainActivity extends Activity {
                     // Now check if it is already purchased:
                     billingClient.queryPurchasesAsync(QueryPurchasesParams.newBuilder().setProductType(BillingClient.ProductType.INAPP).build(), (billingResult12, purchases) -> {
                         // check billingResult and process returned purchase list, e.g. display the products user owns
-                        if (purchases.size() > 0) { // it means there are items:
+                        if (purchases != null && purchases.size() > 0) { // it means there are items:
                             Purchase myOldPurchase = purchases.get(0);
                             if (myOldPurchase.getPurchaseState() == Purchase.PurchaseState.PURCHASED) {
                                 registerTheGameEffectively();
@@ -570,7 +566,7 @@ public class MainActivity extends Activity {
                         // process returned productDetailsList
                         myProducts = productDetailsList;
                         // Get the price of the 0 item if there is at least one product:
-                        if (myProducts.size() > 0) {
+                        if (myProducts != null && myProducts.size() > 0) {
                             ProductDetails productDetail = myProducts.get(0);
                             ProductDetails.OneTimePurchaseOfferDetails offer = productDetail.getOneTimePurchaseOfferDetails();
                             if (offer != null) {
@@ -638,7 +634,6 @@ public class MainActivity extends Activity {
         Settings set = new Settings(this);
         set.saveBooleanSettings("isPremium", true);
         // Now show an alert about this purchase:
-        // GUITools.alert(mFinalContext, getString(R.string.title_success_premium_version), getString(R.string.premium_success_message));
     } // end registerTheGameEffectively() method.
     // End methods for InAppBilling.
 

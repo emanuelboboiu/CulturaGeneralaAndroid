@@ -29,7 +29,6 @@
     </style>
 
     <style name="status_style" parent="android:Widget.Holo.Light.TextView">
-        <item name="android:accessibilityLiveRegion" tools:ignore="NewApi">polite</item>
         <item name="android:padding">@dimen/padding_for_status</item>
         <item name="android:gravity">center_vertical|center_horizontal</item>
         <item name="android:textColor">@color/tvTextWhite</item>
@@ -39,7 +38,7 @@
     <style name="question_style" parent="android:Widget.Holo.Light.TextView">
         <item name="android:clickable">true</item>
         <item name="android:focusable">true</item>
-        <item name="android:accessibilityLiveRegion" tools:ignore="NewApi">polite</item>
+        <item name="android:accessibilityLiveRegion">assertive</item>
         <item name="android:scrollbars">vertical</item>
         <item name="android:gravity">center_vertical|center_horizontal</item>
         <item name="android:background">@drawable/background_question</item>

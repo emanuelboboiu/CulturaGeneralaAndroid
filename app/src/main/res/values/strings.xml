@@ -4,6 +4,7 @@
     <string name="app_name">Cultură generală</string>
     <string name="title_activity_quiz">Cultură generală</string>
     <string name="interstitial_ad_unit_id_test">ca-app-pub-3940256099942544/1033173712</string>
+    <string name="interstitial_ad_unit_id">ca-app-pub-9705662823127450/1853592431</string>
     <string name="banner_ad_unit_id_test">ca-app-pub-3940256099942544/6300978111</string>
     <string name="banner_ad_unit_id">ca-app-pub-9705662823127450/1266176025</string>
     <string name="banner_ad_application_id">ca-app-pub-9705662823127450~3812324606</string>
@@ -11,13 +12,13 @@
 
     <!-- About dialog: -->
     <string name="about_title">Despre joc</string>
-    <string name="app_version">Cultură generală, Fii deștept!, versiunea 6.0</string>
+    <string name="app_version">Cultură generală, Fii deștept!, versiunea 6.1</string>
     <string name="app_release_date">Versiunea 1.0 a fost finalizată vineri, 22 decembrie 2017</string>
-    <string name="app_last_update">Ultima actualizare pe acest dispozitiv:\n - versiunea 6.0, finalizată duminică, 8 ianuarie 2023</string>
+    <string name="app_last_update">Ultima actualizare pe acest dispozitiv:\n - versiunea 6.1, finalizată sâmbătă, 7 ianuarie 2023</string>
     <string name="app_creator">Programat de Emanuel Boboiu (Manu)</string>
     <string name="phone_number">Telefon: +40740203043</string>
     <string name="email_address">E-mail: android@pontes.ro</string>
-    <string name="web_address">Web: www.android.pontes.ro</string>
+    <string name="web_address">Web: www.android.pontes.ro/cg</string>
     <string name="app_credits1">Design creat de Iulian Duma</string>
     <string name="app_credits2">Testare beta: Iulian Duma, Mircea Doduț</string>
 
@@ -198,8 +199,8 @@
 
     <!-- Strings for what's new alert: -->
     <string name="whatsnew_title">Noutăți în 6.0</string>
-    <string name="whatsnew_in_601_a">De acum se poate cumpăra versiune Premium pentru a juca fără reclame. O sumă modică face viața mai ușoară.</string>
-    <string name="whatsnew_in_601_b">A apărut un set nou creat de Gheorghe Andreica, numit Romane polițiste.</string>
+    <string name="whatsnew_in_601_a">A apărut un set nou creat de Gheorghe Andreica, numit Romane polițiste.</string>
+    <string name="whatsnew_in_601_b">De acum se poate cumpăra versiunea Premium pentru a juca fără reclame. Ne dai o sumă mică alegând în meniul principal opțiunea ”Premium…„ și ne încurajezi să lucrăm mai mult la acest joc; în plus, experiența cu jocul îți va fi mai plăcută, fără atâtea reclame enervante.</string>
     <string name="whatsnew_in_601_c">Nu uita că ne poți semnala oricând eventualele erori de conținut sau gramaticale identificate la afișarea întrebărilor; dai click pe cronometru, acesta se oprește, lăsându-te să ne scrii în caseta care apare.</string>
     <string name="chk_got_it">Am văzut, nu mai arăta!</string>
 
