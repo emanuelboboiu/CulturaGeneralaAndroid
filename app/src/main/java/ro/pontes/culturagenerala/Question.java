@@ -34,15 +34,26 @@ public class Question {
     private TextView[] tvLetters;
     private boolean isVariantsResized = false;
 
+    // For text to speech:
+    private final SpeakText tts;
+    private final boolean speakQuestion;
+    private final boolean speakVariants;
+    private final StringBuilder sbQuestion;
+
     // The constructor for a new question:
-    public Question(Context context, Activity activity, DBAdapter mDbHelper,
-                    int set, int threshold, int lastQuestionId) {
+    public Question(Context context, Activity activity, DBAdapter mDbHelper, int set, int threshold, int lastQuestionId) {
         this.mContext = context;
         this.activity = activity;
         this.mDbHelper = mDbHelper;
         this.lastQuestionId = lastQuestionId;
         this.set = set;
         this.threshold = threshold;
+
+        this.sbQuestion = new StringBuilder();
+        this.tts = new SpeakText(mContext);
+        Settings settings = new Settings(mContext);
+        this.speakQuestion = settings.getBooleanSettings("speakQuestion");
+        this.speakVariants = settings.getBooleanSettings("speakVariants");
 
         getTextViews();
     } // end constructor for a new question.
@@ -62,16 +73,12 @@ public class Question {
         if (isNew) { // generate a new question:
             // If set is 0, it means all sets:
             if (set <= 0) {
-                sql = "SELECT * FROM intrebari WHERE prag=" + threshold
-                        + " AND consumat=0 ORDER BY random() LIMIT 1;";
+                sql = "SELECT * FROM intrebari WHERE prag=" + threshold + " AND consumat=0 ORDER BY random() LIMIT 1;";
             } else { // a chosen set:
-                sql = "SELECT * FROM intrebari WHERE setId=" + set
-                        + " AND prag=" + threshold
-                        + " AND consumat=0 ORDER BY random() LIMIT 1;";
+                sql = "SELECT * FROM intrebari WHERE setId=" + set + " AND prag=" + threshold + " AND consumat=0 ORDER BY random() LIMIT 1;";
             } // end make query for a chosen set.
         } else { // get the last question:
-            sql = "SELECT * FROM intrebari WHERE intrebareId=" + lastQuestionId
-                    + ";";
+            sql = "SELECT * FROM intrebari WHERE intrebareId=" + lastQuestionId + ";";
         } // end if is not a new question.
 
         Cursor cursor = mDbHelper.queryData(sql);
@@ -87,8 +94,7 @@ public class Question {
 
         // We set this question as consumed in DB:
         int curQuestionId = cursor.getInt(0);
-        sql = "UPDATE intrebari SET consumat=1 WHERE intrebareId="
-                + curQuestionId + ";";
+        sql = "UPDATE intrebari SET consumat=1 WHERE intrebareId=" + curQuestionId + ";";
         mDbHelper.updateData(sql);
 
         // We shuffle and determine the index of correct index:
@@ -118,76 +124,69 @@ public class Question {
 
         tvVariants = new TextView[4];
         for (int i = 0; i < 4; i++) {
-            int resID = mContext.getResources().getIdentifier(
-                    "tvVariant" + (i + 1), "id", mContext.getPackageName());
+            int resID = mContext.getResources().getIdentifier("tvVariant" + (i + 1), "id", mContext.getPackageName());
             tvVariants[i] = activity.findViewById(resID);
         } // end for.
 
         tvLetters = new TextView[4];
         for (int i = 0; i < 4; i++) {
-            int resID = mContext.getResources().getIdentifier(
-                    "tvLetter" + (i + 1), "id", mContext.getPackageName());
+            int resID = mContext.getResources().getIdentifier("tvLetter" + (i + 1), "id", mContext.getPackageName());
             tvLetters[i] = activity.findViewById(resID);
         } // end for.
 
         // Now work at resize in a tree observer:
         LinearLayout llVariants = activity.findViewById(R.id.llVariants);
-        llVariants.getViewTreeObserver().addOnGlobalLayoutListener(
-                () -> {
-                    if (!isVariantsResized) {
-                        // Take the width of the llVariants Layout:
-                        LinearLayout llVariants1 = activity
-                                .findViewById(R.id.llVariants);
-                        int llVariantsWidth = llVariants1.getWidth();
-                        int procToAddToHeight = 65;
-                        if (MainActivity.isTV) {
-                            // It means the variants can be larger:
-                            procToAddToHeight = 85;
-                        }
-                        int height = procToAddToHeight * Quiz.statusHeight
-                                / 100;
-                        // it's a square.
+        llVariants.getViewTreeObserver().addOnGlobalLayoutListener(() -> {
+            if (!isVariantsResized) {
+                // Take the width of the llVariants Layout:
+                LinearLayout llVariants1 = activity.findViewById(R.id.llVariants);
+                int llVariantsWidth = llVariants1.getWidth();
+                int procToAddToHeight = 65;
+                if (MainActivity.isTV) {
+                    // It means the variants can be larger:
+                    procToAddToHeight = 85;
+                }
+                int height = procToAddToHeight * Quiz.statusHeight / 100;
+                // it's a square.
 
-                        // A LayoutParams for letters:
-                        LayoutParams paramsForLetters = (LayoutParams) tvLetters[0]
-                                .getLayoutParams();
-                        paramsForLetters.height = height;
-                        paramsForLetters.width = height;
+                // A LayoutParams for letters:
+                LayoutParams paramsForLetters = (LayoutParams) tvLetters[0].getLayoutParams();
+                paramsForLetters.height = height;
+                paramsForLetters.width = height;
 
-                        // A LayoutParams for variants:
-                        int tvVariantsWidth = llVariantsWidth
-                                - height
-                                - GUITools.dpToPx(mContext, 2);
-                        LayoutParams paramsForVariants = (LayoutParams) tvVariants[0]
-                                .getLayoutParams();
-                        paramsForVariants.height = height;
-                        paramsForVariants.width = tvVariantsWidth;
+                // A LayoutParams for variants:
+                int tvVariantsWidth = llVariantsWidth - height - GUITools.dpToPx(mContext, 2);
+                LayoutParams paramsForVariants = (LayoutParams) tvVariants[0].getLayoutParams();
+                paramsForVariants.height = height;
+                paramsForVariants.width = tvVariantsWidth;
 
-                        // Set all dimensions for variants controls in a
-                        // for:
-                        for (int i = 0; i < 4; i++) {
-                            tvLetters[i].setLayoutParams(paramsForLetters);
-                            tvVariants[i]
-                                    .setLayoutParams(paramsForVariants);
-                            // Make also scrollable horizontally:
-                            tvVariants[i].setEllipsize(TruncateAt.MARQUEE);
-                            tvVariants[i].setMarqueeRepeatLimit(-1);
-                            tvVariants[i].setSingleLine(true);
-                            tvVariants[i].setHorizontallyScrolling(true);
-                            // tvVariants[i].setHorizontalScrollBarEnabled(true);
-                            tvVariants[i]
-                                    .setMovementMethod(new ScrollingMovementMethod());
-                        } // end for.
+                // Set all dimensions for variants controls in a
+                // for:
+                for (int i = 0; i < 4; i++) {
+                    tvLetters[i].setLayoutParams(paramsForLetters);
+                    tvVariants[i].setLayoutParams(paramsForVariants);
+                    // Make also scrollable horizontally:
+                    tvVariants[i].setEllipsize(TruncateAt.MARQUEE);
+                    tvVariants[i].setMarqueeRepeatLimit(-1);
+                    tvVariants[i].setSingleLine(true);
+                    tvVariants[i].setHorizontallyScrolling(true);
+                    // tvVariants[i].setHorizontalScrollBarEnabled(true);
+                    tvVariants[i].setMovementMethod(new ScrollingMovementMethod());
+                } // end for.
 
-                        isVariantsResized = true;
-                    } // end if isVariantsResized is false.
-                    // End resize Bitmaps for backgrounds.
-                });
+                isVariantsResized = true;
+            } // end if isVariantsResized is false.
+            // End resize Bitmaps for backgrounds.
+        });
         // End resize the backgrounds for different controls.
     } // end getTextViews() method.
 
     private void draw() {
         tvQuestion.setText(questionText);
+        if (this.speakQuestion) {
+            sbQuestion.append(questionText).append("\n");
+        }
+
         tvQuestion.scrollTo(0, 0);
 
         // Make as normal appearance style, simple variant:
@@ -197,7 +196,14 @@ public class Question {
         for (int i = 0; i < 4; i++) {
             tvVariants[i].setText(variants[i]);
             tvVariants[i].scrollTo(0, 0);
+
+            if (this.speakVariants) {
+                sbQuestion.append(aABCD[i]).append(": ").append(variants[i]).append(".\n");
+            }
         } // end for.
+
+        // Say the question and or the variants:
+        tts.sayDelayed(sbQuestion.toString(), true);
     } // end draw() method.
 
     // A method which makes all variants as normal:
@@ -222,18 +228,15 @@ public class Question {
     public void changeTVForNormalVariant(int variant) {
         // Change the background for letter::
         String fileName = "var_blue" + (variant + 1);
-        int resId = mContext.getResources().getIdentifier(fileName, "drawable",
-                mContext.getPackageName());
+        int resId = mContext.getResources().getIdentifier(fileName, "drawable", mContext.getPackageName());
         tvLetters[variant].setBackgroundResource(resId);
 
         // Change the background for variant text:
         tvVariants[variant].setBackgroundResource(R.drawable.var_blue);
         // Change the text colour of the variant text:
-        tvVariants[variant].setTextColor(ContextCompat.getColor(mContext,
-                R.color.tvTextWhite));
+        tvVariants[variant].setTextColor(ContextCompat.getColor(mContext, R.color.tvTextWhite));
 
-        tvVariants[variant].setTextColor(mContext.getResources()
-                .getColorStateList(R.color.selector_text_white));
+        tvVariants[variant].setTextColor(mContext.getResources().getColorStateList(R.color.selector_text_white));
         tvVariants[variant].setFocusable(true);
     } // end changeTVForNormalVariant() method.
 
@@ -241,23 +244,20 @@ public class Question {
     public void changeTVForConfirmation(int variant) {
         // Change the background for letter::
         String fileName = "var_yellow" + (variant + 1);
-        int resId = mContext.getResources().getIdentifier(fileName, "drawable",
-                mContext.getPackageName());
+        int resId = mContext.getResources().getIdentifier(fileName, "drawable", mContext.getPackageName());
         tvLetters[variant].setBackgroundResource(resId);
 
         // Change the background for text variant:
         tvVariants[variant].setBackgroundResource(R.drawable.var_yellow);
         // Change the text colour:
-        tvVariants[variant].setTextColor(ContextCompat.getColor(mContext,
-                R.color.tvTextBlack));
+        tvVariants[variant].setTextColor(ContextCompat.getColor(mContext, R.color.tvTextBlack));
     } // end changeTVForConfirmation() method.
 
     // A method which shows a wrong answer:
     public void showTVForWrongAnswer(int variant) {
         // Change the background for letter::
         String fileName = "var_red" + (variant + 1);
-        int resId = mContext.getResources().getIdentifier(fileName, "drawable",
-                mContext.getPackageName());
+        int resId = mContext.getResources().getIdentifier(fileName, "drawable", mContext.getPackageName());
         tvLetters[variant].setBackgroundResource(resId);
         // We disable it because we use this in fifty_fifty too.
         tvLetters[variant].setEnabled(false);
@@ -268,8 +268,7 @@ public class Question {
         tvVariants[variant].setEnabled(false);
 
         // Change the text colour:
-        tvVariants[variant].setTextColor(ContextCompat.getColor(mContext,
-                R.color.tvTextWhite));
+        tvVariants[variant].setTextColor(ContextCompat.getColor(mContext, R.color.tvTextWhite));
 
         // tvVariants[variant].setFocusable(false);
     } // end showTVForWrong() method.
@@ -278,16 +277,13 @@ public class Question {
     public void showTVForCorrectAnswer() {
         // Change the background for letter::
         String fileName = "var_green" + (correctVariantIndex + 1);
-        int resId = mContext.getResources().getIdentifier(fileName, "drawable",
-                mContext.getPackageName());
+        int resId = mContext.getResources().getIdentifier(fileName, "drawable", mContext.getPackageName());
         tvLetters[correctVariantIndex].setBackgroundResource(resId);
 
         // Change the background for the text variant::
-        tvVariants[correctVariantIndex]
-                .setBackgroundResource(R.drawable.var_green);
+        tvVariants[correctVariantIndex].setBackgroundResource(R.drawable.var_green);
         // Change the text colour:
-        tvVariants[correctVariantIndex].setTextColor(ContextCompat.getColor(
-                mContext, R.color.tvTextBlack));
+        tvVariants[correctVariantIndex].setTextColor(ContextCompat.getColor(mContext, R.color.tvTextBlack));
     } // end showTVForCorrect() method.
 
     /* A method which returns true if final answer is correct, false otherwise: */
@@ -324,8 +320,7 @@ public class Question {
             minPercent = 1;
         } // end if.
 
-        int randPercent = GUITools
-                .random(minPercent, aPercentValues.length - 1);
+        int randPercent = GUITools.random(minPercent, aPercentValues.length - 1);
         randPercent = aPercentValues[randPercent];
         int temCorrectVarriantIndex = correctVariantIndex;
         // If randPercent is less than 60%, the friend give a random answer:
@@ -334,9 +329,7 @@ public class Question {
         } // end if.
 
         // Format the string message to be returned:
-        return String.format(
-                mContext.getString(R.string.used_call), "" + randPercent,
-                aABCD[temCorrectVarriantIndex]);
+        return String.format(mContext.getString(R.string.used_call), "" + randPercent, aABCD[temCorrectVarriantIndex]);
     } // end callFriend() method.
 
     public String askPublic() {
@@ -358,8 +351,7 @@ public class Question {
         // an array to keep the percent for corresponding variants.
         int[] aProcVariants = {0, 0, 0, 0};
         // Set the percentage for correct variant:
-        aProcVariants[correctVariantIndex] = GUITools.random(minPercent,
-                maxPercent);
+        aProcVariants[correctVariantIndex] = GUITools.random(minPercent, maxPercent);
         proc = proc - aProcVariants[correctVariantIndex]; // to have the
         // remaining
         // percentage.
@@ -394,8 +386,7 @@ public class Question {
         } // end for.
         // Cut the final comma:
         rezPublic = new StringBuilder(rezPublic.substring(0, rezPublic.length() - 2));
-        return String.format(
-                mContext.getString(R.string.used_ask), rezPublic);
+        return String.format(mContext.getString(R.string.used_ask), rezPublic);
     } // end askPublic() method.
 
     public String changeQuestion() {
@@ -415,9 +406,7 @@ public class Question {
     // Method for text to speech,:
     public void sayCorrectAnswer() {
         // We try to postpone a little the say action:
-        final String message = String.format(
-                mContext.getString(R.string.tts_correct_answer),
-                aABCD[correctVariantIndex], variants[correctVariantIndex]);
+        final String message = String.format(mContext.getString(R.string.tts_correct_answer), aABCD[correctVariantIndex], variants[correctVariantIndex]);
 
         final Handler handler = new Handler();
         handler.postDelayed(() -> {
@@ -426,5 +415,12 @@ public class Question {
             GUITools.toast(message, 1000, mContext);
         }, 2500);
     } // end sayCorrectAnswer() method.
+
+    // A method to stop the tts for question and variants:
+    public void stopTTS() {
+        if (tts != null) {
+            tts.stop();
+        }
+    } // end stopTTS() method.
 
 } // end Question class.

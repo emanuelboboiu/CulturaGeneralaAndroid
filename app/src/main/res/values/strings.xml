@@ -12,9 +12,9 @@
 
     <!-- About dialog: -->
     <string name="about_title">Despre joc</string>
-    <string name="app_version">Cultură generală, Fii deștept!, versiunea 6.1</string>
+    <string name="app_version">Cultură generală, Fii deștept!, versiunea 7.0</string>
     <string name="app_release_date">Versiunea 1.0 a fost finalizată vineri, 22 decembrie 2017</string>
-    <string name="app_last_update">Ultima actualizare pe acest dispozitiv:\n - versiunea 6.1, finalizată duminică, 8 ianuarie 2023</string>
+    <string name="app_last_update">Ultima actualizare pe acest dispozitiv:\n - versiunea 7.0, finalizată vineri, 6 octombrie 2023</string>
     <string name="app_creator">Programat de Emanuel Boboiu (Manu)</string>
     <string name="phone_number">Telefon: +40740203043</string>
     <string name="email_address">E-mail: android@pontes.ro</string>
@@ -198,10 +198,11 @@
     <string name="feedback_sent_unsuccessfully">Notificarea ta nu a putut fi trimisă.\nTe rugăm să încerci din nou.\nMulțumim pentru interesul acordat!</string>
 
     <!-- Strings for what's new alert: -->
-    <string name="whatsnew_title">Noutăți în 6.0</string>
-    <string name="whatsnew_in_601_a">A apărut un set nou creat de Gheorghe Andreica, numit Romane polițiste.</string>
-    <string name="whatsnew_in_601_b">De acum se poate cumpăra versiunea Premium pentru a juca fără reclame. Ne dai o sumă mică alegând în meniul principal opțiunea ”Premium…„ și ne încurajezi să lucrăm mai mult la acest joc; în plus, experiența cu jocul îți va fi mai plăcută, fără atâtea reclame enervante.</string>
-    <string name="whatsnew_in_601_c">Nu uita că ne poți semnala oricând eventualele erori de conținut sau gramaticale identificate la afișarea întrebărilor; dai click pe cronometru, acesta se oprește, lăsându-te să ne scrii în caseta care apare.</string>
+    <string name="whatsnew_title">Noutăți în 7.0</string>
+    <string name="whatsnew_in_700_a">A apărut un set nou creat de Ghiță Potra, numit „Cum? Unde? Când?”.</string>
+    <string name="whatsnew_in_700_b">Există noi opțiuni în setări: joc fără confirmarea alegerilor, enunțare întrebări, variante și altele prin TTS.</string>
+    <string name="whatsnew_in_700_c">Se poate cumpăra versiunea Premium pentru a juca fără reclame. Ne dai o sumă mică alegând în meniul principal opțiunea ”Premium…„ și ne încurajezi să lucrăm mai mult la acest joc.</string>
+    <string name="whatsnew_in_700_d">Nu uita că ne poți semnala oricând eventualele erori de conținut sau gramaticale identificate la afișarea întrebărilor; dai click pe cronometru, acesta se oprește, lăsându-te să ne scrii în caseta care apare.</string>
     <string name="chk_got_it">Am văzut, nu mai arăta!</string>
 
     <!-- Strings added in 6.0, starting with ThursdayTuesday 3rd January 2023: -->
@@ -219,5 +220,13 @@
     <string name="no_purchases_available">Nu există articole de cumpărat.</string>
     <string name="billing_unknown_error">A apărut o eroare necunoscută în procesul de achiziție.</string>
     <string name="no_connection_available">Am detectat că nu există conexiune la Internet.\nTe rugăm să conectezi dispozitivul la rețea și să încerci din nou.</string>
+
+    <!-- New in version 7.0 -->
+    <string name="speak_question">Enunțare întrebare prin TTS</string>
+    <string name="speak_variants">Enunțare variante prin TTS</string>
+    <string name="speak_others">Enunțare alte evenimente prin TTS</string>
+    <string name="bt_open_tts_settings">Setări TTS de sistem</string>
+    <string name="bt_tts_test">Enunțare exemplu de test</string>
+    <string name="tts_test_text">Care este capitala României?\nA: Arad.\nB: București.\nC: Galați.\nD: Cluj-Napoca.</string>
 
 </resources>

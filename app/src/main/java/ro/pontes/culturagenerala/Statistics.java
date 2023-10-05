@@ -58,8 +58,7 @@ public class Statistics {
         ll.setPadding(paddingPX, 0, paddingPX, 0);
 
         // A LayoutParams for text views dimensions:
-        LinearLayout.LayoutParams tvParam = new LinearLayout.LayoutParams(
-                LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+        LinearLayout.LayoutParams tvParam = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
 
         // 3 variables we use repetitive:
         TextView tv;
@@ -67,68 +66,56 @@ public class Statistics {
         String tvText;
 
         // First, an introductory message:
-        tvText = String.format(mContext.getString(R.string.stats_introduction),
-                getFirstTestDate());
+        tvText = String.format(mContext.getString(R.string.stats_introduction), getFirstTestDate());
         tvSeq = MyHtml.fromHtml(tvText);
         tv = createTextView();
         tv.setText(tvSeq);
         ll.addView(tv, tvParam);
 
         // Number of finished tests:
-        tvText = String.format(
-                mContext.getString(R.string.stats_finished_tests), ""
-                        + getNumberOfFinishedTests());
+        tvText = String.format(mContext.getString(R.string.stats_finished_tests), "" + getNumberOfFinishedTests());
         tvSeq = MyHtml.fromHtml(tvText);
         tv = createTextView();
         tv.setText(tvSeq);
         ll.addView(tv, tvParam);
 
         // The average question reached:
-        tvText = String.format(mContext.getString(R.string.stats_average_nrq),
-                "" + getAverageQuestionsPerTest());
+        tvText = String.format(mContext.getString(R.string.stats_average_nrq), "" + getAverageQuestionsPerTest());
         tvSeq = MyHtml.fromHtml(tvText);
         tv = createTextView();
         tv.setText(tvSeq);
         ll.addView(tv, tvParam);
 
         // Number of total points:
-        tvText = String.format(mContext.getString(R.string.stats_total_points),
-                st.getNumberOfPointsAsString(getNumberOfTotalPoints()));
+        tvText = String.format(mContext.getString(R.string.stats_total_points), st.getNumberOfPointsAsString(getNumberOfTotalPoints()));
         tvSeq = MyHtml.fromHtml(tvText);
         tv = createTextView();
         tv.setText(tvSeq);
         ll.addView(tv, tvParam);
 
         // The average points per test:
-        tvText = String.format(
-                mContext.getString(R.string.stats_average_points), ""
-                        + getAveragePointsPerTest());
+        tvText = String.format(mContext.getString(R.string.stats_average_points), "" + getAveragePointsPerTest());
         tvSeq = MyHtml.fromHtml(tvText);
         tv = createTextView();
         tv.setText(tvSeq);
         ll.addView(tv, tvParam);
 
         // Number of won tests:
-        tvText = String.format(mContext.getString(R.string.stats_won_tests), ""
-                + getNumberOfWonTests());
+        tvText = String.format(mContext.getString(R.string.stats_won_tests), "" + getNumberOfWonTests());
         tvSeq = MyHtml.fromHtml(tvText);
         tv = createTextView();
         tv.setText(tvSeq);
         ll.addView(tv, tvParam);
 
         // Determine now the average duration:
-        tvText = String.format(
-                mContext.getString(R.string.stats_average_duration), ""
-                        + getAverageDurationInSeconds());
+        tvText = String.format(mContext.getString(R.string.stats_average_duration), "" + getAverageDurationInSeconds());
         tvSeq = MyHtml.fromHtml(tvText);
         tv = createTextView();
         tv.setText(tvSeq);
         ll.addView(tv, tvParam);
 
         // Determine now the total duration:
-        tvText = String.format(
-                mContext.getString(R.string.stats_total_duration),
-                getTotalDurationAsString());
+        tvText = String.format(mContext.getString(R.string.stats_total_duration), getTotalDurationAsString());
         tvSeq = MyHtml.fromHtml(tvText);
         tv = createTextView();
         tv.setText(tvSeq);
@@ -137,9 +124,7 @@ public class Statistics {
         // Get now the number of start menu appearances:
         Settings set = new Settings(mContext);
         int nrLaunches = set.getIntSettings("numberOfLaunches");
-        tvText = String.format(
-                mContext.getString(R.string.stats_main_menu_launches), ""
-                        + nrLaunches);
+        tvText = String.format(mContext.getString(R.string.stats_main_menu_launches), "" + nrLaunches);
         tvSeq = MyHtml.fromHtml(tvText);
         tv = createTextView();
         tv.setText(tvSeq);
@@ -160,8 +145,7 @@ public class Statistics {
         // Now a for to show the last tests:
         // Query the IDs for last tests:
         int nrTestsToShow = 5;
-        String sql = "SELECT id FROM statistici ORDER BY data DESC LIMIT "
-                + nrTestsToShow + ";";
+        String sql = "SELECT id FROM statistici ORDER BY data DESC LIMIT " + nrTestsToShow + ";";
         Cursor cursor = mDbHelper2.queryData(sql);
         // Only if the cursor contains some tests:
         if (cursor.getCount() > 0) {
@@ -197,8 +181,7 @@ public class Statistics {
 
         // Now a for to show the best tests:
         // Query the IDs for best tests:
-        sql = "SELECT id FROM statistici ORDER BY puncte DESC, durata ASC LIMIT "
-                + nrTestsToShow + ";";
+        sql = "SELECT id FROM statistici ORDER BY puncte DESC, durata ASC LIMIT " + nrTestsToShow + ";";
         cursor = mDbHelper2.queryData(sql);
         // Only if the cursor contains some tests:
         if (cursor.getCount() > 0) {
@@ -227,8 +210,7 @@ public class Statistics {
 
             // Create the button to send the best set:
             // We need a LayoutParam to add the button at the centre:
-            LinearLayout.LayoutParams btParam = new LinearLayout.LayoutParams(
-                    LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+            LinearLayout.LayoutParams btParam = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
             btParam.gravity = Gravity.CENTER_HORIZONTAL;
 
             Button btSend = new Button(mContext);
@@ -239,9 +221,7 @@ public class Statistics {
                 if (GUITools.isNetworkAvailable(mContext)) {
                     checkIfWasSent(bestId);
                 } else {
-                    GUITools.alert(mContext, mContext
-                            .getString(R.string.warning), mContext
-                            .getString(R.string.no_internet_is_available));
+                    GUITools.alert(mContext, mContext.getString(R.string.warning), mContext.getString(R.string.no_internet_is_available));
                 } // end if no Internet is available.
             }); // end onClickListener.
             ll.addView(btSend, btParam);
@@ -249,16 +229,13 @@ public class Statistics {
             // Create the button to get current position:
             Button btGetPosition = new Button(mContext);
             btGetPosition.setTextSize(MainActivity.textSize);
-            btGetPosition.setText(mContext
-                    .getString(R.string.bt_get_best_test_position));
+            btGetPosition.setText(mContext.getString(R.string.bt_get_best_test_position));
             btGetPosition.setOnClickListener(view -> {
                 // Only if there is an Internet connection:
                 if (GUITools.isNetworkAvailable(mContext)) {
                     getBetsTestPosition();
                 } else {
-                    GUITools.alert(mContext, mContext
-                            .getString(R.string.warning), mContext
-                            .getString(R.string.no_internet_is_available));
+                    GUITools.alert(mContext, mContext.getString(R.string.warning), mContext.getString(R.string.no_internet_is_available));
                 } // end if no Internet is available.
             }); // end onClickListener.
             ll.addView(btGetPosition, btParam);
@@ -276,15 +253,13 @@ public class Statistics {
         // This button is available only if is not Android TV:
         if (!MainActivity.isTV) {
             // We need a LayoutParam to add the button at the right:
-            LinearLayout.LayoutParams btParam = new LinearLayout.LayoutParams(
-                    LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-            btParam.gravity = Gravity.RIGHT;
+            LinearLayout.LayoutParams btParam = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+            btParam.gravity = Gravity.END;
 
             Button btGS = new Button(mContext);
             btGS.setTextSize(MainActivity.textSize);
             btGS.setText(mContext.getString(R.string.bt_web_statistics));
-            btGS.setOnClickListener(view -> GUITools.openBrowser(mContext,
-                    "http://www.android.pontes.ro/cg/")); // end onClickListener.
+            btGS.setOnClickListener(view -> GUITools.openBrowser(mContext, "http://www.android.pontes.ro/cg/")); // end onClickListener.
             ll.addView(btGS, btParam);
         } // end if it is not Android TV.
 
@@ -296,11 +271,9 @@ public class Statistics {
         alertDialog.setTitle(mContext.getString(R.string.statistics_title));
         alertDialog.setView(sv);
 
-        alertDialog.setPositiveButton(
-                mContext.getString(R.string.close_statistics),
-                (dialog, whichButton) -> {
-                    // Do nothing.
-                });
+        alertDialog.setPositiveButton(mContext.getString(R.string.close_statistics), (dialog, whichButton) -> {
+            // Do nothing.
+        });
 
         alertDialog.create();
         alertDialog.show();
@@ -378,9 +351,7 @@ public class Statistics {
         rest = rest % 60;
         int seconds = rest;
 
-        return String.format(
-                mContext.getString(R.string.stats_duration_as_string), ""
-                        + days, "" + hours, "" + minutes, "" + seconds);
+        return String.format(mContext.getString(R.string.stats_duration_as_string), "" + days, "" + hours, "" + minutes, "" + seconds);
     } // end getTotalDurationAsString() method.
 
     // A method to get the average duration in seconds:
@@ -396,8 +367,7 @@ public class Statistics {
     public String getTestPositionInStats(int points, int duration) {
         String msg;
 
-        String sql = "SELECT COUNT(*) FROM statistici WHERE puncte>" + points
-                + ";";
+        String sql = "SELECT COUNT(*) FROM statistici WHERE puncte>" + points + ";";
         Cursor cursor = mDbHelper2.queryData(sql);
 
         if (cursor.getCount() == 1) {
@@ -409,9 +379,7 @@ public class Statistics {
             if (position == 1) { // record:
                 msg = mContext.getString(R.string.tv_status_record);
             } else { // no record, normal position:
-                msg = String.format(
-                        mContext.getString(R.string.tv_status_test_position),
-                        "" + position);
+                msg = String.format(mContext.getString(R.string.tv_status_test_position), "" + position);
             } // end if else to determine record or position.
         } // End if getCount() is 1, a result for SQL count.
         else { // no count result, error:
@@ -430,48 +398,17 @@ public class Statistics {
     } // end createTextView() method.
     // end show statistics in a alert methods.
 
-    public void postFinishedTestLocally(String sets, int nrq, int points,
-                                        int duration, int androidTV, String usedOptions, int wasPostedOnline) {
+    public void postFinishedTestLocally(String sets, int nrq, int points, int duration, int androidTV, String usedOptions, int wasPostedOnline) {
         // Determine local time:
         long curTime = GUITools.getTimeInSeconds();
 
         // We format the SQL string to insert a finished game:
-        String sql = "INSERT INTO statistici (random_id, seturi, nrq, puncte, durata, android_tv, optiuni_utilizate, data, postat_online) VALUES ('"
-                + MainActivity.randomId
-                + "', '"
-                + sets
-                + "', '"
-                + nrq
-                + "', '"
-                + points
-                + "', '"
-                + duration
-                + "', '"
-                + androidTV
-                + "', '"
-                + usedOptions
-                + "', '"
-                + curTime
-                + "', '"
-                + wasPostedOnline
-                + "');";
+        String sql = "INSERT INTO statistici (random_id, seturi, nrq, puncte, durata, android_tv, optiuni_utilizate, data, postat_online) VALUES ('" + MainActivity.randomId + "', '" + sets + "', '" + nrq + "', '" + points + "', '" + duration + "', '" + androidTV + "', '" + usedOptions + "', '" + curTime + "', '" + wasPostedOnline + "');";
         mDbHelper2.insertData(sql);
     } // end postFinishedTestLocaly() method.
 
-    public void postFinishedTestOnline(String sets, int nrq, int points,
-                                       int duration, int androidTV, String usedOptions) {
-        String url = "http://www.android.pontes.ro/cg/insert_stats.php?random_id="
-                + MainActivity.randomId
-                + "&seturi="
-                + sets
-                + "&nrq="
-                + nrq
-                + "&puncte="
-                + points
-                + "&durata="
-                + duration
-                + "&android_tv="
-                + androidTV + "&optiuni_utilizate=" + usedOptions;
+    public void postFinishedTestOnline(String sets, int nrq, int points, int duration, int androidTV, String usedOptions) {
+        String url = "http://www.android.pontes.ro/cg/insert_stats.php?random_id=" + MainActivity.randomId + "&seturi=" + sets + "&nrq=" + nrq + "&puncte=" + points + "&durata=" + duration + "&android_tv=" + androidTV + "&optiuni_utilizate=" + usedOptions;
         new GetWebData().execute(url);
     } // end PostFinishedTest() method.
 
@@ -481,7 +418,6 @@ public class Statistics {
         String sql = "SELECT * FROM statistici WHERE postat_online=0;";
         Cursor cursor = mDbHelper2.queryData(sql);
         int nrNotPosted = cursor.getCount();
-        // GUITools.alert(mContext, "ABC", "" + nrNotPosted);
         if (nrNotPosted > 0) {
             /*
              * We try to post maximum 3 tests at a time if they are available.
@@ -500,13 +436,11 @@ public class Statistics {
                     String usedOptions = cursor.getString(7);
 
                     // Make current records a posted on-line in local DB:
-                    sql = "UPDATE statistici SET postat_online=1 WHERE id="
-                            + id + ";";
+                    sql = "UPDATE statistici SET postat_online=1 WHERE id=" + id + ";";
                     mDbHelper2.updateData(sql);
 
                     // Post it effectively:
-                    postFinishedTestOnline(sets, nrq, points, duration,
-                            androidTV, usedOptions);
+                    postFinishedTestOnline(sets, nrq, points, duration, androidTV, usedOptions);
                     cursor.moveToNext();
                 } // end for 3 posted tests.
             } // end if there is an Internet connection available.
@@ -524,10 +458,7 @@ public class Statistics {
         int duration = cursor.getInt(5);
         int date = cursor.getInt(8);
 
-        return String.format(
-                mContext.getString(R.string.stats_test_info),
-                GUITools.timeStampToString(mContext, date), "" + nrq, ""
-                        + points, "" + duration);
+        return String.format(mContext.getString(R.string.stats_test_info), GUITools.timeStampToString(mContext, date), "" + nrq, "" + points, "" + duration);
     } // end getTestFromHistoryById() method.
 
     // This is a subclass:
@@ -552,8 +483,7 @@ public class Statistics {
                 // Create a URLConnection object:
                 URLConnection urlConnection = url.openConnection();
                 // Wrap the URLConnection in a BufferedReader:
-                BufferedReader bufferedReader = new BufferedReader(
-                        new InputStreamReader(urlConnection.getInputStream()));
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
                 String line;
                 // Read from the URLConnection via the BufferedReader:
                 while ((line = bufferedReader.readLine()) != null) {
@@ -583,8 +513,7 @@ public class Statistics {
         protected void onPreExecute() {
             super.onPreExecute();
             pd = new ProgressDialog(mContext);
-            pd.setMessage(mContext
-                    .getString(R.string.stats_please_wait_sending));
+            pd.setMessage(mContext.getString(R.string.stats_please_wait_sending));
             pd.setIndeterminate(false);
             pd.setCancelable(true);
             pd.show();
@@ -603,8 +532,7 @@ public class Statistics {
                 // Create a URLConnection object:
                 URLConnection urlConnection = url.openConnection();
                 // Wrap the URLConnection in a BufferedReader:
-                BufferedReader bufferedReader = new BufferedReader(
-                        new InputStreamReader(urlConnection.getInputStream()));
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
                 String line;
                 // Read from the URLConnection via the BufferedReader:
                 while ((line = bufferedReader.readLine()) != null) {
@@ -632,8 +560,7 @@ public class Statistics {
         Cursor cursor = mDbHelper2.queryData(sql);
         int wasSent = cursor.getInt(0);
         if (wasSent == 1) { // already sent:
-            GUITools.alert(mContext, mContext.getString(R.string.warning),
-                    mContext.getString(R.string.stats_test_was_already_sent));
+            GUITools.alert(mContext, mContext.getString(R.string.warning), mContext.getString(R.string.stats_test_was_already_sent));
         } else { // continue sending:
             // Here an alert for nickname:
             AlertDialog.Builder alert = new AlertDialog.Builder(mContext);
@@ -653,9 +580,7 @@ public class Statistics {
             ll.setPadding(paddingPX, 0, paddingPX, 0);
 
             // A LayoutParams to add next items into addLLMain:
-            LinearLayout.LayoutParams llParams = new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT);
+            LinearLayout.LayoutParams llParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
             // The text view where we say about nickname:
             TextView tv = new TextView(mContext);
@@ -688,25 +613,20 @@ public class Statistics {
             sv.addView(ll);
             alert.setView(sv);
             // end if OK was pressed.
-            alert.setPositiveButton(mContext.getString(R.string.bt_send),
-                    (dialog, whichButton) -> {
-                        // Next two line are also at the done button:
-                        String nickname = input.getText().toString();
-                        // Check if the nickname has enough characters:
-                        if (nickname.length() < 4 || nickname.length() > 20) { // wrong:
-                            GUITools.alert(
-                                    mContext,
-                                    mContext.getString(R.string.error),
-                                    mContext.getString(R.string.nickname_wrong_message));
-                        } else { // correct:
-                            beforeSendingResultForTop(id, nickname);
-                        } // end correct nickname.
-                    });
+            alert.setPositiveButton(mContext.getString(R.string.bt_send), (dialog, whichButton) -> {
+                // Next two line are also at the done button:
+                String nickname = input.getText().toString();
+                // Check if the nickname has enough characters:
+                if (nickname.length() < 4 || nickname.length() > 20) { // wrong:
+                    GUITools.alert(mContext, mContext.getString(R.string.error), mContext.getString(R.string.nickname_wrong_message));
+                } else { // correct:
+                    beforeSendingResultForTop(id, nickname);
+                } // end correct nickname.
+            });
 
-            alert.setNegativeButton(mContext.getString(R.string.cancel),
-                    (dialog, whichButton) -> {
-                        // Cancelled, do nothing yet.
-                    });
+            alert.setNegativeButton(mContext.getString(R.string.cancel), (dialog, whichButton) -> {
+                // Cancelled, do nothing yet.
+            });
 
             alert.create();
             alert.show();
@@ -732,32 +652,15 @@ public class Statistics {
         mDbHelper2.updateData(sql);
 
         // Send it effectively:
-        postTestForTopOnline(nickname, sets, nrq, points, duration, androidTV,
-                usedOptions);
+        postTestForTopOnline(nickname, sets, nrq, points, duration, androidTV, usedOptions);
     } // end beforeSendingResultForTop() method.
 
     /*
      * This method sends the test for top effectively, it happens before the
      * subclass:
      */
-    private void postTestForTopOnline(String nickname, String sets, int nrq,
-                                      int points, int duration, int androidTV, String usedOptions) {
-        String url = "http://www.android.pontes.ro/cg/insert_top.php?random_id="
-                + MainActivity.randomId
-                + "&porecla="
-                + nickname
-                + "&seturi="
-                + sets
-                + "&nrq="
-                + nrq
-                + "&puncte="
-                + points
-                + "&durata="
-                + duration
-                + "&android_tv="
-                + androidTV
-                + "&optiuni_utilizate="
-                + usedOptions;
+    private void postTestForTopOnline(String nickname, String sets, int nrq, int points, int duration, int androidTV, String usedOptions) {
+        String url = "http://www.android.pontes.ro/cg/insert_top.php?random_id=" + MainActivity.randomId + "&porecla=" + nickname + "&seturi=" + sets + "&nrq=" + nrq + "&puncte=" + points + "&durata=" + duration + "&android_tv=" + androidTV + "&optiuni_utilizate=" + usedOptions;
         new GetWebTop().execute(url);
     } // end postTestForTopOnline() method.
     // End method before asynchronous task in subclass.
@@ -768,16 +671,12 @@ public class Statistics {
         SoundPlayer.playSimple(mContext, "send_something");
         // Check if there is an error:
         if (gotS.equalsIgnoreCase("error")) { // an error occurred:
-            GUITools.alert(mContext, mContext.getString(R.string.error),
-                    mContext.getString(R.string.error_occurred));
+            GUITools.alert(mContext, mContext.getString(R.string.error), mContext.getString(R.string.error_occurred));
         } else { // no error:
             int pos = Integer.parseInt(gotS);
             pos = pos + 1;
-            String body = String.format(
-                    mContext.getString(R.string.stats_result_sent_body), ""
-                            + pos);
-            GUITools.alert(mContext,
-                    mContext.getString(R.string.stats_result_sent_title), body);
+            String body = String.format(mContext.getString(R.string.stats_result_sent_body), "" + pos);
+            GUITools.alert(mContext, mContext.getString(R.string.stats_result_sent_title), body);
         } // end if no error.
     } // end afterSendingBestResult() method.
 
@@ -792,8 +691,7 @@ public class Statistics {
         protected void onPreExecute() {
             super.onPreExecute();
             pd = new ProgressDialog(mContext);
-            pd.setMessage(mContext
-                    .getString(R.string.stats_please_wait_getting));
+            pd.setMessage(mContext.getString(R.string.stats_please_wait_getting));
             pd.setIndeterminate(false);
             pd.setCancelable(true);
             pd.show();
@@ -812,8 +710,7 @@ public class Statistics {
                 // Create a URLConnection object:
                 URLConnection urlConnection = url.openConnection();
                 // Wrap the URLConnection in a BufferedReader:
-                BufferedReader bufferedReader = new BufferedReader(
-                        new InputStreamReader(urlConnection.getInputStream()));
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
                 String line;
                 // Read from the URLConnection via the BufferedReader:
                 while ((line = bufferedReader.readLine()) != null) {
@@ -839,8 +736,7 @@ public class Statistics {
      * subclass:
      */
     private void getBetsTestPosition() {
-        String url = "http://www.android.pontes.ro/cg/get_top.php?random_id="
-                + MainActivity.randomId;
+        String url = "http://www.android.pontes.ro/cg/get_top.php?random_id=" + MainActivity.randomId;
         new GetBestPosition().execute(url);
     } // end getBetsTestPosition() method, is before asynchronous.
 
@@ -851,12 +747,10 @@ public class Statistics {
         // First, if no record found in top on-line:
         if (s.equalsIgnoreCase("nothing")) {
             msgTitle = mContext.getString(R.string.warning);
-            msgBody = mContext
-                    .getString(R.string.stats_no_results_found_in_top);
+            msgBody = mContext.getString(R.string.stats_no_results_found_in_top);
         } else if (s.equalsIgnoreCase("error")) {
             msgTitle = mContext.getString(R.string.error);
-            msgBody = mContext
-                    .getString(R.string.stats_error_get_sent_result_position);
+            msgBody = mContext.getString(R.string.stats_error_get_sent_result_position);
         } // end if another error.
         else { // another string received:
             /*
@@ -866,27 +760,17 @@ public class Statistics {
             String[] arrS = s.split("\\|");
             // We need to be a 6 in length array:
             if (arrS.length == 6) {
-                msgTitle = mContext
-                        .getString(R.string.stats_current_top_position_title);
+                msgTitle = mContext.getString(R.string.stats_current_top_position_title);
 
                 // We format the string:
                 /*
                  * First we format the test info, after we include in string
                  * with the position:
                  */
-                String testInfo = mContext
-                        .getString(R.string.stats_test_info_best_result);
-                testInfo = String.format(
-                        testInfo,
-                        GUITools.timeStampToString(mContext,
-                                Integer.parseInt(arrS[5])), arrS[2], arrS[3],
-                        arrS[4], arrS[1]);
+                String testInfo = mContext.getString(R.string.stats_test_info_best_result);
+                testInfo = String.format(testInfo, GUITools.timeStampToString(mContext, Integer.parseInt(arrS[5])), arrS[2], arrS[3], arrS[4], arrS[1]);
 
-                msgBody = MyHtml
-                        .fromHtml(
-                                String.format(
-                                        mContext.getString(R.string.stats_current_top_position_body),
-                                        arrS[0], testInfo)).toString();
+                msgBody = MyHtml.fromHtml(String.format(mContext.getString(R.string.stats_current_top_position_body), arrS[0], testInfo)).toString();
 
             } else { // another error, no 6 items in arrS:
                 msgTitle = mContext.getString(R.string.error);

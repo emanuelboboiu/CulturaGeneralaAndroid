@@ -59,6 +59,7 @@ public class Quiz {
     // Some objects:
     private final StringTools st;
     private final Statistics stats;
+    private final SpeakText tts;
 
     private TextView tvStatus = null;
     public static int statusHeight = 150; // we need it in Question class.
@@ -85,6 +86,7 @@ public class Quiz {
         this.activity = activity;
         this.st = new StringTools(mContext);
         this.stats = new Statistics(mContext);
+        this.tts = new SpeakText(mContext);
 
         // Start things for our database:
         mDbHelper = new DBAdapter(this.mContext);
@@ -547,6 +549,8 @@ public class Quiz {
          */
         LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.ll_confirm_final_answer, llForIbsLayout, true);
+        String temp = mContext.getString(R.string.are_you_sure);
+        speakOthers(temp);
 
         lastChosenAnswer = answer;
     } // end showAnswerConfirmation() method.
@@ -783,6 +787,7 @@ public class Quiz {
     private void showCurrentPointsOnTVStatus() {
         String msg = MyHtml.fromHtml(String.format(mContext.getString(R.string.tv_status_actual_points), st.getNumberOfPointsAsString(totalPoints))).toString();
         tvStatus.setText(msg);
+        speakOthers(msg);
     } // end showCurrentPointsOnTVStatus() method.
 
     // A method to show current set on tvQuestion at long click:
@@ -797,6 +802,7 @@ public class Quiz {
         String authorName = tempCursor.getString(0);
         String msg = MyHtml.fromHtml(String.format(mContext.getString(R.string.tv_set_item), setName, authorName)).toString();
         tvStatus.setText(msg);
+        speakOthers(msg);
     } // end showCurrentSet() method.
 
     /*
@@ -843,6 +849,7 @@ public class Quiz {
         msgInfo = String.format(msgInfo, msgPointsStatus);
         msgInfo = MyHtml.fromHtml(msgInfo).toString();
         tvInfo.setText(msgInfo);
+        speakOthers(msgInfo);
     } // end showBottomInformation() method.
 
     // A method for use a helping option confirmation:
@@ -864,6 +871,7 @@ public class Quiz {
         // Get the question confirmation from the string array:
         String msgQuestion = mContext.getResources().getStringArray(R.array.use_options_question_array)[option];
         tvConfirmation.setText(msgQuestion);
+        speakOthers(msgQuestion);
 
         // Save the chosen help option to use it after yes pressed:
         lastChosenHelpOption = option;
@@ -924,6 +932,7 @@ public class Quiz {
         TextView tv = activity.findViewById(R.id.tvResultsAfterUseHelpOptions);
         SoundPlayer.playSimple(mContext, "use_help");
         tv.setText(msgResults);
+        speakOthers(msgResults);
     } // end showResultsAfterUseHelpOptions() method.
 
     // A method which checks if there are more questions not used:
@@ -1173,5 +1182,20 @@ public class Quiz {
         Feedback feedback = new Feedback(mContext, question.lastQuestionId);
         feedback.feedbackStart();
     } // end showFeedbackAlert()() method.
+
+    // A method to speak other things, but stop other speak at the beginning:
+    private void speakOthers(String text) {
+        stopTTS();
+        this.tts.sayOthers(text, true);
+    } // end speakOthers() method.
+
+    public void stopTTS() {
+        if (question != null) {
+            question.stopTTS();
+        }
+        if (tts != null) {
+            tts.stop();
+        }
+    } // end stopTTS() method.
 
 } // end Quiz class.

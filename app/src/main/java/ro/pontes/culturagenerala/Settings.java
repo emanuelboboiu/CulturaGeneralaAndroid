@@ -128,9 +128,16 @@ public class Settings {
             MainActivity.randomId = GUITools.random(1, 2147000000);
             saveIntSettings("randomId", MainActivity.randomId);
         } // end if randomId doesn't exist.
+
+        // If no accessibility settings:
+        if (!preferenceExists("speakOthers")) {
+            setDefaultAccessibility();
+        } // end if no accessibility settings found.
     } // end charge settings.
 
     public void setDefaultSettings() {
+// A method in this class to set the TTS:
+        setDefaultAccessibility();
 
         saveBooleanSettings("isPremium", false);
         MainActivity.isPremium = false;
@@ -147,8 +154,17 @@ public class Settings {
         // Save DataBases version to 0:
         saveIntSettings("dbVer", 0);
 
-        // The default set is 1:
+        // The default sets are 1 and 24:
         saveStringSettings("curSetIds", "1|24");
     } // end setDefaultSettings function.
+
+    private void setDefaultAccessibility() {
+        // Detect if it's accessibility:
+        if (GUITools.isAccessibilityEnabled(context)) {
+            saveBooleanSettings("speakOthers", true);
+            saveBooleanSettings("speakQuestion", true);
+            saveBooleanSettings("speakVariants", true);
+        }
+    } // end setDefaultAccessibility() method.
 
 } // end Settings Class.

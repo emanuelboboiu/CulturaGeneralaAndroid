@@ -15,9 +15,7 @@ public class StringTools {
     public String getNumberOfPointsAsString(int nrOfPoints) {
 
         // First take the corresponding plural resource:
-        String numberOfPointsMessage = res.getQuantityString(
-                R.plurals.msg_number_of_points, nrOfPoints, nrOfPoints);
-        return numberOfPointsMessage;
+        return res.getQuantityString(R.plurals.msg_number_of_points, nrOfPoints, nrOfPoints);
     } // end getNumberOfPointsAsString() method.
 
 } // end StringTools class.

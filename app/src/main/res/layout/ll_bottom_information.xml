@@ -13,7 +13,6 @@
         android:id="@+id/tvBottomInformation"
         style="@style/bottom_info_style"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:accessibilityLiveRegion="polite" />
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

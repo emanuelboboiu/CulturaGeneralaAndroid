@@ -11,8 +11,6 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Point;
-import android.media.AudioManager;
-import android.media.ToneGenerator;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -252,12 +250,6 @@ public class GUITools {
         return Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
     } // end dpToPx() method.
 
-    // Convert pixel to DP:
-    public static int pxToDp(Context mContext, int px) {
-        DisplayMetrics displayMetrics = mContext.getResources().getDisplayMetrics();
-        return Math.round(px / (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
-    } // end pxToDp() method.
-
     // A method which returns true if is portrait, false otherwise:
     public static boolean isPortraitOrientation(Activity activity) {
         // Get the size of the screen:
@@ -398,11 +390,5 @@ public class GUITools {
             activity.getBaseContext().getResources().updateConfiguration(config, activity.getBaseContext().getResources().getDisplayMetrics());
         } // end if langNumber is not 0, no device language.
     } // end setLocale() method.
-
-    // A method to play a tone, just to make tests:
-    public static void beep() {
-        ToneGenerator toneG = new ToneGenerator(AudioManager.STREAM_ALARM, 100);
-        toneG.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD, 200);
-    } // end beep() method.
 
 } // end GUITools class.

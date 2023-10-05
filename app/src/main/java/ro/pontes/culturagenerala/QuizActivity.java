@@ -72,6 +72,7 @@ public class QuizActivity extends Activity {
     @Override
     public void onPause() {
         // Add here what you want to happens on pause:
+        quiz.stopTTS();
         quiz.saveLastGame();
         sndMusic.stopLooped();
         super.onPause();

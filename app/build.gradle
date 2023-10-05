@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdk 33
+    compileSdk 34
     buildToolsVersion '33.0.0'
 
     defaultConfig {
         applicationId "ro.pontes.culturagenerala"
         minSdk 23
-        targetSdk 33
+        targetSdk 34
     }
 
     buildTypes {
@@ -27,9 +27,7 @@ android {
 }
 
 dependencies {
-    implementation 'com.google.android.gms:play-services-ads:21.4.0'
-    def billing_version = "5.1.0"
-    implementation "com.android.billingclient:billing:$billing_version"
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'androidx.annotation:annotation:1.5.0'
+    implementation 'com.google.android.gms:play-services-ads:22.4.0'
+    implementation "com.android.billingclient:billing:6.0.1"
+    implementation 'androidx.appcompat:appcompat:1.6.1'
 }

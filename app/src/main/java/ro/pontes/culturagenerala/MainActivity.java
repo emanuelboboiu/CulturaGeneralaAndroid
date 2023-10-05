@@ -5,6 +5,7 @@ import static com.google.android.gms.common.util.CollectionUtils.listOf;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
@@ -47,12 +48,13 @@ public class MainActivity extends Activity {
     public static String mUpgradePrice = "�";
 
     private final Context mFinalContext = this;
-    public static int curVer = 601;
+    public static int curVer = 700;
     public static boolean isFirstLaunchInSession = true;
     public static int randomId = 0;
     public static boolean isPortrait = true;
     public static boolean isTV = false;
     public static boolean isAccessibility = false;
+    public static boolean isSpeech = true;
     public static boolean isSound = true;
     public static boolean isMusic = true;
     public static int soundBackgroundPercentage = 75;
@@ -393,6 +395,18 @@ public class MainActivity extends Activity {
                 set.saveBooleanSettings("isWakeLock", MainActivity.isWakeLock);
                 break;
 
+            case R.id.cbtSpeakQuestion:
+                set.saveBooleanSettings("speakQuestion", checked);
+                break;
+
+            case R.id.cbtSpeakVariants:
+                set.saveBooleanSettings("speakVariants", checked);
+                break;
+
+            case R.id.cbtSpeakOthers:
+                set.saveBooleanSettings("speakOthers", checked);
+                break;
+
             case R.id.cbtGotIt:
                 set.saveBooleanSettings("wasAnnounced" + curVer, checked);
                 break;
@@ -440,10 +454,8 @@ public class MainActivity extends Activity {
     private void showWhatsNew() {
         Settings set = new Settings(this);
         boolean wasAnnounced = set.getBooleanSettings("wasAnnounced" + curVer);
-        /*
-         * Only if it was not set not to be announced anymore, wasAnnounced
-         * true:
-         */
+
+        // Only if it was not set not to be announced anymore, wasAnnounced true:
         if (!wasAnnounced) {
             // create an alert inflating an XML:
             LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -458,6 +470,19 @@ public class MainActivity extends Activity {
         } // end if it was not announced.
     } // end showWhatsNew() method.
 
+    // A method to speak a TTS test from settings:
+    public void ttsTest(View view) {
+        SpeakText tts = new SpeakText(this);
+        tts.speakTest(getString(R.string.tts_test_text));
+    } // end ttsTest() method.
+
+    // A method to open TTS Settings:
+    public void openTTSSettings(View view) {
+        // Open TTS settings
+        Intent intent = new Intent();
+        intent.setAction("com.android.settings.TTS_SETTINGS");
+        startActivity(intent);
+    } // end openTTSSettings() method.
 
     // In app billing section starts here:
     public void showPremium(View view) {
