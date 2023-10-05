@@ -57,6 +57,14 @@ public class SettingsManagement {
             cbtScreenAwakeSetting.setChecked(MainActivity.isWakeLock);
         }
 
+        // For ask final question:
+        CheckBox cbtAskFinal = settingsView.findViewById(R.id.cbtAskFinal);
+        cbtAskFinal.setChecked(set.getBooleanSettings("askFinal"));
+
+        // For ask help question:
+        CheckBox cbtAskHelp = settingsView.findViewById(R.id.cbtAskHelp);
+        cbtAskHelp.setChecked(set.getBooleanSettings("askHelp"));
+
         // For speak question:
         CheckBox cbtSpeakQuestion = settingsView.findViewById(R.id.cbtSpeakQuestion);
         cbtSpeakQuestion.setChecked(set.getBooleanSettings("speakQuestion"));

@@ -145,7 +145,6 @@ public class QuizActivity extends Activity {
 
     // The method which calculates the option chosen:
     public void variantClicked(int var) {
-        SoundPlayer.playSimple(this, "var_chosen");
         quiz.confirmAnswer(var);
     }// end variantClicked() method.
 
@@ -165,7 +164,6 @@ public class QuizActivity extends Activity {
 
     public void fifty(View view) {
         helpOptionClicked(0, view);
-        // quiz.info(); // to delete after.
     } // end fifty() method.
 
     public void call(View view) {

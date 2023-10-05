@@ -10,7 +10,7 @@
         <item>Jocul este creat să fie compatibil și cu televizoarele cu Android TV, este disponibil în Magazin Play pentru aceste dispozitive.</item>
         <item>&lt;b>Atenție!&lt;/b> Dacă întrebarea este mai lungă și nu încape în chenarul rezervat, se poate face scroll pe verticală. De asemenea, dacă o variantă de răspuns este mai lungă decât spațiul alocat, se poate face scroll pe orizontală.</item>
         <item>La un click scurt pe bara / zona de status din partea de sus a ferestrei jocului este afișat punctajul din acel moment.</item>
-        <item>La un click lung pe bara / zona de status aflată în partea de sus a ferestrei jocului este afișat numele autorului și setul din care face parte întrebarea din acel moment.</item>
+        <item>La un click lung pe bara / zona de status aflată în partea de sus a ferestrei jocului este afișat numele autorului și setul din care face parte întrebarea curentă.</item>
         <item></item>
         <item>&lt;b>Alegere seturi de întrebări&lt;/b></item>
         <item>A doua opțiune din meniul principal este &lt;i>Alegere seturi&lt;/i>.</item>
@@ -65,6 +65,11 @@
         <item>&lt;i>Activare sunete&lt;/i> – activează / dezactivează diverse sunete care marchează anumite evenimente pe parcursul testului.</item>
         <item>&lt;i>Activare muzică de fundal&lt;/i> – activează / dezactivează fundalul sonor al jocului, sunt melodii clasice celebre în format Midi.</item>
         <item>&lt;i>Menținere ecran activ&lt;/i> – face ca ecranul să nu se blocheze pe parcursul unui test.</item>
+        <item>&lt;i>Confirmare răspuns final&lt;/i> – dacă este bifat, în partea de jos apare întrebarea dacă răspunsul este final.</item>
+        <item>&lt;i>Confirmare utilizare variantă ajutătoare&lt;/i> – dacă este bifat, în partea de jos apare întrebarea dacă se uutilizează această opțiune.</item>
+        <item>&lt;i>Enunțare întrebare&lt;/i> – dacă e bifat, întrebarea va fi enunțată prin vocea setată ca implicită în Setările TTS de sistem. Există tot în setările jocului și un buton care duce la setările TTS de sistem, loc în care se pot ajusta vocile, viteza de enunțare și altele.</item>
+        <item>&lt;i>Enunțare variante prin TTS&lt;/i> – dacă e bifat, variantele de răspuns vor fi enunțate prin aceeași voce cu care ar fi anunțată și întrebarea.</item>
+        <item>&lt;i>Enunțare alte evenimente prin TTS&lt;/i> – dacă e bifat, evenimente precum răspuns corect, răspuns greșit și altele sunt anunțate prin vocea TTS de sistem.</item>
         <item>&lt;i>Resetare joc la valorile implicite&lt;/i> – face ca jocul să fie adus în starea lui inițială, din momentul instalării. Această opțiune nu șterge statisticile.</item>
         <item></item>
         <item>&lt;b>Semnalare erori&lt;/b></item>
@@ -73,6 +78,10 @@
         <item>Timpul va fi oprit și va apărea o casetă de dialog în care se poate alege tipul de eroare și scrie câte ceva despre aceasta.&lt;br>Nu trebuie să ne spui despre care întrebare este vorba, se trimite automat ID-ul de identificare al acesteia în baza de date.</item>
         <item>Descrierea erorii identificate ar trebui să fie cât mai concisă, de exemplu: &lt;i>\"apare scris Caragiale cu c mic\"&lt;/i>.</item>
         <item>Mulțumim de pe acum pentru implicare și pentru eventualul ajutor pe care ni-l vei da pentru a ajunge la întrebări cât mai corecte din toate punctele de vedere.</item>
+        <item></item>
+        <item>&lt;b>Joc Premium&lt;/b></item>
+        <item>Din meniul principal se poate achiziționa varianta Premium a acestui joc. Cu varianta Premium beneficiezi de o experiență mai plăcută, fără reclame și cu spațiu pe ecran mai mult.</item>
+        <item>Cumpărând varianta Premium pentru o sumă modică, ne încurajezi să lucrăm mai mult la acest joc. Mulțumim!</item>
         <item></item>
         <item>&lt;b>Contact&lt;/b></item>
         <item>Pentru a întreba alte detalii sau pentru a trimite sugestii, scrie la emanuelboboiu@gmail.com.</item>

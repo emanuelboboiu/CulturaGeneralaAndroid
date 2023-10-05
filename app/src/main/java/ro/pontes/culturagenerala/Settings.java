@@ -165,6 +165,10 @@ public class Settings {
             saveBooleanSettings("speakQuestion", true);
             saveBooleanSettings("speakVariants", true);
         }
+
+        // By default, ask for final question or use help are deactivated:
+        saveBooleanSettings("askFinal", false);
+        saveBooleanSettings("askHelp", false);
     } // end setDefaultAccessibility() method.
 
 } // end Settings Class.

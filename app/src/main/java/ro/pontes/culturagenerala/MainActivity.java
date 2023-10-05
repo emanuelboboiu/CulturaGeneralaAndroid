@@ -395,6 +395,14 @@ public class MainActivity extends Activity {
                 set.saveBooleanSettings("isWakeLock", MainActivity.isWakeLock);
                 break;
 
+            case R.id.cbtAskFinal:
+                set.saveBooleanSettings("askFinal", checked);
+                break;
+
+            case R.id.cbtAskHelp:
+                set.saveBooleanSettings("askHelp", checked);
+                break;
+
             case R.id.cbtSpeakQuestion:
                 set.saveBooleanSettings("speakQuestion", checked);
                 break;

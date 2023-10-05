@@ -49,11 +49,10 @@ public class Quiz {
     private int remainedChances = 3;
     private String[] chanceMessages;
     private String[] chanceStars;
+    private boolean askFinal = false;
+    private boolean askHelp = false;
 
-    /*
-     * Next static variable keeps information about game status, if it is
-     * between question answered and handle start.
-     */
+    // Next static variable keeps information about game status, if it is between question answered and handle start:
     private boolean isTestBetweenQuestions = false;
 
     // Some objects:
@@ -275,7 +274,6 @@ public class Quiz {
                         params.setMargins(0, topMargin, 0, 0);
                         llFirstVariant.setLayoutParams(params);
                     } // end if is more space available.
-
                 }, 110); // a longer delay.
             } // end if is portrait.
             // end put the variants middle between chronometer
@@ -319,8 +317,10 @@ public class Quiz {
      * with new question or continued game with same question:
      */
     public void startOrContinueGame() {
-        // Get the current set IDs at start:
+        // Get the current set IDs at start and get also the ask or not for final and using help:
         Settings set = new Settings(mContext);
+        askFinal = set.getBooleanSettings("askFinal");
+        askHelp = set.getBooleanSettings("askHelp");
         curSetIds = set.getStringSettings("curSetIds").split("\\|");
         // Determine the number of sets chosen:
         /*
@@ -436,7 +436,6 @@ public class Quiz {
     public void confirmAnswer(int answer) {
         // We disable all variants until a confirmation is given:
         question.enableOrDisableAllVariants(false);
-
         question.changeTVForConfirmation(answer);
         // Now change the llIbsLayout to as if this is the final answer:
         showAnswerConfirmation(answer);
@@ -526,10 +525,7 @@ public class Quiz {
         } // end else finished or more chances.
     } // end checkIfIsCorrect() method.
 
-    /*
-     * A method to go back to question after no was pressed for the
-     * confirmation:
-     */
+    // A method to go back to question after no was pressed for the confirmation:
     public void backToQuestion() {
         SoundPlayer.playSimple(mContext, "an_action");
         question.changeTVForNormalVariant(lastChosenAnswer);
@@ -540,19 +536,25 @@ public class Quiz {
 
     // This method shows the question in the lower part of the activity:
     private void showAnswerConfirmation(int answer) {
-        // Delete what was previous in the llForIbsButtons:
-        llForIbsLayout.removeAllViews();
-
-        /*
-         * Inflate the layout with confirm message and yes / no buttons from
-         * XML:
-         */
-        LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        inflater.inflate(R.layout.ll_confirm_final_answer, llForIbsLayout, true);
-        String temp = mContext.getString(R.string.are_you_sure);
-        speakOthers(temp);
-
         lastChosenAnswer = answer;
+        // If askFinal is true let's ask if it is final:
+        if (askFinal) {
+            SoundPlayer.playSimple(mContext, "var_chosen");
+            // Delete what was previous in the llForIbsButtons:
+            llForIbsLayout.removeAllViews();
+
+            /*
+             * Inflate the layout with confirm message and yes / no buttons from
+             * XML:
+             */
+            LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            inflater.inflate(R.layout.ll_confirm_final_answer, llForIbsLayout, true);
+            String temp = mContext.getString(R.string.are_you_sure);
+            speakOthers(temp);
+        } // end if it must ask for confirmation.
+        else { // dont ask for confirmation:
+            checkIfIsCorrectFinalAnswer();
+        } // end if not confirmation for final answer is needed.
     } // end showAnswerConfirmation() method.
 
     // A method to inflate the IBS in the lower part:
@@ -589,10 +591,7 @@ public class Quiz {
         } // end for.
     } // end setIbsState() method.
 
-    /*
-     * This method shows in the lower part if it was a correct answer and other
-     * things:
-     */
+    // This method shows in the lower part if it was a correct answer and other things:
     private void showInformationAboutCorrectAnswer() {
         /*
          * If is a level finished we give the bonus. 10 points for first, 20
@@ -674,6 +673,7 @@ public class Quiz {
         // Because is expired, we must set chances to 0:
         remainedChances = 0;
         showBottomInformation(3);
+        question.sayCorrectAnswer();
         // Change also the tvStatus
         showFinalInfoOnTVStatus(3);
     } // end showInformationAboutTimeExpired() method.
@@ -699,6 +699,7 @@ public class Quiz {
         // because is finished, we must make chances to 0:
         remainedChances = 0;
         showBottomInformation(5);
+        question.sayCorrectAnswer();
         // Change also the tvStatus:
         showFinalInfoOnTVStatus(5);
         chronStop();
@@ -852,38 +853,39 @@ public class Quiz {
         speakOthers(msgInfo);
     } // end showBottomInformation() method.
 
-    // A method for use a helping option confirmation:
-    // This method shows the question in the lower part of the activity:
+    // A method for use a helping option confirmation. This method shows the question in the lower part of the activity:
     public void showUseHelpConfirmation(int option) {
-        SoundPlayer.playSimple(mContext, "an_action");
-        // Delete what was previous in the llForIbsButtons:
-        llForIbsLayout.removeAllViews();
-
-        /*
-         * Inflate the layout with confirm message and yes / no buttons from
-         * XML:
-         */
-        LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        inflater.inflate(R.layout.ll_confirm_use_help, llForIbsLayout, true);
-
-        // Take the TextView for the question:
-        TextView tvConfirmation = activity.findViewById(R.id.tvConfirmUseHelp);
-        // Get the question confirmation from the string array:
-        String msgQuestion = mContext.getResources().getStringArray(R.array.use_options_question_array)[option];
-        tvConfirmation.setText(msgQuestion);
-        speakOthers(msgQuestion);
-
         // Save the chosen help option to use it after yes pressed:
         lastChosenHelpOption = option;
+
+        // Only if it is askHelp true:
+        if (askHelp) {
+            SoundPlayer.playSimple(mContext, "an_action");
+            // Delete what was previous in the llForIbsButtons:
+            llForIbsLayout.removeAllViews();
+
+            /*
+             * Inflate the layout with confirm message and yes / no buttons from
+             * XML:
+             */
+            LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            inflater.inflate(R.layout.ll_confirm_use_help, llForIbsLayout, true);
+
+            // Take the TextView for the question:
+            TextView tvConfirmation = activity.findViewById(R.id.tvConfirmUseHelp);
+            // Get the question confirmation from the string array:
+            String msgQuestion = mContext.getResources().getStringArray(R.array.use_options_question_array)[option];
+            tvConfirmation.setText(msgQuestion);
+            speakOthers(msgQuestion);
+        } // end if askHelp is true.
+        else { // no use help confirmation needed:
+            useHelpOptionEffectively();
+        } // end if no use help confirmation is needed.
     } // end showUseHelpConfirmation() method.
 
     // A method which uses effectively the help option:
     public void useHelpOptionEffectively() {
-        /*
-         * The lastChosenHelpOption variable says which help options to be use
-         * here:
-         */
-
+         // The lastChosenHelpOption variable says which help options to be use here:
         // We change in the ibStatus to false an used option:
         ibStatus[lastChosenHelpOption] = false;
 
@@ -905,7 +907,6 @@ public class Quiz {
             case 3: // change question:
                 msgAfterHelpOption = question.changeQuestion();
                 // Needed a delay to show again the buttons:
-                // Needed a delay:
                 final Handler handler = new Handler();
                 // Do something after a while:
                 // Just one action:

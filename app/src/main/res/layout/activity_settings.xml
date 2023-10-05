@@ -40,6 +40,22 @@
             android:text="@string/enable_screen_awake" />
 
         <CheckBox
+            android:id="@+id/cbtAskFinal"
+            style="@style/style_check_boxes_in_settings"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onCheckboxClicked"
+            android:text="@string/cbt_ask_final" />
+
+        <CheckBox
+            android:id="@+id/cbtAskHelp"
+            style="@style/style_check_boxes_in_settings"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onCheckboxClicked"
+            android:text="@string/cbt_ask_help" />
+
+        <CheckBox
             android:id="@+id/cbtSpeakQuestion"
             style="@style/style_check_boxes_in_settings"
             android:layout_width="match_parent"

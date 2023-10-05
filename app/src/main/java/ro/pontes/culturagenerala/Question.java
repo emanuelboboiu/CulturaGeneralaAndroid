@@ -38,6 +38,7 @@ public class Question {
     private final SpeakText tts;
     private final boolean speakQuestion;
     private final boolean speakVariants;
+    private final boolean speakOthers;
     private final StringBuilder sbQuestion;
 
     // The constructor for a new question:
@@ -54,6 +55,7 @@ public class Question {
         Settings settings = new Settings(mContext);
         this.speakQuestion = settings.getBooleanSettings("speakQuestion");
         this.speakVariants = settings.getBooleanSettings("speakVariants");
+        this.speakOthers = settings.getBooleanSettings("speakOthers");
 
         getTextViews();
     } // end constructor for a new question.
@@ -121,6 +123,11 @@ public class Question {
         // We take all the TextViews to fill them with text:
         tvQuestion = activity.findViewById(R.id.tvQuestion);
         tvQuestion.setMovementMethod(new ScrollingMovementMethod());
+// Add on the question text view question repeat:
+        tvQuestion.setOnClickListener(view -> {
+            stopTTS();
+            sayQuestion(true);
+        });
 
         tvVariants = new TextView[4];
         for (int i = 0; i < 4; i++) {
@@ -183,9 +190,7 @@ public class Question {
 
     private void draw() {
         tvQuestion.setText(questionText);
-        if (this.speakQuestion) {
-            sbQuestion.append(questionText).append("\n");
-        }
+        fillQuestionTTS();
 
         tvQuestion.scrollTo(0, 0);
 
@@ -196,15 +201,40 @@ public class Question {
         for (int i = 0; i < 4; i++) {
             tvVariants[i].setText(variants[i]);
             tvVariants[i].scrollTo(0, 0);
+        } // end for.
+        fillVariantsTTS();
+        // Say the question and or the variants:
+        sayQuestion(false);
+    } // end draw() method.
 
-            if (this.speakVariants) {
+    private void fillQuestionTTS() {
+        if (this.speakQuestion) {
+            sbQuestion.append(questionText).append("\n");
+        }
+    } // end fillQuestionTTS() method.
+
+    private void fillVariantsTTS() {
+        if (this.speakVariants) {
+            for (int i = 0; i < 4; i++) {
+                sbQuestion.append(aABCD[i]).append(": ").append(variants[i]).append(".\n");
+            } // end for through variants..
+        } // end if speakVariants is activated.
+    } // end fillVariantsTTS() method.
+
+    private void fillVariantsAfterFiftyFiftyTTS(int first, int second) {
+        // Trunkate the sbQuestion:
+        sbQuestion.setLength(0);
+        fillQuestionTTS();
+        for (int i = 0; i < variants.length; i++) {
+            if (i != first && i != second) {
                 sbQuestion.append(aABCD[i]).append(": ").append(variants[i]).append(".\n");
             }
-        } // end for.
+        } // end for through variants.
+    } // end fillVariantsAfterFiftyFiftyTTS() method.
 
-        // Say the question and or the variants:
-        tts.sayDelayed(sbQuestion.toString(), true);
-    } // end draw() method.
+    public void sayQuestion(boolean interrupted) {
+        tts.sayDelayed(sbQuestion.toString(), interrupted);
+    } // end sayQuestion() method.
 
     // A method which makes all variants as normal:
     public void makeAllVariantsAsNormal() {
@@ -306,6 +336,10 @@ public class Question {
         // Make red and disable those 2 variants:
         this.showTVForWrongAnswer(first);
         this.showTVForWrongAnswer(second);
+// Fill also the variants only with these two remained:
+        fillVariantsAfterFiftyFiftyTTS(first, second);
+        stopTTS();
+        sayQuestion(true);
 
         return mContext.getString(R.string.used_fifty);
     } // end fiftyFifty() method.
@@ -391,29 +425,23 @@ public class Question {
 
     public String changeQuestion() {
         this.showTVForCorrectAnswer();
-        sayCorrectAnswer();
         // Needed a delay:
         final Handler handler = new Handler();
         handler.postDelayed(() -> {
             // Do something after a while:
-            // Just one action:
+            // Just two action:
+            stopTTS();
+            sbQuestion.setLength(0);
             make(true); // generates a new question.
         }, 2000);
-
         return mContext.getString(R.string.used_change);
     } // end changeQuestion() method.
 
-    // Method for text to speech,:
     public void sayCorrectAnswer() {
-        // We try to postpone a little the say action:
-        final String message = String.format(mContext.getString(R.string.tts_correct_answer), aABCD[correctVariantIndex], variants[correctVariantIndex]);
-
-        final Handler handler = new Handler();
-        handler.postDelayed(() -> {
-            // Do something after a while:
-            // Just one action, show a toast with correct answer:
-            GUITools.toast(message, 1000, mContext);
-        }, 2500);
+        if (speakOthers) {
+            String message = String.format(mContext.getString(R.string.tts_correct_answer), aABCD[correctVariantIndex], variants[correctVariantIndex]);
+            tts.say(message, true);
+        }
     } // end sayCorrectAnswer() method.
 
     // A method to stop the tts for question and variants:

@@ -14,7 +14,7 @@
     <string name="about_title">Despre joc</string>
     <string name="app_version">Cultură generală, Fii deștept!, versiunea 7.0</string>
     <string name="app_release_date">Versiunea 1.0 a fost finalizată vineri, 22 decembrie 2017</string>
-    <string name="app_last_update">Ultima actualizare pe acest dispozitiv:\n - versiunea 7.0, finalizată vineri, 6 octombrie 2023</string>
+    <string name="app_last_update">Ultima actualizare pe acest dispozitiv:\n - versiunea 7.0, finalizată sâmbătă, 7 octombrie 2023</string>
     <string name="app_creator">Programat de Emanuel Boboiu (Manu)</string>
     <string name="phone_number">Telefon: +40740203043</string>
     <string name="email_address">E-mail: android@pontes.ro</string>
@@ -200,8 +200,8 @@
     <!-- Strings for what's new alert: -->
     <string name="whatsnew_title">Noutăți în 7.0</string>
     <string name="whatsnew_in_700_a">A apărut un set nou creat de Ghiță Potra, numit „Cum? Unde? Când?”.</string>
-    <string name="whatsnew_in_700_b">Există noi opțiuni în setări: joc fără confirmarea alegerilor, enunțare întrebări, variante și altele prin TTS.</string>
-    <string name="whatsnew_in_700_c">Se poate cumpăra versiunea Premium pentru a juca fără reclame. Ne dai o sumă mică alegând în meniul principal opțiunea ”Premium…„ și ne încurajezi să lucrăm mai mult la acest joc.</string>
+    <string name="whatsnew_in_700_b">Implicit nu mai trebuie confirmat răspunsul final și utilizarea variantelor ajutătoare. Se poate activa solicitarea confirmării în Setări.</string>
+    <string name="whatsnew_in_700_c">Întrebarea, variantele și alte informații pot fi enunțate automat de o voce din dispozitiv. În setări se poate alege care informații să fie enunțate.</string>
     <string name="whatsnew_in_700_d">Nu uita că ne poți semnala oricând eventualele erori de conținut sau gramaticale identificate la afișarea întrebărilor; dai click pe cronometru, acesta se oprește, lăsându-te să ne scrii în caseta care apare.</string>
     <string name="chk_got_it">Am văzut, nu mai arăta!</string>
 
@@ -228,5 +228,7 @@
     <string name="bt_open_tts_settings">Setări TTS de sistem</string>
     <string name="bt_tts_test">Enunțare exemplu de test</string>
     <string name="tts_test_text">Care este capitala României?\nA: Arad.\nB: București.\nC: Galați.\nD: Cluj-Napoca.</string>
+    <string name="cbt_ask_final">Confirmare răspuns final</string>
+    <string name="cbt_ask_help">Confirmare utilizare variantă ajutătoare</string>
 
 </resources>

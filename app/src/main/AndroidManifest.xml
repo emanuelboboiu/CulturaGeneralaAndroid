@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="ro.pontes.culturagenerala"
-    android:versionCode="91"
+    android:versionCode="92"
     android:versionName="7.0">
 
     <uses-permission android:name="android.permission.INTERNET" />
