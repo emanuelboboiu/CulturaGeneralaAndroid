@@ -30,7 +30,8 @@
             android:id="@+id/tvStatus"
             style="@style/status_style"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:nextFocusDown="@+id/tvQuestion" />
 
         <LinearLayout
             android:id="@+id/llQuestion"
@@ -45,6 +46,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="0.4"
+                android:nextFocusUp="@+id/tvStatus"
                 android:nextFocusDown="@+id/tvVariant1" />
 
             <LinearLayout

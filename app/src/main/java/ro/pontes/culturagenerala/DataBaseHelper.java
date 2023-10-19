@@ -13,10 +13,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
 
-/*
- * Class started on Sunday, 24 September 2017, created by Emanuel Boboiu.
- * This is the most useful class to work with SQLite database.
- * */
+// Class started on Sunday, 24 September 2017, created by Emanuel Boboiu.
 
 public class DataBaseHelper extends SQLiteOpenHelper {
     // private static String TAG = "DataBaseHelper"; // Tag just for the LogCat.
@@ -24,8 +21,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     private static String DB_PATH = "";
     private static final String DB_NAME = "cultura_generala.db";
     private static final String SP_KEY_DB_VER = "dbVer";
-    private static final int DATABASE_VERSION = 27;
-    private static final int lastUpdateTimestamp = 1696604400; // 6 octombrie 2023.
+    private static final int DATABASE_VERSION = 29;
+    private static final int lastUpdateTimestamp = 1697713200; // 18 octombrie 2023.
 
     private SQLiteDatabase mDataBase;
     private final Context mContext;

@@ -12,15 +12,15 @@
 
     <!-- About dialog: -->
     <string name="about_title">Despre joc</string>
-    <string name="app_version">Cultură generală, Fii deștept!, versiunea 7.0</string>
+    <string name="app_version">Cultură generală, Fii deștept!, versiunea 7.1</string>
     <string name="app_release_date">Versiunea 1.0 a fost finalizată vineri, 22 decembrie 2017</string>
-    <string name="app_last_update">Ultima actualizare pe acest dispozitiv:\n - versiunea 7.0, finalizată sâmbătă, 7 octombrie 2023</string>
+    <string name="app_last_update">Ultima actualizare pe acest dispozitiv:\n - versiunea 7.1, finalizată miercuri, 18 octombrie 2023</string>
     <string name="app_creator">Programat de Emanuel Boboiu (Manu)</string>
     <string name="phone_number">Telefon: +40740203043</string>
     <string name="email_address">E-mail: android@pontes.ro</string>
     <string name="web_address">Web: www.android.pontes.ro/cg</string>
     <string name="app_credits1">Design creat de Iulian Duma</string>
-    <string name="app_credits2">Testare beta: Iulian Duma, Mircea Doduț</string>
+    <string name="app_credits2">Testare beta: Andrei Negoiță</string>
 
     <!-- Other strings: -->
     <string name="ib_fifty">Jumi juma</string>
@@ -198,11 +198,11 @@
     <string name="feedback_sent_unsuccessfully">Notificarea ta nu a putut fi trimisă.\nTe rugăm să încerci din nou.\nMulțumim pentru interesul acordat!</string>
 
     <!-- Strings for what's new alert: -->
-    <string name="whatsnew_title">Noutăți în 7.0</string>
-    <string name="whatsnew_in_700_a">A apărut un set nou creat de Ghiță Potra, numit „Cum? Unde? Când?”.</string>
-    <string name="whatsnew_in_700_b">Implicit nu mai trebuie confirmat răspunsul final și utilizarea variantelor ajutătoare. Se poate activa solicitarea confirmării în Setări.</string>
-    <string name="whatsnew_in_700_c">Întrebarea, variantele și alte informații pot fi enunțate automat de o voce din dispozitiv. În setări se poate alege care informații să fie enunțate.</string>
-    <string name="whatsnew_in_700_d">Nu uita că ne poți semnala oricând eventualele erori de conținut sau gramaticale identificate la afișarea întrebărilor; dai click pe cronometru, acesta se oprește, lăsându-te să ne scrii în caseta care apare.</string>
+    <string name="whatsnew_title">Noutăți în 7.1</string>
+    <string name="whatsnew_in_701_a">A apărut un set nou cu întrebări din Chimie, creat de Lucian Pop.</string>
+    <string name="whatsnew_in_701_b">Implicit nu mai trebuie confirmat răspunsul final și utilizarea variantelor ajutătoare. Se poate activa solicitarea confirmării în Setări.</string>
+    <string name="whatsnew_in_701_c">Întrebarea, variantele și alte informații pot fi enunțate automat de o voce din dispozitiv. În setări se poate alege care informații să fie enunțate.</string>
+    <string name="whatsnew_in_701_d">Nu uita că ne poți semnala oricând eventualele erori de conținut sau gramaticale identificate la afișarea întrebărilor; dai click pe cronometru, acesta se oprește, lăsându-te să ne scrii în caseta care apare.</string>
     <string name="chk_got_it">Am văzut, nu mai arăta!</string>
 
     <!-- Strings added in 6.0, starting with ThursdayTuesday 3rd January 2023: -->
@@ -230,5 +230,6 @@
     <string name="tts_test_text">Care este capitala României?\nA: Arad.\nB: București.\nC: Galați.\nD: Cluj-Napoca.</string>
     <string name="cbt_ask_final">Confirmare răspuns final</string>
     <string name="cbt_ask_help">Confirmare utilizare variantă ajutătoare</string>
+    <string name="system_tts_settings_not_found">Pe acest dispozitiv nu se pot accesa setările TTS de sistem.\nPuteți căuta setările TTS de sistem în setările generale ale dispozitivului, la Accesibilitate, Opțiuni transformare text în vorbire.</string>
 
 </resources>

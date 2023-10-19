@@ -76,8 +76,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingTop="5dp"
-            android:text="@string/app_credits2"
-            android:visibility="gone" />
+            android:text="@string/app_credits2" />
 
         <Button
             android:id="@+id/btRateApp"

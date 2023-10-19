@@ -222,14 +222,16 @@ public class Question {
     } // end fillVariantsTTS() method.
 
     private void fillVariantsAfterFiftyFiftyTTS(int first, int second) {
-        // Trunkate the sbQuestion:
-        sbQuestion.setLength(0);
-        fillQuestionTTS();
-        for (int i = 0; i < variants.length; i++) {
-            if (i != first && i != second) {
-                sbQuestion.append(aABCD[i]).append(": ").append(variants[i]).append(".\n");
-            }
-        } // end for through variants.
+        if (this.speakVariants) {
+            // Truncate the sbQuestion:
+            sbQuestion.setLength(0);
+            fillQuestionTTS();
+            for (int i = 0; i < variants.length; i++) {
+                if (i != first && i != second) {
+                    sbQuestion.append(aABCD[i]).append(": ").append(variants[i]).append(".\n");
+                }
+            } // end for through variants.
+        } // end if speak variants is activated in settings.
     } // end fillVariantsAfterFiftyFiftyTTS() method.
 
     public void sayQuestion(boolean interrupted) {
@@ -407,9 +409,7 @@ public class Question {
                 while (whereToAdd == correctVariantIndex) {
                     whereToAdd = GUITools.random(0, 3);
                 } // end while.
-                // Now add the remaining PROC variable to the random
-                // incorrect
-                // variant:
+                // Now add the remaining PROC variable to the random incorrect variant:
                 aProcVariants[whereToAdd] += proc;
             } // end if is 3 in for.
         } // end for.

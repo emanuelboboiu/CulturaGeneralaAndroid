@@ -30,6 +30,7 @@
 
     <style name="status_style" parent="android:Widget.Holo.Light.TextView">
         <item name="android:padding">@dimen/padding_for_status</item>
+        <item name="android:focusable">true</item>
         <item name="android:gravity">center_vertical|center_horizontal</item>
         <item name="android:textColor">@color/tvTextWhite</item>
         <item name="android:textSize">@dimen/text_size_main</item>
@@ -92,6 +93,7 @@
 
     <style name="bottom_info_style" parent="android:Widget.Holo.Light.TextView">
         <item name="android:background">@color/transparent</item>
+        <item name="android:focusable">true</item>
         <item name="android:gravity">center_vertical|center_horizontal</item>
         <item name="android:textColor">@color/tvTextWhite</item>
         <item name="android:textSize">@dimen/text_size_main</item>
@@ -100,6 +102,7 @@
 
     <style name="about_dialog_style" parent="android:Widget.Holo.Light.TextView">
         <item name="android:textSize">@dimen/text_size_main</item>
+        <item name="android:focusable">true</item>
     </style>
 
     <style name="pb_style" parent="android:Widget.Holo.Light.TextView">

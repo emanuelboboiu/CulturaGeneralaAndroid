@@ -4,6 +4,7 @@ import static com.google.android.gms.common.util.CollectionUtils.listOf;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -48,7 +49,7 @@ public class MainActivity extends Activity {
     public static String mUpgradePrice = "�";
 
     private final Context mFinalContext = this;
-    public static int curVer = 700;
+    public static int curVer = 701;
     public static boolean isFirstLaunchInSession = true;
     public static int randomId = 0;
     public static boolean isPortrait = true;
@@ -489,7 +490,11 @@ public class MainActivity extends Activity {
         // Open TTS settings
         Intent intent = new Intent();
         intent.setAction("com.android.settings.TTS_SETTINGS");
-        startActivity(intent);
+        try {
+            startActivity(intent);
+        } catch (ActivityNotFoundException e) {
+            GUITools.alert(this, getString(R.string.error), getString(R.string.system_tts_settings_not_found));
+        }
     } // end openTTSSettings() method.
 
     // In app billing section starts here:
