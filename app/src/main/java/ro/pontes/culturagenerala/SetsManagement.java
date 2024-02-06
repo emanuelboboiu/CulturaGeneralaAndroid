@@ -78,7 +78,7 @@ public class SetsManagement {
         LinearLayout.LayoutParams tvParam = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, tvHeight);
 
         // Get all sets from DB:
-        String sql = "SELECT * FROM seturi ORDER BY nume;";
+        String sql = "SELECT * FROM seturi ORDER BY nume COLLATE LOCALIZED;";
         Cursor cursor = mDbHelper.queryData(sql);
 
         /*

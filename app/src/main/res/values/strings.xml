@@ -12,9 +12,9 @@
 
     <!-- About dialog: -->
     <string name="about_title">Despre joc</string>
-    <string name="app_version">Cultură generală, Fii deștept!, versiunea 7.5</string>
+    <string name="app_version">Cultură generală, Fii deștept!, versiunea 7.9</string>
     <string name="app_release_date">Versiunea 1.0 a fost finalizată vineri, 22 decembrie 2017</string>
-    <string name="app_last_update">Ultima actualizare pe acest dispozitiv:\n - versiunea 7.5, finalizată luni, 1 ianuarie 2024</string>
+    <string name="app_last_update">Ultima actualizare pe acest dispozitiv:\n - versiunea 7.9, finalizată marți, 6 februarie 2024</string>
     <string name="app_creator">Programat de Emanuel Boboiu (Manu)</string>
     <string name="phone_number">Telefon: +40740203043</string>
     <string name="email_address">E-mail: android@pontes.ro</string>
@@ -198,11 +198,11 @@
     <string name="feedback_sent_unsuccessfully">Notificarea ta nu a putut fi trimisă.\nTe rugăm să încerci din nou.\nMulțumim pentru interesul acordat!</string>
 
     <!-- Strings for what's new alert: -->
-    <string name="whatsnew_title">Noutăți în 7.5</string>
-    <string name="whatsnew_in_750_a">Nou set de întrebări din Psihologie, creat de Camelia Savu. Întrebările au fost create pe baza manualului de clasa a X-a și reflectă întregul conținut al acestuia. Setul poate servi și la pregătirea pentru Bacalaureat.</string>
-    <string name="whatsnew_in_750_b">În varianta web a jocului, aflată la www.culturagenerala.ro, se poate contribui creând seturi de întrebări.</string>
-    <string name="whatsnew_in_750_c">Nu mai trebuie confirmat răspunsul final sau utilizarea variantelor ajutătoare, decât dacă se alege acest lucru în Setări. Tot în Setări, cine dorește poate să activeze citirea cu voce tare a întrebării.</string>
-    <string name="whatsnew_in_750_d">Nu uita că ne poți semnala oricând eventualele erori de conținut sau gramaticale identificate la afișarea întrebărilor; dai click pe cronometru, acesta se oprește, lăsându-te să ne scrii în caseta care apare.</string>
+    <string name="whatsnew_title">Noutăți în 7.9</string>
+    <string name="whatsnew_in_790_a">Set nou cu 750 de întrebări din Filosofie, manual de clasa a XII-a, creat de Camelia Savu; util și pentru pregătire Bacalaureat.\nSetul apărut anterior: „În premieră și recorduri” de Ghiță Potra.</string>
+    <string name="whatsnew_in_790_b">În varianta web a jocului, aflată la www.culturagenerala.ro, se poate contribui creând seturi de întrebări.</string>
+    <string name="whatsnew_in_790_c">Nu mai trebuie confirmat răspunsul final sau utilizarea variantelor ajutătoare, decât dacă se alege acest lucru în Setări. Tot în Setări, cine dorește poate să activeze citirea cu voce tare a întrebării.</string>
+    <string name="whatsnew_in_790_d">Nu uita că ne poți semnala oricând eventualele erori de conținut sau gramaticale identificate la afișarea întrebărilor; dai click pe cronometru, acesta se oprește, lăsându-te să ne scrii în caseta care apare.</string>
     <string name="chk_got_it">Am văzut, nu mai arăta!</string>
 
     <!-- Strings added in 6.0, starting with ThursdayTuesday 3rd January 2023: -->
