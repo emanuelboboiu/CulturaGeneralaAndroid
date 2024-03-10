@@ -90,11 +90,13 @@ public class SetsManagement {
         int arrTVIndex = 0;
 
         // Add first the all sets item:
-        String tvText = mContext.getString(R.string.tv_set_item_all);
+        int totalNumberOfQuestions = getTotalNumberOfQuestions();
+        String tvItemAll = mContext.getString(R.string.tv_set_item_all);
+        String tvText = String.format(tvItemAll, "" + totalNumberOfQuestions);
         CharSequence tvSeq = MyHtml.fromHtml(tvText);
         TextView tv = createTextView();
         tv.setText(tvSeq);
-        // hope not interfere.
+        // Let's hope that it doesn't interfere.
         int BASE_VIEW_ID = 1000010000;
         tv.setId(BASE_VIEW_ID);
         tv.setTag(0);
@@ -111,7 +113,7 @@ public class SetsManagement {
         ll.addView(tv, tvParam);
         // end adding the first item, all sets.
 
-        // A string like "Geography (John Smith)":
+        // A string like "Geography (John Smith) (123)":
         String tvItem = mContext.getString(R.string.tv_set_item);
         // In a while make TVs for each set:
         cursor.moveToFirst();
@@ -119,7 +121,8 @@ public class SetsManagement {
             final int setId = cursor.getInt(0);
             String setName = cursor.getString(1);
             String authorName = getSetAuthor(setId);
-            tvText = String.format(tvItem, setName, authorName);
+            int nrQuestions = getNumberOfQuestionsBySetId(setId);
+            tvText = String.format(tvItem, setName, authorName, "" + nrQuestions);
             tvSeq = MyHtml.fromHtml(tvText);
             tv = createTextView();
             tv.setText(tvSeq);
@@ -382,6 +385,22 @@ public class SetsManagement {
         cursor.moveToFirst();
         return cursor.getInt(0);
     } // end getMaxSetId() method.
+
+    // A method to return the number of questions by setId:
+    private int getNumberOfQuestionsBySetId(int setId) {
+        String sql = "SELECT COUNT(*) FROM intrebari WHERE setId=" + setId + ";";
+        Cursor cursor = mDbHelper.queryData(sql);
+        cursor.moveToFirst();
+        return cursor.getInt(0);
+    } // end getNumberOfQuestionsBySetId() method.
+
+    // A method to return the total number of questions:
+    private int getTotalNumberOfQuestions() {
+        String sql = "SELECT COUNT(*) FROM intrebari;";
+        Cursor cursor = mDbHelper.queryData(sql);
+        cursor.moveToFirst();
+        return cursor.getInt(0);
+    } // end getTotalNumberOfQuestions() method.
 
     // A method to create a text view for items in this alert:
     private TextView createTextView() {

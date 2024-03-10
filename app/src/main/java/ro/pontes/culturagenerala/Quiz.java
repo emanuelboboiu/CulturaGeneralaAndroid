@@ -801,7 +801,13 @@ public class Quiz {
         sql = "SELECT nume FROM autori WHERE autorId=" + author + ";";
         tempCursor = mDbHelper.queryData(sql);
         String authorName = tempCursor.getString(0);
-        String msg = MyHtml.fromHtml(String.format(mContext.getString(R.string.tv_set_item), setName, authorName)).toString();
+
+        // Determine the number of questions in set:
+        sql = "SELECT COUNT(*) FROM intrebari WHERE setId=" + lastCurSetId + ";";
+        tempCursor = mDbHelper.queryData(sql);
+        String totalQuestionsInSet = tempCursor.getString(0);
+
+        String msg = MyHtml.fromHtml(String.format(mContext.getString(R.string.tv_set_item), setName, authorName, totalQuestionsInSet)).toString();
         tvStatus.setText(msg);
         speakOthers(msg);
     } // end showCurrentSet() method.
@@ -885,7 +891,7 @@ public class Quiz {
 
     // A method which uses effectively the help option:
     public void useHelpOptionEffectively() {
-         // The lastChosenHelpOption variable says which help options to be use here:
+        // The lastChosenHelpOption variable says which help options to be use here:
         // We change in the ibStatus to false an used option:
         ibStatus[lastChosenHelpOption] = false;
 

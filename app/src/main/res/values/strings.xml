@@ -12,9 +12,9 @@
 
     <!-- About dialog: -->
     <string name="about_title">Despre joc</string>
-    <string name="app_version">Cultură generală, Fii deștept!, versiunea 7.9</string>
+    <string name="app_version">Cultură generală, Fii deștept!, versiunea 8.0</string>
     <string name="app_release_date">Versiunea 1.0 a fost finalizată vineri, 22 decembrie 2017</string>
-    <string name="app_last_update">Ultima actualizare pe acest dispozitiv:\n - versiunea 7.9, finalizată marți, 6 februarie 2024</string>
+    <string name="app_last_update">Ultima actualizare pe acest dispozitiv:\n - versiunea 8.0, finalizată miercuri, 5 martie 2024</string>
     <string name="app_creator">Programat de Emanuel Boboiu (Manu)</string>
     <string name="phone_number">Telefon: +40740203043</string>
     <string name="email_address">E-mail: android@pontes.ro</string>
@@ -105,9 +105,9 @@
     <!-- Sets management strings -->
     <string name="warning_choose_not_available">Există un test neterminat dintr-o sesiune anterioară, aflat în prezent la întrebarea %1$s.\nSeturile nu pot fi alese până nu este finalizat testul început.</string>
     <string name="set_management_alert_title">Alegere seturi de întrebări</string>
-    <string name="tv_set_item_all">&lt;b>Selectare toate&lt;/b></string>
+    <string name="tv_set_item_all">&lt;b>Selectare toate&lt;/b> (%1$s întrebări)</string>
     <string name="tv_set_item_none">&lt;b>Deselectare toate&lt;/b></string>
-    <string name="tv_set_item">&lt;i>%1$s&lt;/i> &lt;b>(%2$s)&lt;/b></string>
+    <string name="tv_set_item">&lt;i>%1$s&lt;/i> &lt;b>(%2$s)&lt;/b> (%3$s)</string>
     <string name="save_sets">Salvează!</string>
 
     <!-- Settings activity: -->
@@ -198,11 +198,11 @@
     <string name="feedback_sent_unsuccessfully">Notificarea ta nu a putut fi trimisă.\nTe rugăm să încerci din nou.\nMulțumim pentru interesul acordat!</string>
 
     <!-- Strings for what's new alert: -->
-    <string name="whatsnew_title">Noutăți în 7.9</string>
-    <string name="whatsnew_in_790_a">Set nou cu 750 de întrebări din Filosofie, manual de clasa a XII-a, creat de Camelia Savu; util și pentru pregătire Bacalaureat.\nSetul apărut anterior: „În premieră și recorduri” de Ghiță Potra.</string>
-    <string name="whatsnew_in_790_b">În varianta web a jocului, aflată la www.culturagenerala.ro, se poate contribui creând seturi de întrebări.</string>
-    <string name="whatsnew_in_790_c">Nu mai trebuie confirmat răspunsul final sau utilizarea variantelor ajutătoare, decât dacă se alege acest lucru în Setări. Tot în Setări, cine dorește poate să activeze citirea cu voce tare a întrebării.</string>
-    <string name="whatsnew_in_790_d">Nu uita că ne poți semnala oricând eventualele erori de conținut sau gramaticale identificate la afișarea întrebărilor; dai click pe cronometru, acesta se oprește, lăsându-te să ne scrii în caseta care apare.</string>
+    <string name="whatsnew_title">Noutăți în 8.0</string>
+    <string name="whatsnew_in_800_a">A apărut setul „Metafore rebusiste” creat de Cristian Pașcalău, lector la Facultatea de Litere (UBB); sunt 300 de definiții selectate din „Dicționarul metaforelor rebusiste”, publicat de acesta în anul 2022 la editura Casa Cărții de Știință.\nSetul apărut anterior: „Filosofie - Manual a XII-a”, creat de Camelia Savu; util și pentru pregătire Bacalaureat.</string>
+    <string name="whatsnew_in_800_b">În varianta web a jocului, aflată la www.culturagenerala.ro, se poate contribui creând seturi de întrebări.</string>
+    <string name="whatsnew_in_800_c">Nu mai trebuie confirmat răspunsul final sau utilizarea variantelor ajutătoare, decât dacă se alege acest lucru în Setări. Tot în Setări, cine dorește poate să activeze citirea cu voce tare a întrebării.</string>
+    <string name="whatsnew_in_800_d">Nu uita că ne poți semnala oricând eventualele erori de conținut sau gramaticale identificate la afișarea întrebărilor; dai click pe cronometru, acesta se oprește, lăsându-te să ne scrii în caseta care apare.</string>
     <string name="chk_got_it">Am văzut, nu mai arăta!</string>
 
     <!-- Strings added in 6.0, starting with ThursdayTuesday 3rd January 2023: -->
