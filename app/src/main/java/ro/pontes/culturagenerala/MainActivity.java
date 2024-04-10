@@ -49,7 +49,7 @@ public class MainActivity extends Activity {
     public static String mUpgradePrice = "�";
 
     private final Context mFinalContext = this;
-    public static int curVer = 800;
+    public static int curVer = 810;
     public static boolean isFirstLaunchInSession = true;
     public static int randomId = 0;
     public static boolean isPortrait = true;
