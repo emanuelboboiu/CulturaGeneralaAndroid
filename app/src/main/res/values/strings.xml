@@ -12,9 +12,9 @@
 
     <!-- About dialog: -->
     <string name="about_title">Despre joc</string>
-    <string name="app_version">Cultură generală, Fii deștept!, versiunea 8.1</string>
+    <string name="app_version">Cultură generală, Fii deștept!, versiunea 8.2</string>
     <string name="app_release_date">Versiunea 1.0 a fost finalizată vineri, 22 decembrie 2017</string>
-    <string name="app_last_update">Ultima actualizare pe acest dispozitiv:\n - versiunea 8.1, finalizată miercuri, 10 aprilie 2024</string>
+    <string name="app_last_update">Ultima actualizare pe acest dispozitiv:\n - versiunea 8.2, finalizată joi, 25 aprilie 2024</string>
     <string name="app_creator">Programat de Emanuel Boboiu (Manu)</string>
     <string name="phone_number">Telefon: +40740203043</string>
     <string name="email_address">E-mail: android@pontes.ro</string>
@@ -198,11 +198,11 @@
     <string name="feedback_sent_unsuccessfully">Notificarea ta nu a putut fi trimisă.\nTe rugăm să încerci din nou.\nMulțumim pentru interesul acordat!</string>
 
     <!-- Strings for what's new alert: -->
-    <string name="whatsnew_title">Noutăți în 8.1</string>
-    <string name="whatsnew_in_810_a">A apărut setul „Pe meridianele culturii” cu 4175 de întrebări de cultură generală; sunt întrebările formulate între 2012 și 2023 în cadrul concursului omonim, susținut anual de ANR.</string>
-    <string name="whatsnew_in_810_b">Setul apărut anterior este „Metafore rebusiste” creat de Cristian Pașcalău, lector la Facultatea de Litere (UBB).</string>
-    <string name="whatsnew_in_810_c">În varianta web a jocului, aflată la www.culturagenerala.ro, se poate contribui creând seturi de întrebări.</string>
-    <string name="whatsnew_in_810_d">Nu uita că atingând cronometrul apare o casetă din care se pot semnala eventualele erori.</string>
+    <string name="whatsnew_title">Noutăți în 8.2</string>
+    <string name="whatsnew_in_820_a">A apărut setul „Istoria românilor (manual)” cu 1365 de întrebări formulate de Camelia Savu pe baza manualului de istorie de clasa a XII-a. Acest set este util și pentru pregătirea pentru Bacalaureat.</string>
+    <string name="whatsnew_in_820_b">Setul apărut anterior este „Pe meridianele culturii” cu 4175 de întrebări de cultură generală, formulate de un colectiv de autori.</string>
+    <string name="whatsnew_in_820_c">În varianta web a jocului, aflată la www.culturagenerala.ro, se poate contribui creând seturi de întrebări.</string>
+    <string name="whatsnew_in_820_d">Nu uita că atingând cronometrul apare o casetă din care se pot semnala eventualele erori.</string>
     <string name="chk_got_it">Am văzut, nu mai arăta!</string>
 
     <!-- Strings added in 6.0, starting with ThursdayTuesday 3rd January 2023: -->
