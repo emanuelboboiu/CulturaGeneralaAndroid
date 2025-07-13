@@ -14,7 +14,8 @@
         style="@style/bottom_info_style"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="0.85" />
+        android:layout_weight="0.85"
+        android:nextFocusRight="@+id/btDismiss" />
 
     <Button
         android:id="@+id/btDismiss"
@@ -24,7 +25,11 @@
         android:layout_weight="0.15"
         android:contentDescription="@string/dismiss_results_after_use_help_options"
         android:focusable="true"
+        android:nextFocusUp="@+id/tvStatus"
         android:onClick="dismissResultsAfterUseHelpOption"
-        android:text="@string/x_for_dismiss" />
+        android:text="@string/x_for_dismiss">
+
+        <requestFocus />
+    </Button>
 
 </LinearLayout>

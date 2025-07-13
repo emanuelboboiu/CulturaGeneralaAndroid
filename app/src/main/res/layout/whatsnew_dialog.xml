@@ -19,25 +19,25 @@
             style="@style/about_dialog_style"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/whatsnew_in_870_a" />
+            android:text="@string/whatsnew_in_970_a" />
 
         <TextView
             style="@style/about_dialog_style"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/whatsnew_in_870_b" />
+            android:text="@string/whatsnew_in_970_b" />
 
         <TextView
             style="@style/about_dialog_style"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/whatsnew_in_870_c" />
+            android:text="@string/whatsnew_in_970_c" />
 
         <TextView
             style="@style/about_dialog_style"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/whatsnew_in_870_d" />
+            android:text="@string/whatsnew_in_970_d" />
 
         <CheckBox
             android:id="@+id/cbtGotIt"
