@@ -21,8 +21,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     private static String DB_PATH = "";
     private static final String DB_NAME = "cultura_generala.db";
     private static final String SP_KEY_DB_VER = "dbVer";
-    private static final int DATABASE_VERSION = 47;
-    private static final int lastUpdateTimestamp = 1744416000; // 12 April 2025.
+    private static final int DATABASE_VERSION = 48;
+    private static final int lastUpdateTimestamp = 1752429600; // 13 July 2025.
 
     private SQLiteDatabase mDataBase;
     private final Context mContext;

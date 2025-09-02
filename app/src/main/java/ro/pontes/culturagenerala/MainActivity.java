@@ -49,7 +49,7 @@ public class MainActivity extends Activity {
     public static String mUpgradePrice = "�";
 
     private final Context mFinalContext = this;
-    public static int curVer = 970;
+    public static int curVer = 1000;
     public static boolean isFirstLaunchInSession = true;
     public static int randomId = 0;
     public static boolean isPortrait = true;
@@ -370,56 +370,48 @@ public class MainActivity extends Activity {
 
         Settings set = new Settings(this); // to save changes.
 
-        // Check which check box was clicked
-        switch (view.getId()) {
-            case R.id.cbtSoundsSetting:
-                MainActivity.isSound = checked;
-                set.saveBooleanSettings("isSound", MainActivity.isSound);
-                break;
+        int viewId = view.getId();
 
-            case R.id.cbtMusicSetting:
-                if (checked) {
-                    MainActivity.isMusic = true;
-                    GUITools.setVolumeForBackground(this);
-                    sndBackground = new SoundPlayer();
-                    sndBackground.playLooped(this, "main_background");
-                } else {
-                    MainActivity.isMusic = false;
-                    sndBackground.stopLooped();
-                    sndBackground = null;
-                }
-                set.saveBooleanSettings("isMusic", MainActivity.isMusic);
-                break;
+        if (viewId == R.id.cbtSoundsSetting) {
+            MainActivity.isSound = checked;
+            set.saveBooleanSettings("isSound", MainActivity.isSound);
 
-            case R.id.cbtScreenAwakeSetting:
-                MainActivity.isWakeLock = checked;
-                set.saveBooleanSettings("isWakeLock", MainActivity.isWakeLock);
-                break;
+        } else if (viewId == R.id.cbtMusicSetting) {
+            if (checked) {
+                MainActivity.isMusic = true;
+                GUITools.setVolumeForBackground(this);
+                sndBackground = new SoundPlayer();
+                sndBackground.playLooped(this, "main_background");
+            } else {
+                MainActivity.isMusic = false;
+                sndBackground.stopLooped();
+                sndBackground = null;
+            }
+            set.saveBooleanSettings("isMusic", MainActivity.isMusic);
 
-            case R.id.cbtAskFinal:
-                set.saveBooleanSettings("askFinal", checked);
-                break;
+        } else if (viewId == R.id.cbtScreenAwakeSetting) {
+            MainActivity.isWakeLock = checked;
+            set.saveBooleanSettings("isWakeLock", MainActivity.isWakeLock);
 
-            case R.id.cbtAskHelp:
-                set.saveBooleanSettings("askHelp", checked);
-                break;
+        } else if (viewId == R.id.cbtAskFinal) {
+            set.saveBooleanSettings("askFinal", checked);
 
-            case R.id.cbtSpeakQuestion:
-                set.saveBooleanSettings("speakQuestion", checked);
-                break;
+        } else if (viewId == R.id.cbtAskHelp) {
+            set.saveBooleanSettings("askHelp", checked);
 
-            case R.id.cbtSpeakVariants:
-                set.saveBooleanSettings("speakVariants", checked);
-                break;
+        } else if (viewId == R.id.cbtSpeakQuestion) {
+            set.saveBooleanSettings("speakQuestion", checked);
 
-            case R.id.cbtSpeakOthers:
-                set.saveBooleanSettings("speakOthers", checked);
-                break;
+        } else if (viewId == R.id.cbtSpeakVariants) {
+            set.saveBooleanSettings("speakVariants", checked);
 
-            case R.id.cbtGotIt:
-                set.saveBooleanSettings("wasAnnounced" + curVer, checked);
-                break;
-        } // end switch.
+        } else if (viewId == R.id.cbtSpeakOthers) {
+            set.saveBooleanSettings("speakOthers", checked);
+
+        } else if (viewId == R.id.cbtGotIt) {
+            set.saveBooleanSettings("wasAnnounced" + curVer, checked);
+        }
+
         SoundPlayer.playSimple(mContext, "element_clicked");
     } // end onClick method.
 

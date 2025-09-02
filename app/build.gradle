@@ -1,33 +1,38 @@
-apply plugin: 'com.android.application'
+plugins {
+    id 'com.android.application'
+}
 
 android {
-    compileSdk 34
-    buildToolsVersion '33.0.0'
+    namespace "ro.pontes.culturagenerala"
+    compileSdk 36
 
     defaultConfig {
         applicationId "ro.pontes.culturagenerala"
         minSdk 23
-        targetSdk 34
+        targetSdk 36
+        versionCode 121
+        versionName "10.0"
     }
 
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
-    dependenciesInfo {
-        includeInApk true
-        includeInBundle false
+
+    buildFeatures {
+        viewBinding true
     }
 }
 
 dependencies {
-    implementation 'com.google.android.gms:play-services-ads:22.6.0'
-    implementation "com.android.billingclient:billing:6.1.0"
-    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.gms:play-services-ads:23.0.0'
+    implementation 'com.android.billingclient:billing:6.2.1'
+    implementation 'androidx.appcompat:appcompat:1.7.0'
 }

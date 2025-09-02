@@ -12,9 +12,9 @@
 
     <!-- About dialog: -->
     <string name="about_title">Despre joc</string>
-    <string name="app_version">Cultură generală, Fii deștept!, versiunea 9.7</string>
+    <string name="app_version">Cultură generală, Fii deștept!, versiunea 10.0</string>
     <string name="app_release_date">Versiunea 1.0 a fost finalizată vineri, 22 decembrie 2017</string>
-    <string name="app_last_update">Ultima actualizare pe acest dispozitiv:\n - versiunea 9.7, finalizată sâmbătă, 12 aprilie 2025</string>
+    <string name="app_last_update">Ultima actualizare pe acest dispozitiv:\n - versiunea 10.0, finalizată miercuri, 3 septembrie 2025</string>
     <string name="app_creator">Programat de Emanuel Boboiu (Manu)</string>
     <string name="phone_number">Telefon: +40740203043</string>
     <string name="email_address">E-mail: android@pontes.ro</string>
@@ -198,11 +198,11 @@
     <string name="feedback_sent_unsuccessfully">Notificarea ta nu a putut fi trimisă.\nTe rugăm să încerci din nou.\nMulțumim pentru interesul acordat!</string>
 
     <!-- Strings for what's new alert: -->
-    <string name="whatsnew_title">Noutăți în 9.7</string>
-    <string name="whatsnew_in_970_a">A apărut setul „Sociologie (manual XI)” cu 700 de întrebări formulate de Camelia Savu pe baza unui manual de sociologie de clasa a XI-a.</string>
-    <string name="whatsnew_in_970_b">Setul apărut anterior este „Univers botanic” cu 200 de întrebări formulate de Ghiță Potra.</string>
-    <string name="whatsnew_in_970_c">În varianta web a jocului, aflată la www.culturagenerala.ro, se poate contribui creând seturi de întrebări.</string>
-    <string name="whatsnew_in_970_d">Nu uita că atingând cronometrul apare o casetă din care se pot semnala eventualele erori.</string>
+    <string name="whatsnew_title">Noutăți în 10.0</string>
+    <string name="whatsnew_in_1000_a">A apărut setul „Teatru radiofonic” cu 200 de întrebări formulate de Ghiță Potra.</string>
+    <string name="whatsnew_in_1000_b">Setul apărut anterior este „Sociologie (manual XI)” cu 700 de întrebări formulate de Camelia Savu pe baza unui manual de sociologie de clasa a XI-a.</string>
+    <string name="whatsnew_in_1000_c">În varianta web a jocului, aflată la www.culturagenerala.ro, se poate contribui creând seturi de întrebări.</string>
+    <string name="whatsnew_in_1000_d">Nu uita că atingând cronometrul apare o casetă din care se pot semnala eventualele erori.</string>
     <string name="chk_got_it">Am văzut, nu mai arăta!</string>
 
     <!-- Strings added in 6.0, starting with ThursdayTuesday 3rd January 2023: -->
