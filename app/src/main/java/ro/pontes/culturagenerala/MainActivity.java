@@ -22,7 +22,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import com.android.billingclient.api.AcknowledgePurchaseParams;
-import com.android.billingclient.api.AcknowledgePurchaseResponseListener;
 import com.android.billingclient.api.BillingClient;
 import com.android.billingclient.api.BillingClientStateListener;
 import com.android.billingclient.api.BillingFlowParams;
@@ -46,7 +45,7 @@ public class MainActivity extends Activity {
 
     public static boolean isPremium = false;
     private final String mProduct = "cg_premium";
-    public static String mUpgradePrice = "�";
+    public static String mUpgradePrice = "€";
 
     private final Context mFinalContext = this;
     public static int curVer = 1000;
@@ -81,7 +80,6 @@ public class MainActivity extends Activity {
     // For billing:
     private PurchasesUpdatedListener purchasesUpdatedListener;
     private BillingClient billingClient;
-    private AcknowledgePurchaseResponseListener acknowledgePurchaseResponseListener;
     List<ProductDetails> myProducts;
 
     public static int mPaddingDP = 3;
@@ -547,7 +545,6 @@ public class MainActivity extends Activity {
     } // end upgradeToPremiumActions() method.
 
     private void startBillingDependencies() {
-        // end onPurchasesUpdated() method.
         purchasesUpdatedListener = (billingResult, purchases) -> {
             // If item newly purchased
             if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK && purchases != null) {
@@ -569,7 +566,10 @@ public class MainActivity extends Activity {
             }
         };
 
-        billingClient = BillingClient.newBuilder(this).setListener(purchasesUpdatedListener).enablePendingPurchases().build();
+        billingClient = BillingClient.newBuilder(this)
+                .setListener(purchasesUpdatedListener)
+                .enablePendingPurchases(com.android.billingclient.api.PendingPurchasesParams.newBuilder().enableOneTimeProducts().build())
+                .build();
 
         billingClient.startConnection(new BillingClientStateListener() {
             @Override
@@ -591,16 +591,18 @@ public class MainActivity extends Activity {
                     // end check if it is already purchased.
 
                     // Now let's query for our product:
-                    billingClient.queryProductDetailsAsync(queryProductDetailsParams, (billingResult1, productDetailsList) -> {
+                    billingClient.queryProductDetailsAsync(queryProductDetailsParams, (billingResult1, queryProductDetailsResult) -> {
                         // check billingResult
-                        // process returned productDetailsList
-                        myProducts = productDetailsList;
-                        // Get the price of the 0 item if there is at least one product:
-                        if (myProducts != null && myProducts.size() > 0) {
-                            ProductDetails productDetail = myProducts.get(0);
-                            ProductDetails.OneTimePurchaseOfferDetails offer = productDetail.getOneTimePurchaseOfferDetails();
-                            if (offer != null) {
-                                mUpgradePrice = offer.getFormattedPrice();
+                        // process returned productDetailsList from the result object
+                        if (billingResult1.getResponseCode() == BillingClient.BillingResponseCode.OK) {
+                            myProducts = queryProductDetailsResult.getProductDetailsList();
+                            // Get the price of the 0 item if there is at least one product:
+                            if (myProducts != null && myProducts.size() > 0) {
+                                ProductDetails productDetail = myProducts.get(0);
+                                ProductDetails.OneTimePurchaseOfferDetails offer = productDetail.getOneTimePurchaseOfferDetails();
+                                if (offer != null) {
+                                    mUpgradePrice = offer.getFormattedPrice();
+                                }
                             }
                         }
                     });
@@ -614,16 +616,6 @@ public class MainActivity extends Activity {
                 // Google Play by calling the startConnection() method.
             }
         }); // end startConnection.
-
-        // Create also the acknowledge purchase listener:
-        acknowledgePurchaseResponseListener = billingResult -> {
-            if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
-                // if purchase is acknowledged
-                // Grant entitlement to the user. and restart activity
-                registerTheGameEffectively(); // here is also saved everything in shared preferences.
-            }
-        };
-// End acknowledge listener creation..
     } // end startBillingDependencies() method.
 
     private void initiatePurchase() {
@@ -652,7 +644,15 @@ public class MainActivity extends Activity {
         if (purchase.getPurchaseState() == Purchase.PurchaseState.PURCHASED) {
             if (!purchase.isAcknowledged()) {
                 AcknowledgePurchaseParams acknowledgePurchaseParams = AcknowledgePurchaseParams.newBuilder().setPurchaseToken(purchase.getPurchaseToken()).build();
-                billingClient.acknowledgePurchase(acknowledgePurchaseParams, acknowledgePurchaseResponseListener);
+
+                // Updated for Billing Library 8.0.0 - using callback instead of deprecated listener
+                billingClient.acknowledgePurchase(acknowledgePurchaseParams, billingResult -> {
+                    if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
+                        // if purchase is acknowledged
+                        // Grant entitlement to the user. and restart activity
+                        registerTheGameEffectively(); // here is also saved everything in shared preferences.
+                    }
+                });
             }
         }
     } // end handlePurchase() method.

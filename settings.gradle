@@ -14,5 +14,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "CulturaGenerala" // Or your app name
+rootProject.name = "CulturaGenerala"
 include(":app")
