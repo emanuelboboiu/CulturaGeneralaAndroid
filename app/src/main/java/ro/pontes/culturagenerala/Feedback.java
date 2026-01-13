@@ -115,7 +115,10 @@ public class Feedback {
         String newDescription = (MyHtml.fromHtml(description).toString()).trim();
         if (newDescription.length() >= 2) {
             // Add here into online database:
-            String url = "http://www.android.pontes.ro/cg/insert_feedback.php?id_intrebare=" + questionId + "&tip_eroare=" + type + "&random_id=" + MainActivity.randomId + "&descriere=" + newDescription;
+
+            String encodedDescription = newDescription.replace(" ", "%20");
+
+            String url = "https://android.pontes.ro/cg/insert_feedback.php?id_intrebare=" + questionId + "&tip_eroare=" + type + "&random_id=" + MainActivity.randomId + "&descriere=" + encodedDescription;
             new SendFeedback().execute(url);
         } // end if the length are OK.
         else {

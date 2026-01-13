@@ -10,8 +10,8 @@ android {
         applicationId "ro.pontes.culturagenerala"
         minSdk 23
         targetSdk 36
-        versionCode 121
-        versionName "10.0"
+        versionCode 125
+        versionName "10.3"
     }
 
     buildTypes {
@@ -32,7 +32,7 @@ android {
 }
 
 dependencies {
-    implementation 'com.google.android.gms:play-services-ads:24.5.0'
-    implementation 'com.android.billingclient:billing:8.0.0'
+    implementation 'com.google.android.gms:play-services-ads:24.9.0'
+    implementation 'com.android.billingclient:billing:8.3.0'
     implementation 'androidx.appcompat:appcompat:1.7.1'
 }

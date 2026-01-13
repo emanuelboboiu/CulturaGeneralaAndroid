@@ -259,7 +259,7 @@ public class Statistics {
             Button btGS = new Button(mContext);
             btGS.setTextSize(MainActivity.textSize);
             btGS.setText(mContext.getString(R.string.bt_web_statistics));
-            btGS.setOnClickListener(view -> GUITools.openBrowser(mContext, "http://www.android.pontes.ro/cg/")); // end onClickListener.
+            btGS.setOnClickListener(view -> GUITools.openBrowser(mContext, "https://android.pontes.ro/cg/")); // end onClickListener.
             ll.addView(btGS, btParam);
         } // end if it is not Android TV.
 
@@ -408,7 +408,7 @@ public class Statistics {
     } // end postFinishedTestLocaly() method.
 
     public void postFinishedTestOnline(String sets, int nrq, int points, int duration, int androidTV, String usedOptions) {
-        String url = "http://www.android.pontes.ro/cg/insert_stats.php?random_id=" + MainActivity.randomId + "&seturi=" + sets + "&nrq=" + nrq + "&puncte=" + points + "&durata=" + duration + "&android_tv=" + androidTV + "&optiuni_utilizate=" + usedOptions;
+        String url = "https://android.pontes.ro/cg/insert_stats.php?random_id=" + MainActivity.randomId + "&seturi=" + sets + "&nrq=" + nrq + "&puncte=" + points + "&durata=" + duration + "&android_tv=" + androidTV + "&optiuni_utilizate=" + usedOptions;
         new GetWebData().execute(url);
     } // end PostFinishedTest() method.
 
@@ -660,7 +660,7 @@ public class Statistics {
      * subclass:
      */
     private void postTestForTopOnline(String nickname, String sets, int nrq, int points, int duration, int androidTV, String usedOptions) {
-        String url = "http://www.android.pontes.ro/cg/insert_top.php?random_id=" + MainActivity.randomId + "&porecla=" + nickname + "&seturi=" + sets + "&nrq=" + nrq + "&puncte=" + points + "&durata=" + duration + "&android_tv=" + androidTV + "&optiuni_utilizate=" + usedOptions;
+        String url = "https://android.pontes.ro/cg/insert_top.php?random_id=" + MainActivity.randomId + "&porecla=" + nickname + "&seturi=" + sets + "&nrq=" + nrq + "&puncte=" + points + "&durata=" + duration + "&android_tv=" + androidTV + "&optiuni_utilizate=" + usedOptions;
         new GetWebTop().execute(url);
     } // end postTestForTopOnline() method.
     // End method before asynchronous task in subclass.
@@ -736,7 +736,7 @@ public class Statistics {
      * subclass:
      */
     private void getBetsTestPosition() {
-        String url = "http://www.android.pontes.ro/cg/get_top.php?random_id=" + MainActivity.randomId;
+        String url = "https://android.pontes.ro/cg/get_top.php?random_id=" + MainActivity.randomId;
         new GetBestPosition().execute(url);
     } // end getBetsTestPosition() method, is before asynchronous.
 

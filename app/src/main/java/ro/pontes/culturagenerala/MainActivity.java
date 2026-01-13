@@ -48,7 +48,7 @@ public class MainActivity extends Activity {
     public static String mUpgradePrice = "€";
 
     private final Context mFinalContext = this;
-    public static int curVer = 1000;
+    public static int curVer = 1030;
     public static boolean isFirstLaunchInSession = true;
     public static int randomId = 0;
     public static boolean isPortrait = true;
